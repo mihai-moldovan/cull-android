@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ButtonRounded">
+        <item name="android:background">@drawable/btn_rounded</item>
+        <item name="android:fontFamily">@font/kievitcomppro_light</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/btn_rounded_font</item>
+        <item name="android:layout_height">@dimen/btn_rounded_height</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+    <style name="DefaultTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textStyle">normal</item>
+        <item name="fontFamily">@font/kievitcomppro_light</item>
+        <item name="android:textSize">@dimen/text_font</item>
+    </style>
+
+    <style name="TitleTextAppearance" parent="DefaultTextAppearance">
+        <item name="android:textSize">@dimen/title_font</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+</resources>

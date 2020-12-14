@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import kotlinx.coroutines.*
-import ro.chiralinteriordesign.cull.MainActivity
 import ro.chiralinteriordesign.cull.R
+import ro.chiralinteriordesign.cull.ui.tutorial.TutorialActivity
 
 class SplashActivity : Activity() {
 
@@ -19,7 +19,7 @@ class SplashActivity : Activity() {
         GlobalScope.launch {
             delay(3000)
             this@SplashActivity.finish()
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashActivity, TutorialActivity::class.java))
         }
     }
 }

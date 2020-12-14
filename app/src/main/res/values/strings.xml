@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">CULL</string>
-    <string name="title_activity_splash">SplashActivity</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">Hello Square World!</string>
+    <string-array name="tutorial_texts">
+        <item>Bine ai venit!</item>
+        <item>Cull este aplicația ta de design interior</item>
+        <item>Cum funcționează?</item>
+        <item>Completează testul de stil și definește spațiul pe care vrei să-l amenajezi, iar noi îți vom genera moodboard-ul.</item>
+        <item>Ești gata?</item>
+        <item>Hai să începem!</item>
+    </string-array>
+    <string name="btn_skip">Skip</string>
 </resources>
