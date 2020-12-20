@@ -1,12 +1,18 @@
 <resources>
     <string name="app_name">CULL</string>
-    <string-array name="tutorial_texts">
-        <item>Bine ai venit!</item>
-        <item>Cull este aplicația ta de design interior</item>
-        <item>Cum funcționează?</item>
-        <item>Completează testul de stil și definește spațiul pe care vrei să-l amenajezi, iar noi îți vom genera moodboard-ul.</item>
-        <item>Ești gata?</item>
-        <item>Hai să începem!</item>
-    </string-array>
+
+    <!--    TUTORIAL-->
+    <string name="tutorial_title_1">Bine ai venit!</string>
+    <string name="tutorial_title_2">Cum funcționează?</string>
+    <string name="tutorial_title_3">Ești gata?</string>
+    <string name="tutorial_text_1">Cull este aplicația ta de design interior</string>
+    <string name="tutorial_text_2">Completează testul de stil și definește spațiul pe care vrei să-l amenajezi, iar noi îți vom genera moodboard-ul.</string>
+    <string name="tutorial_text_3">Hai să începem!</string>
+
     <string name="btn_skip">Skip</string>
+
+    <!-- QUIZ -->
+    <string name="btn_discover_your_style">Descopera-ti stilul</string>
+    <string name="quiz_start_title">Care este stilul tău?</string>
+    <string name="quiz_start_text">Alege imaginile preferate si află\ncare este stilul care te definește!</string>
 </resources>

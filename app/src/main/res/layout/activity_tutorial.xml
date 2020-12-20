@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         android:src="@drawable/background_pattern"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,8 +20,10 @@
         android:id="@+id/viewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/standard_btn_margin"
+        android:layout_marginBottom="@dimen/standard_btn_margin"
+        app:layout_constraintBottom_toTopOf="@id/titleView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.73"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,42 +31,50 @@
         android:id="@+id/titleView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tutorial_text_margin_h"
+        android:layout_marginEnd="@dimen/tutorial_text_margin_h"
+        android:layout_marginBottom="@dimen/tutorial_text_spacing"
         android:gravity="center"
         android:textAppearance="@style/TitleTextAppearance"
+        app:layout_constraintBottom_toTopOf="@id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewPager"
         tools:text="Bine ai venit" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/tutorial_text_spacing"
-        android:gravity="center"
+        android:layout_marginStart="@dimen/tutorial_text_margin_h"
+        android:layout_marginEnd="@dimen/tutorial_text_margin_h"
+        android:layout_marginBottom="@dimen/tutorial_text_spacing"
+        android:gravity="center_horizontal|top"
+        android:lines="3"
         android:textAppearance="@style/DefaultTextAppearance"
+        app:layout_constraintBottom_toTopOf="@id/dotsIndicator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleView"
         tools:text="Cull este aplicația ta de design interior" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/dotsIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/tutorial_text_spacing"
+        android:layout_marginBottom="@dimen/dot_margin"
+        app:layout_constraintBottom_toTopOf="@id/btnSkip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView"
         app:tabBackground="@drawable/dot_indicator"
         app:tabGravity="center"
-        app:tabIndicatorHeight="@dimen/dot_size_selected" />
+        app:tabIndicatorHeight="0dp"
+        app:tabPaddingEnd="13dp"
+        app:tabPaddingStart="13dp" />
 
-    <TextView
+    <Button
         android:id="@+id/btnSkip"
         style="@style/ButtonRounded"
         android:layout_width="0dp"
-        android:layout_marginBottom="@dimen/tutorial_btn_margin"
+        android:layout_marginBottom="@dimen/standard_btn_margin"
         android:text="@string/btn_skip"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

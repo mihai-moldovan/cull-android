@@ -1,37 +1,50 @@
 package ro.chiralinteriordesign.cull.ui.tutorial
 
-import android.graphics.drawable.Drawable
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import ro.chiralinteriordesign.cull.App
+import ro.chiralinteriordesign.cull.Preferences
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.databinding.ActivityTutorialBinding
 import ro.chiralinteriordesign.cull.databinding.TutorialItemBinding
+import ro.chiralinteriordesign.cull.ui.quiz.QuizActivity
 
 class TutorialActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTutorialBinding
+
+    val images = listOf(
+        R.drawable.onboarding_1,
+        R.drawable.onboarding_2,
+        R.drawable.onboarding_3,
+    )
+    val titles = listOf(
+        R.string.tutorial_title_1,
+        R.string.tutorial_title_2,
+        R.string.tutorial_title_3,
+    )
+
+    val texts = listOf(
+        R.string.tutorial_text_1,
+        R.string.tutorial_text_2,
+        R.string.tutorial_text_3,
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTutorialBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val images = listOf(
-            R.drawable.onboarding_1,
-            R.drawable.onboarding_2,
-            R.drawable.onboarding_3,
-        )
+
         binding.viewPager.adapter = Adapter(images)
-        val texts = resources.getStringArray(R.array.tutorial_texts)
-        if (texts.size / 2 != images.size) {
+        if (titles.size != texts.size || titles.size != images.size) {
             error("Images size and texts size do not match")
         }
         TabLayoutMediator(binding.dotsIndicator, binding.viewPager) { _, _ -> }.attach()
@@ -57,10 +70,20 @@ class TutorialActivity : AppCompatActivity() {
             }
 
             private fun updateTexts() {
-                binding.titleView.text = texts[currentPos * 2]
-                binding.textView.text = texts[currentPos * 2 + 1]
+                binding.titleView.setText(titles[currentPos])
+                binding.textView.setText(texts[currentPos])
             }
         })
+
+        binding.btnSkip.setOnClickListener {
+            startActivity(Intent(this, QuizActivity::class.java))
+            finish()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        App.instance.preferences.put(Preferences.Key.TUTORIAL_SEEN, System.currentTimeMillis())
     }
 
     class ViewHolder(private val binding: TutorialItemBinding) :

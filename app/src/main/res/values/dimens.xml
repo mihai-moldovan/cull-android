@@ -5,6 +5,7 @@
     <dimen name="btn_rounded_corners">26dp</dimen>
     <dimen name="btn_rounded_height">52dp</dimen>
     <dimen name="btn_rounded_font">18sp</dimen>
+    <dimen name="standard_btn_margin">45dp</dimen>
 
     <!--    Text-->
     <dimen name="text_font">14sp</dimen>
@@ -12,8 +13,7 @@
 
     <!-- Tutorial -->
     <dimen name="tutorial_text_spacing">8dp</dimen>
-    <dimen name="tutorial_btn_margin">45dp</dimen>
-
+    <dimen name="tutorial_text_margin_h">25dp</dimen>
 
     <!-- Dot Indicator -->
     <dimen name="dot_size_selected">12dp</dimen>
@@ -22,4 +22,7 @@
     <dimen name="dot_inner_padding">3.5dp</dimen>
     <dimen name="dot_margin">15dp</dimen>
 
+    <!--    QUIZ-->
+    <dimen name="quiz_bottom_background_radius">20dp</dimen>
+    <dimen name="quiz_image_margin">-20dp</dimen>
 </resources>
