@@ -20,9 +20,8 @@
         android:id="@+id/viewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/standard_btn_margin"
-        android:layout_marginBottom="@dimen/standard_btn_margin"
         app:layout_constraintBottom_toTopOf="@id/titleView"
+        app:layout_constraintDimensionRatio="0.828729"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
