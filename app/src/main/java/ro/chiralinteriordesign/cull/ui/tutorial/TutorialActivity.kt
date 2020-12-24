@@ -14,9 +14,10 @@ import ro.chiralinteriordesign.cull.Preferences
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.databinding.ActivityTutorialBinding
 import ro.chiralinteriordesign.cull.databinding.TutorialItemBinding
+import ro.chiralinteriordesign.cull.ui.BaseActivity
 import ro.chiralinteriordesign.cull.ui.quiz.QuizActivity
 
-class TutorialActivity : AppCompatActivity() {
+class TutorialActivity : BaseActivity() {
 
     private lateinit var binding: ActivityTutorialBinding
 

@@ -10,7 +10,8 @@ import android.content.SharedPreferences
 class Preferences(app: Application) {
 
     enum class Key {
-        TUTORIAL_SEEN
+        TUTORIAL_SEEN,
+        CACHE_TIMESTAMP,
     }
 
     private val mSharedPreferences: SharedPreferences

@@ -1,9 +1,8 @@
 package ro.chiralinteriordesign.cull
 
-import retrofit2.Retrofit
-import ro.chiralinteriordesign.cull.services.LocalRepository
-import ro.chiralinteriordesign.cull.services.Webservice
-import ro.chiralinteriordesign.cull.services.createWebservice
+import android.app.ActivityManager
+import android.app.ActivityManager.RunningAppProcessInfo
+import ro.chiralinteriordesign.cull.services.DataRepository
 
 
 /**
@@ -12,16 +11,20 @@ import ro.chiralinteriordesign.cull.services.createWebservice
 class App : android.app.Application() {
 
     val preferences: Preferences by lazy { Preferences(this) }
-
-    val webservice: Webservice by lazy { createWebservice(this) }
-
-    val localRepository: LocalRepository by lazy { LocalRepository(this) }
+    val dataRepository: DataRepository by lazy { DataRepository(this) }
 
     override fun onCreate() {
         super.onCreate()
         instance = this
 
     }
+
+    val isInForeground: Boolean = {
+        val appProcessInfo = RunningAppProcessInfo()
+        ActivityManager.getMyMemoryState(appProcessInfo)
+        (appProcessInfo.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND ||
+                appProcessInfo.importance == RunningAppProcessInfo.IMPORTANCE_VISIBLE)
+    }()
 
     companion object {
 

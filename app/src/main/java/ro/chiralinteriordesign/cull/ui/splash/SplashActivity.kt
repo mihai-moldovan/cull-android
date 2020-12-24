@@ -12,11 +12,12 @@ import ro.chiralinteriordesign.cull.Constants
 import ro.chiralinteriordesign.cull.Preferences
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.databinding.ActivitySplashBinding
+import ro.chiralinteriordesign.cull.ui.BaseActivity
 import ro.chiralinteriordesign.cull.ui.quiz.QuizActivity
 import ro.chiralinteriordesign.cull.ui.tutorial.TutorialActivity
 
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
 
     private val viewModel: SplashViewModel by viewModels()
     private lateinit var binding: ActivitySplashBinding

@@ -14,47 +14,26 @@ import kotlin.reflect.KProperty
  */
 class LocalRepository(val appContext: Context) {
 
-    companion object {
+    private val data = hashMapOf<String, Serializable>()
 
-        const val TAG = "LocalRepository"
-
-        private const val FILE_QUIZ = "quiz.bin"
-
-        @JvmField
-        val QUIZ_ACTION = LocalRepository::javaClass.name + "/quiz_update"
+    operator fun get(key: String): Serializable? {
+        return data[key] ?: load(key).also { it?.let { data[key] = it } }
     }
 
-    var quiz: Quiz? by RepositoryDelegate(FILE_QUIZ, QUIZ_ACTION)
-
-    inner class RepositoryDelegate<T : Serializable>(
-        private val fileName: String,
-        private val updateAction: String? = null
-    ) :
-        ReadWriteProperty<LocalRepository, T?> {
-        private var wasLoaded = false
-        private var _value: T? = null
-
-        override fun getValue(thisRef: LocalRepository, property: KProperty<*>): T? {
-            if (!wasLoaded) {
-                wasLoaded = true
-                @Suppress("UNCHECKED_CAST")
-                _value = load(fileName) as? T
-            }
-            return _value
+    operator fun set(key: String, value: Serializable?) {
+        if (value != null) {
+            data[key] = value
+        } else {
+            data.remove(key)
         }
-
-        override fun setValue(thisRef: LocalRepository, property: KProperty<*>, value: T?) {
-            _value = value
-            wasLoaded = true
-            save(value, fileName)
-            updateAction?.let {
-                LocalBroadcastManager.getInstance(appContext)
-                    .sendBroadcast(
-                        Intent(it)
-                    )
-            }
-        }
+        save(value, key)
+        LocalBroadcastManager.getInstance(appContext).sendBroadcast(Intent(intentAction(key)))
     }
+
+    fun intentAction(key: String): String {
+        return LocalRepository::javaClass.name + "/" + key
+    }
+
 
     private fun load(fileName: String): Serializable? {
         var ois: ObjectInputStream? = null
@@ -63,7 +42,6 @@ class LocalRepository(val appContext: Context) {
             ois = ObjectInputStream(FileInputStream(f))
             return ois.readObject() as? Serializable
         } catch (e: Exception) {
-            Log.w(TAG, "problem reading file: $fileName")
             f.delete()
         } finally {
             ois?.close()

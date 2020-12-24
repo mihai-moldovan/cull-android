@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "632306785377",
+    "project_id": "cull-e9932",
+    "storage_bucket": "cull-e9932.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:632306785377:android:492a6cf44632a589a2de20",
+        "android_client_info": {
+          "package_name": "ro.chiralinteriordesign.cull"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "632306785377-bapss4jhcevb39v1t629p9p43sacia7f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ro.chiralinteriordesign.cull",
+            "certificate_hash": "e5768ca990071ba790452367701c44a33ffa0b89"
+          }
+        },
+        {
+          "client_id": "632306785377-ecl601n6sqkqlmoujjla9d34nvt5i1g9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYe0p-dZJOW1zJU_bHLui2PHlJzOlzexw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "632306785377-ecl601n6sqkqlmoujjla9d34nvt5i1g9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,6 +3,7 @@ package ro.chiralinteriordesign.cull.ui.splash
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
+import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.model.quiz.QuizRepository
 import ro.chiralinteriordesign.cull.services.ResultWrapper
 
@@ -12,17 +13,10 @@ import ro.chiralinteriordesign.cull.services.ResultWrapper
  */
 class SplashViewModel : ViewModel() {
 
-    private val quizRepo = QuizRepository()
+    private val dataRepo = App.instance.dataRepository
 
     fun ensureAllLoaded() = liveData(Dispatchers.IO) {
-        if (quizRepo.hasLocalQuiz()) {
-            emit(true)
-        } else {
-            when (quizRepo.getQuiz(false)) {
-                is ResultWrapper.Success -> emit(true)
-                else -> emit(false)
-            }
-        }
+        val result = dataRepo.reloadDataIfNeeded()
+        emit(result || dataRepo.hasLocalData)
     }
-
 }
