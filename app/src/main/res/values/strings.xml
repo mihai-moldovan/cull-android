@@ -18,6 +18,9 @@
     <string name="btn_discover_your_style">Descopera-ti stilul</string>
     <string name="quiz_start_title">Care este stilul tău?</string>
     <string name="quiz_start_text">Alege imaginile preferate si află\ncare este stilul care te definește!</string>
+    <string name="quiz_step_format">Pasul %1$d</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

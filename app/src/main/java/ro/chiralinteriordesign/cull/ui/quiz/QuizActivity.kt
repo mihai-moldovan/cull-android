@@ -10,5 +10,13 @@ class QuizActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
+
+        if (supportFragmentManager.findFragmentById(R.id.childContainer) == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.childContainer, QuizIntroFragment())
+                .commitNow()
+        }
     }
+
 }

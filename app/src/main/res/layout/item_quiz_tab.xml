@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/quiz_tab_background"
+    android:fontFamily="@font/kievitcomppro"
+    android:paddingTop="@dimen/quiz_tab_padding_v"
+    android:paddingBottom="@dimen/quiz_tab_padding_v"
+    android:textColor="@color/quiz_tab_text"
+    android:textSize="@dimen/quiz_tab_font"
+    tools:text="Pasul 1" />
+
+
+

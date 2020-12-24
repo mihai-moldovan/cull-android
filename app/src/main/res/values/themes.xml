@@ -4,6 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/white</item>
         <item name="colorOnPrimary">@color/background_dark</item>
+        <item name="android:windowBackground">@color/almost_black</item>
         <!-- Secondary brand color. -->
     </style>
 

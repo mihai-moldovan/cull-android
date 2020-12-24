@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_checked="true">
+        <layer-list>
+            <item android:height="@dimen/quiz_tab_line_width" android:drawable="@color/gold" android:gravity="bottom" />
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            <item android:height="@dimen/quiz_tab_line_width" android:drawable="@color/white" android:gravity="bottom" />
+        </layer-list>
+    </item>
+</selector>
