@@ -1,6 +1,15 @@
 package ro.chiralinteriordesign.cull.model.quiz
 
-import ro.chiralinteriordesign.cull.services.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import kotlinx.coroutines.*
+import ro.chiralinteriordesign.cull.App
+import ro.chiralinteriordesign.cull.services.LocalRepository
+import ro.chiralinteriordesign.cull.services.ResultWrapper
+import ro.chiralinteriordesign.cull.services.Webservice
+import ro.chiralinteriordesign.cull.services.safeApiCall
+import java.util.concurrent.TimeUnit
+
 
 /**
  * Created by Mihai Moldovan on 21/12/2020.
@@ -18,7 +27,26 @@ class QuizRepository(
         } else {
             val response = safeApiCall { webservice.getQuiz() }
             when (response) {
-                is ResultWrapper.Success -> localRepository[this.javaClass.name] = response.value
+                is ResultWrapper.Success -> {
+                    localRepository[this.javaClass.name] = response.value
+                    val dm = App.instance.resources.displayMetrics
+                    val jobs = mutableListOf<Job>()
+                    for (q in response.value.questions) {
+                        for (a in q.answers) {
+                            jobs.add(withContext(Dispatchers.IO) {
+                                async {
+                                    Glide
+                                        .with(App.instance)
+                                        .load(a.photo)
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .submit(dm.widthPixels, dm.heightPixels)
+                                        .get(10, TimeUnit.SECONDS)
+                                }
+                            })
+                        }
+                    }
+                    jobs.joinAll()
+                }
                 else -> Unit
             }
             response

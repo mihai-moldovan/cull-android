@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.quiz.QuizResultFragment">
+    tools:context=".ui.quiz.QuizActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/quiz_image_margin"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@id/bottomView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/quiz_start_image" />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/quiz_bottom_background"
+        android:paddingTop="@dimen/standard_btn_margin"
+        android:paddingBottom="@dimen/standard_btn_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tutorial_text_margin_h"
+            android:layout_marginEnd="@dimen/tutorial_text_margin_h"
+            android:layout_marginBottom="@dimen/tutorial_text_spacing"
+            android:gravity="center"
+            android:textAppearance="@style/TitleTextAppearance"
+            app:layout_constraintBottom_toTopOf="@id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/quiz_start_title" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tutorial_text_margin_h"
+            android:layout_marginEnd="@dimen/tutorial_text_margin_h"
+            android:layout_marginBottom="@dimen/standard_btn_margin"
+            android:gravity="center_horizontal|top"
+            android:textAppearance="@style/DefaultTextAppearance"
+            app:layout_constraintBottom_toTopOf="@id/btnRedo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/quiz_start_text" />
+
+
+        <TextView
+            android:id="@+id/btnRedo"
+            style="@style/ButtonRounded"
+            android:layout_width="0dp"
+            android:text="@string/btn_redo_test"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnContinue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.4" />
+
+        <TextView
+            android:id="@+id/btnContinue"
+            style="@style/ButtonRounded"
+            android:layout_width="0dp"
+            android:text="@string/btn_continue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnRedo"
+            app:layout_constraintWidth_percent="0.4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
