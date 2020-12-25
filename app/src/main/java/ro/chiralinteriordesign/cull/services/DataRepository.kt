@@ -13,6 +13,7 @@ import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.Constants
 import ro.chiralinteriordesign.cull.Preferences
 import ro.chiralinteriordesign.cull.model.quiz.QuizRepository
+import ro.chiralinteriordesign.cull.model.user.UserRepository
 
 /**
  * Created by Mihai Moldovan on 24/12/2020.
@@ -27,6 +28,7 @@ class DataRepository(val appContext: Context) {
     private val webservice: Webservice by lazy { createWebservice(appContext) }
 
     val quizRepository: QuizRepository by lazy { QuizRepository(localRepository, webservice) }
+    val userRepository: UserRepository by lazy { UserRepository(localRepository, webservice) }
 
     suspend fun reloadDataIfNeeded(): Boolean {
         val timestamp = App.instance.preferences.getLong(Preferences.Key.CACHE_TIMESTAMP, 0L)

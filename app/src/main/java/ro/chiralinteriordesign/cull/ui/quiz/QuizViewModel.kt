@@ -20,6 +20,7 @@ class QuizViewModel : ViewModel() {
     val currentQuestion = MutableLiveData(0)
 
     private val quizRepo = App.instance.dataRepository.quizRepository
+    private val userRepo = App.instance.dataRepository.userRepository
 
     private val quiz = liveData(Dispatchers.IO) {
         when (val result = quizRepo.getQuiz()) {
@@ -45,15 +46,27 @@ class QuizViewModel : ViewModel() {
                 }
             }
             //all answers have results, post results
-            val results = hashMapOf<Int, Int>()
-            for (answer in answers.values) {
-                results[answer.attributedResultId] = (results[answer.attributedResultId] ?: 0) + 1
-            }
-            results.maxByOrNull { it.value }?.value?.let { resultId ->
-                quiz.value?.let { quiz ->
-                    quiz.results.firstOrNull { it.id == resultId }?.let { result.postValue(it) }
+            computeResult()
+        }
+    }
+
+    private fun computeResult() {
+        val results = hashMapOf<Int, Int>()
+        for (answer in answers.values) {
+            results[answer.attributedResultId] = (results[answer.attributedResultId] ?: 0) + 1
+        }
+        results.maxByOrNull { it.value }?.value?.let { resultId ->
+            quiz.value?.let { quiz ->
+                quiz.results.firstOrNull { it.id == resultId }?.let {
+                    result.postValue(it)
+                    userRepo.currentUser = userRepo.currentUser.copy(quizResultId = it.id)
                 }
             }
         }
+    }
+
+    fun resetQuiz() {
+        answers.clear()
+        result.value = null
     }
 }

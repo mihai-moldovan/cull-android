@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.databinding.FragmentQuizResultBinding
@@ -16,6 +17,7 @@ class QuizResultFragment : Fragment() {
     private lateinit var result: QuizResult
 
     private var binding: FragmentQuizResultBinding? = null
+    private val viewModel: QuizViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +44,7 @@ class QuizResultFragment : Fragment() {
             .load(result.photo)
             .into(binding.imageView)
         binding.btnRedo.setOnClickListener {
+            viewModel.resetQuiz()
             parentFragmentManager.popBackStack()
         }
 

@@ -16,7 +16,6 @@ class App : android.app.Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-
     }
 
     val isInForeground: Boolean = {

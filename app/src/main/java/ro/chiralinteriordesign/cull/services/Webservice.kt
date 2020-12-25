@@ -8,8 +8,10 @@ import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.POST
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.model.quiz.Quiz
+import ro.chiralinteriordesign.cull.model.user.User
 import java.io.IOException
 
 /**
@@ -76,4 +78,20 @@ interface Webservice {
 
     @GET("quiz/")
     suspend fun getQuiz(): Quiz
+
+    @POST("user/login/")
+    suspend fun login(email: String, password: String): User
+
+    @POST("user/register/")
+    suspend fun register(firstName: String, lastName: String, email: String, password: String): User
+
+    @POST("user/save/")
+    suspend fun save(
+        firstName: String?,
+        lastName: String?,
+        email: String?,
+        password: String?,
+        quizResultId: Int?
+    ): User
+
 }

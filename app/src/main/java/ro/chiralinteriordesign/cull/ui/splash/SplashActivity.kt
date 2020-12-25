@@ -30,7 +30,10 @@ class SplashActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
+        binding.progressBar.show()
+
         viewModel.ensureAllLoaded().observe(this, Observer {
+            binding.progressBar.hide()
             if (it) {
                 GlobalScope.launch {
                     delay(300)
