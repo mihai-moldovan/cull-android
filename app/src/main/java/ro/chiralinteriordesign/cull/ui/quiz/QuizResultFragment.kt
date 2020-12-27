@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import ro.chiralinteriordesign.cull.R
@@ -43,6 +44,7 @@ class QuizResultFragment : Fragment() {
             .with(binding.imageView)
             .load(result.photo)
             .into(binding.imageView)
+
         binding.btnRedo.setOnClickListener {
             viewModel.resetQuiz()
             parentFragmentManager.popBackStack()
@@ -52,6 +54,12 @@ class QuizResultFragment : Fragment() {
             requireActivity().finish()
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.resetQuiz()
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

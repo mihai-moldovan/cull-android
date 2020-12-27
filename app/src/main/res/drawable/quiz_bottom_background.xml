@@ -4,6 +4,6 @@
     <corners
         android:topLeftRadius="@dimen/quiz_bottom_background_radius"
         android:topRightRadius="@dimen/quiz_bottom_background_radius" />
-    <solid android:color="@color/almost_black" />
+    <solid android:color="@color/background_dark" />
 
 </shape>

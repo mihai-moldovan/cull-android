@@ -3,6 +3,8 @@
 
     <!--    GENERAL-->
     <string name="generic_error">Conexiunea la server nu a reusit</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_continue">Continua</string>
 
     <!--    TUTORIAL-->
     <string name="tutorial_title_1">Bine ai venit!</string>
@@ -21,6 +23,23 @@
     <string name="quiz_step_format">Pasul %1$d</string>
 
     <string name="btn_redo_test">Reluare test</string>
-    <string name="btn_continue">Continua</string>
+
+
+    <!-- SELECT SPACE-->
+    <string name="space_title">Ce cameră îți dorești să\namenajezi</string>
+    <string name="space_room_type_living">Living</string>
+    <string name="space_room_type_dining">Dining</string>
+    <string name="space_room_type_lobby">Hol</string>
+    <string name="space_room_type_office">Birou</string>
+    <string name="space_room_type_bedroom">Dormitor</string>
+    <string name="space_room_type_child_room">Camera copii</string>
+    <string name="space_dimensions_cta">Adauga dimensiunile estimative</string>
+    <string name="space_length">Lungime</string>
+    <string name="space_width">Latime</string>
+    <string name="space_height">Inaltime</string>
+    <string name="space_windows">Ferestre</string>
+    <string name="space_doors">Usi</string>
+    <string name="space_edit_suffix_cm">CM</string>
+    <string name="space_edit_error_not_zero">Valoare incorecta</string>
 
 </resources>

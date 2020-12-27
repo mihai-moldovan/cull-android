@@ -13,7 +13,9 @@ import ro.chiralinteriordesign.cull.Preferences
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.databinding.ActivitySplashBinding
 import ro.chiralinteriordesign.cull.ui.BaseActivity
+import ro.chiralinteriordesign.cull.ui.products.ProductsActivity
 import ro.chiralinteriordesign.cull.ui.quiz.QuizActivity
+import ro.chiralinteriordesign.cull.ui.space.SelectSpaceActivity
 import ro.chiralinteriordesign.cull.ui.tutorial.TutorialActivity
 
 
@@ -51,14 +53,28 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun advance() {
-        finish()
-        if (System.currentTimeMillis() - App.instance.preferences.getLong(
-                Preferences.Key.TUTORIAL_SEEN, 0
-            ) > Constants.TUTORIAL_INTERVAL
-        ) {
-            startActivity(Intent(this@SplashActivity, TutorialActivity::class.java))
-        } else {
-            startActivity(Intent(this@SplashActivity, QuizActivity::class.java))
+        val user = App.instance.dataRepository.userRepository.currentUser
+        when {
+            System.currentTimeMillis() - App.instance.preferences.getLong(
+                Preferences.Key.TUTORIAL_SEEN,
+                0
+            ) > Constants.TUTORIAL_INTERVAL -> {
+                //didn't show tutorial
+                startActivity(Intent(this@SplashActivity, TutorialActivity::class.java))
+            }
+            user.quizResultId == 0 -> {
+                //has no quiz done
+                startActivity(Intent(this@SplashActivity, QuizActivity::class.java))
+            }
+            user.rooms.isNullOrEmpty() -> {
+                //has has no space saved
+                startActivity(Intent(this@SplashActivity, SelectSpaceActivity::class.java))
+            }
+            else -> {
+                //show products
+                startActivity(Intent(this@SplashActivity, ProductsActivity::class.java))
+            }
         }
+        finish()
     }
 }

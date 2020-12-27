@@ -6,27 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.quiz.QuizQuestionListFragment">
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="@dimen/quiz_tab_line_width"
-        android:layout_marginTop="@dimen/quiz_tab_line_width_negative"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabs" />
-
-    <androidx.recyclerview.widget.RecyclerView
+    <ro.chiralinteriordesign.cull.ui.quiz.NonInteractiveTabLayout
         android:id="@+id/tabs"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/quiz_tab_margin_h"
-        android:layout_marginEnd="@dimen/quiz_tab_margin_h"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="@dimen/quiz_tabs_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="5" />
+        app:tabIndicatorColor="@color/gold"
+        app:tabTextAppearance="@style/QuizTabStyle" />
 
 
     <FrameLayout

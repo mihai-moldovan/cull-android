@@ -60,7 +60,7 @@ class UserRepository(
         return response
     }
 
-    val isLoggedIn: Boolean = currentUser.id > 0
+    val isLoggedIn: Boolean get() = currentUser.id > 0
 
     var currentUser: User
         get() {

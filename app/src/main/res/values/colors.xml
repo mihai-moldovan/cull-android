@@ -4,6 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_dark">#FF181818</color>
     <color name="gold">#FFb59a56</color>
-    <color name="almost_black">#FF181818</color>
+    <color name="dark_gray">#FF707070</color>
 
 </resources>

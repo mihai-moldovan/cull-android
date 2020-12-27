@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_margin"
+        tools:context=".ui.space.SelectSpaceActivity">
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kievitcomppro"
+            android:gravity="center_horizontal"
+            android:text="@string/space_title"
+            android:textSize="@dimen/space_title_font"
+            app:layout_constraintBottom_toTopOf="@+id/roomTypesView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/roomTypesView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_item_spacing"
+            app:layout_constraintBottom_toTopOf="@+id/dimensionsTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleView">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/middleColumn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/secondRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:barrierMargin="@dimen/space_item_spacing"
+                app:constraint_referenced_ids="roomTypeLiving,roomTypeDining,roomTypeLobby" />
+
+
+            <CheckedTextView
+                android:id="@+id/roomTypeLiving"
+                style="@style/SpaceRoomTypeView"
+                android:text="@string/space_room_type_living"
+                app:drawableTopCompat="@drawable/icon_space_check_living"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckedTextView
+                android:id="@+id/roomTypeDining"
+                style="@style/SpaceRoomTypeView"
+                android:text="@string/space_room_type_dining"
+                app:drawableTopCompat="@drawable/icon_space_check_dining"
+                app:layout_constraintEnd_toEndOf="@id/middleColumn"
+                app:layout_constraintStart_toStartOf="@id/middleColumn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckedTextView
+                android:id="@+id/roomTypeLobby"
+                style="@style/SpaceRoomTypeView"
+                android:text="@string/space_room_type_lobby"
+                app:drawableTopCompat="@drawable/icon_space_check_lobby"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <CheckedTextView
+                android:id="@+id/roomTypeOffice"
+                style="@style/SpaceRoomTypeView"
+                android:text="@string/space_room_type_office"
+                app:drawableTopCompat="@drawable/icon_space_check_office"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/secondRow" />
+
+            <CheckedTextView
+                android:id="@+id/roomTypeBedroom"
+                style="@style/SpaceRoomTypeView"
+                android:text="@string/space_room_type_bedroom"
+                app:drawableTopCompat="@drawable/icon_space_check_bedroom"
+                app:layout_constraintEnd_toEndOf="@id/middleColumn"
+                app:layout_constraintStart_toStartOf="@+id/middleColumn"
+                app:layout_constraintTop_toBottomOf="@+id/secondRow" />
+
+            <CheckedTextView
+                android:id="@+id/roomTypeChildroom"
+                style="@style/SpaceRoomTypeView"
+                android:text="@string/space_room_type_child_room"
+                app:drawableTopCompat="@drawable/icon_space_check_childroom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/secondRow" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/dimensionsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_item_spacing"
+            android:fontFamily="@font/kievitcomppro"
+            android:text="@string/space_dimensions_cta"
+            android:textAllCaps="true"
+            android:textSize="@dimen/space_dimensions_font"
+            app:layout_constraintBottom_toTopOf="@+id/lengthInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/roomTypesView" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lengthInput"
+            style="@style/SpaceTextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/widthInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dimensionsTitle"
+            app:suffixText="@string/space_edit_suffix_cm">
+
+            <com.google.android.material.textfield.TextInputEditText style="@style/SpaceEditText" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/lengthTitle"
+            style="@style/SpaceEditTitle"
+            android:text="@string/space_length"
+            app:layout_constraintStart_toStartOf="@id/lengthInput"
+            app:layout_constraintTop_toTopOf="@id/lengthInput" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/widthInput"
+            style="@style/SpaceTextInputLayout"
+            app:layout_constraintBottom_toTopOf="@+id/heightInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lengthInput"
+            app:suffixText="@string/space_edit_suffix_cm">
+
+            <com.google.android.material.textfield.TextInputEditText style="@style/SpaceEditText" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/widthTitle"
+            style="@style/SpaceEditTitle"
+            android:text="@string/space_width"
+            app:layout_constraintStart_toStartOf="@id/widthInput"
+            app:layout_constraintTop_toTopOf="@id/widthInput" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/heightInput"
+            style="@style/SpaceTextInputLayout"
+            app:layout_constraintBottom_toTopOf="@+id/windowsInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/widthInput"
+            app:suffixText="@string/space_edit_suffix_cm">
+
+            <com.google.android.material.textfield.TextInputEditText style="@style/SpaceEditText" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/heightTitle"
+            style="@style/SpaceEditTitle"
+            android:text="@string/space_height"
+            app:layout_constraintStart_toStartOf="@id/heightInput"
+            app:layout_constraintTop_toTopOf="@id/heightInput" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/windowsInput"
+            style="@style/SpaceTextInputLayout"
+            app:layout_constraintBottom_toTopOf="@+id/btnContinue"
+            app:layout_constraintEnd_toStartOf="@+id/doorsInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heightInput">
+
+            <com.google.android.material.textfield.TextInputEditText style="@style/SpaceEditText" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/windowsTitle"
+            style="@style/SpaceEditTitle"
+            android:text="@string/space_windows"
+            app:layout_constraintStart_toStartOf="@id/windowsInput"
+            app:layout_constraintTop_toTopOf="@id/windowsInput" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/doorsInput"
+            style="@style/SpaceTextInputLayout"
+            android:layout_marginStart="@dimen/space_item_spacing"
+            android:layout_marginTop="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/windowsInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/windowsInput"
+            app:layout_constraintTop_toTopOf="@+id/windowsInput">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/SpaceEditText"
+                android:imeOptions="actionDone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/doorsTitle"
+            style="@style/SpaceEditTitle"
+            android:text="@string/space_doors"
+            app:layout_constraintStart_toStartOf="@id/doorsInput"
+            app:layout_constraintTop_toTopOf="@id/doorsInput" />
+
+        <TextView
+            android:id="@+id/btnContinue"
+            style="@style/ButtonRounded"
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/space_item_spacing"
+            android:text="@string/btn_continue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/windowsInput"
+            app:layout_constraintWidth_percent="0.4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

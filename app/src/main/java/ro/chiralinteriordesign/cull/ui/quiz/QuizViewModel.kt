@@ -50,6 +50,17 @@ class QuizViewModel : ViewModel() {
         }
     }
 
+    fun goBackOneQuestion(): Boolean {
+        return currentQuestion.value?.let {
+            if (it > 0) {
+                currentQuestion.postValue(it - 1)
+                true
+            } else {
+                false
+            }
+        } ?: false
+    }
+
     private fun computeResult() {
         val results = hashMapOf<Int, Int>()
         for (answer in answers.values) {
@@ -67,6 +78,7 @@ class QuizViewModel : ViewModel() {
 
     fun resetQuiz() {
         answers.clear()
+        currentQuestion.value = 0
         result.value = null
     }
 }
