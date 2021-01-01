@@ -63,5 +63,26 @@
     <dimen name="btn_size">50dp</dimen>
 
 
+    <!-- PRODUCTS -->
+    <dimen name="products_screen_spacing">15dp</dimen>
+    <dimen name="products_search_font">15sp</dimen>
+    <dimen name="products_list_font">15sp</dimen>
+    <dimen name="products_list_inset">42dp</dimen>
+    <dimen name="products_search_corners">8dp</dimen>
+    <dimen name="products_search_padding_h">15dp</dimen>
+    <dimen name="products_search_padding_v">15dp</dimen>
+    <dimen name="products_stroke">1dp</dimen>
+    <dimen name="products_card_corner">4dp</dimen>
+    <dimen name="products_add_padding">6.5dp</dimen>
+
+
+    <!-- MENU -->
+    <dimen name="menu_padding_v">40dp</dimen>
+    <dimen name="menu_padding_h">21dp</dimen>
+    <dimen name="menu_title_font">12sp</dimen>
+    <dimen name="menu_item_font">20sp</dimen>
+    <dimen name="menu_item_padding">8dp</dimen>
+
+
     <integer name="fragment_animation_duration">200</integer>
 </resources>

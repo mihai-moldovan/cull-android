@@ -5,16 +5,84 @@
     android:id="@+id/products_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/products_screen_spacing"
     tools:context=".ui.products.ProductsListFragment">
 
-    <TextView
-        android:id="@+id/message"
+    <ImageButton
+        android:id="@+id/buttonMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ProductsListFragment"
+        android:background="@null"
+        android:src="@drawable/btn_hamburger_selector"
+        app:layout_constraintBottom_toBottomOf="@id/searchBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchBar" />
+
+
+    <EditText
+        android:id="@+id/searchBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/products_screen_spacing"
+        android:layout_marginEnd="@dimen/products_screen_spacing"
+        android:background="@drawable/search_bar_bacgkround"
+        android:drawableEnd="@drawable/icon_search"
+        android:fontFamily="@font/kievitcomppro"
+        android:hint="@string/search_hint"
+        android:textSize="@dimen/products_list_font"
+        app:layout_constraintEnd_toStartOf="@+id/buttonFilters"
+        app:layout_constraintStart_toEndOf="@+id/buttonMenu"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/buttonFilters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/products_screen_spacing"
+        android:background="@null"
+        android:src="@drawable/btn_filter"
+        app:layout_constraintBottom_toBottomOf="@id/searchBar"
+        app:layout_constraintEnd_toStartOf="@+id/buttonCart"
+        app:layout_constraintTop_toTopOf="@id/searchBar" />
+
+    <ImageButton
+        android:id="@+id/buttonCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/btn_cart"
+        app:layout_constraintBottom_toBottomOf="@id/searchBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchBar" />
+
+    <TextView
+        android:id="@+id/roomTypeLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kievitcomppro"
+        android:gravity="center_horizontal"
+        android:paddingTop="@dimen/products_screen_spacing"
+        android:paddingBottom="@dimen/products_screen_spacing"
+        android:textColor="@color/white"
+        android:textSize="@dimen/products_list_font"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchBar"
+        tools:text="Dormitor Minimalist Cozy" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/roomTypeLabel"
+        app:spanCount="2"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_product_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

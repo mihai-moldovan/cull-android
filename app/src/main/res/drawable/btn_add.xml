@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:bottomRightRadius="@dimen/products_card_corner" android:topLeftRadius="@dimen/products_card_corner" />
+                    <stroke android:width="@dimen/products_stroke" android:color="@color/gold" />
+                </shape>
+            </item>
+            <item android:bottom="@dimen/products_add_padding" android:drawable="@drawable/icon_add" android:left="@dimen/products_add_padding" android:right="@dimen/products_add_padding" android:top="@dimen/products_add_padding" />
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:bottomRightRadius="@dimen/products_card_corner" android:topLeftRadius="@dimen/products_card_corner" />
+                    <solid android:color="@color/gold" />
+                </shape>
+            </item>
+            <item android:bottom="@dimen/products_add_padding" android:drawable="@drawable/icon_add" android:left="@dimen/products_add_padding" android:right="@dimen/products_add_padding" android:top="@dimen/products_add_padding" />
+        </layer-list>
+    </item>
+</selector>

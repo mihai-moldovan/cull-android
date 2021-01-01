@@ -62,11 +62,13 @@ class QuizViewModel : ViewModel() {
     }
 
     private fun computeResult() {
-        val results = hashMapOf<Int, Int>()
-        for (answer in answers.values) {
-            results[answer.attributedResultId] = (results[answer.attributedResultId] ?: 0) + 1
+        val questions = questions.value ?: return
+        val results = hashMapOf<Int, Float>()
+        for ((qId, answer) in answers) {
+            results[answer.attributedResultId] = (results[answer.attributedResultId]
+                ?: 0f) + (questions.firstOrNull { it.id == qId }?.weight ?: 1.0f)
         }
-        results.maxByOrNull { it.value }?.value?.let { resultId ->
+        results.maxByOrNull { it.value }?.key?.let { resultId ->
             quiz.value?.let { quiz ->
                 quiz.results.firstOrNull { it.id == resultId }?.let {
                     result.postValue(it)

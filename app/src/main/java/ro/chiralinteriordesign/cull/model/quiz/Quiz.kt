@@ -18,6 +18,7 @@ data class Quiz(
 data class QuizQuestion(
     val id: Int,
     val question: String,
+    val weight: Float,
     val position: Int,
     val answers: List<QuizAnswer>
 ) : Serializable

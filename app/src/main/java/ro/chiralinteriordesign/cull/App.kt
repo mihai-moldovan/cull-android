@@ -3,6 +3,7 @@ package ro.chiralinteriordesign.cull
 import android.app.ActivityManager
 import android.app.ActivityManager.RunningAppProcessInfo
 import ro.chiralinteriordesign.cull.services.DataRepository
+import ro.chiralinteriordesign.cull.utils.Utils
 
 
 /**
@@ -16,6 +17,12 @@ class App : android.app.Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+
+        val versionCode = Utils.appVersionCode
+        if (preferences.getInt(Preferences.Key.LAST_VERSION, 0) != versionCode) {
+            preferences.put(Preferences.Key.LAST_VERSION, versionCode)
+            preferences.clear(Preferences.Key.CACHE_TIMESTAMP)
+        }
     }
 
     val isInForeground: Boolean = {

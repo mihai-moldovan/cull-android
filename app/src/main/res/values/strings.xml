@@ -42,4 +42,15 @@
     <string name="space_edit_suffix_cm">CM</string>
     <string name="space_edit_error_not_zero">Valoare incorecta</string>
 
+    <!-- PRODUCTS -->
+    <string name="search_hint">Cauta un produs…</string>
+
+    <!-- MENU -->
+    <string name="menu_title">NAVIGATIE</string>
+    <string name="menu_account">Contul meu</string>
+    <string name="menu_orders">Istoric comenzi</string>
+    <string name="menu_terms">Termeni si conditii</string>
+    <string name="menu_policy">Politica de confidentialitate</string>
+    <string name="menu_logout">Log out</string>
+
 </resources>

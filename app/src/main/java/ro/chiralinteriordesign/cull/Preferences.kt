@@ -12,6 +12,7 @@ class Preferences(app: Application) {
     enum class Key {
         TUTORIAL_SEEN,
         CACHE_TIMESTAMP,
+        LAST_VERSION,
     }
 
     private val mSharedPreferences: SharedPreferences

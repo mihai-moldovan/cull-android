@@ -9,8 +9,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.model.quiz.Quiz
+import ro.chiralinteriordesign.cull.model.text.Text
 import ro.chiralinteriordesign.cull.model.user.User
 import java.io.IOException
 
@@ -93,5 +95,8 @@ interface Webservice {
         password: String?,
         quizResultId: Int?
     ): User
+
+    @GET("text/{key}/")
+    suspend fun getText(@Path("key") key: String): Text
 
 }

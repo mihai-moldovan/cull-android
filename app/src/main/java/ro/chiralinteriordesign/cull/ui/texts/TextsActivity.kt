@@ -5,10 +5,19 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.webkit.*
+import androidx.annotation.RequiresApi
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.databinding.ActivityTextsBinding
+import ro.chiralinteriordesign.cull.model.text.Text
+import ro.chiralinteriordesign.cull.services.ResultWrapper
 import ro.chiralinteriordesign.cull.ui.BaseActivity
 
+
 private const val ARG_CONTENT = "content"
+private const val ARG_TEXT_KEY = "text_key"
 private const val ARG_TITLE = "title"
 private const val HTML_TEMPLATE = """
 <!DOCTYPE html>
@@ -43,11 +52,13 @@ class TextsActivity : BaseActivity() {
             context: Context,
             title: String,
             content: String? = null,
+            textKey: Text.Key? = null,
             url: String? = null
         ): Intent {
             return Intent(context, TextsActivity::class.java)
                 .apply {
                     content?.let { putExtra(ARG_CONTENT, it) }
+                    textKey?.let { putExtra(ARG_TEXT_KEY, it) }
                     putExtra(ARG_TITLE, title)
                     url?.let { data = Uri.parse(it) }
                 }
@@ -62,12 +73,24 @@ class TextsActivity : BaseActivity() {
         binding = ActivityTextsBinding.inflate(layoutInflater)
         binding.titleView.text = intent.getStringExtra(ARG_TITLE)
         binding.webview.setBackgroundColor(Color.TRANSPARENT)
-        val content = intent.getStringExtra(ARG_CONTENT)
-        content?.let {
-            binding.webview.loadData(
-                HTML_TEMPLATE.replace("@content@", it),
-                "text/html", "utf-8"
+
+        intent.getStringExtra(ARG_CONTENT)?.let {
+            binding.webview.loadDataWithBaseURL(
+                "", HTML_TEMPLATE.replace("@content@", it),
+                "text/html", "utf-8", null
             )
+        } ?: (intent.getSerializableExtra(ARG_TEXT_KEY) as? Text.Key)?.let {
+            lifecycleScope.launch {
+                val result = App.instance.dataRepository.textRepository.getText(it)
+                if (result is ResultWrapper.Success) {
+                    binding.webview.loadDataWithBaseURL(
+                        "", HTML_TEMPLATE.replace("@content@", result.value.value),
+                        "text/html", "utf-8", null
+                    )
+                } else {
+                    finish()
+                }
+            }
         } ?: intent.data?.let {
             binding.webview.loadUrl(it.toString())
         }
