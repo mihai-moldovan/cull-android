@@ -5,8 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.webkit.*
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import ro.chiralinteriordesign.cull.App
@@ -71,7 +69,7 @@ class TextsActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTextsBinding.inflate(layoutInflater)
-        binding.titleView.text = intent.getStringExtra(ARG_TITLE)
+        binding.navBar.titleView.text = intent.getStringExtra(ARG_TITLE)
         binding.webview.setBackgroundColor(Color.TRANSPARENT)
 
         intent.getStringExtra(ARG_CONTENT)?.let {
@@ -95,9 +93,9 @@ class TextsActivity : BaseActivity() {
             binding.webview.loadUrl(it.toString())
         }
 
-        binding.btnBack.setOnClickListener { onBackPressed() }
+        binding.navBar.btnBack.setOnClickListener { onBackPressed() }
         binding.btnOk.setOnClickListener { onBackPressed() }
-        binding.btnClose.setOnClickListener { onBackPressed() }
+        binding.navBar.btnClose.setOnClickListener { onBackPressed() }
         setContentView(binding.root)
     }
 }

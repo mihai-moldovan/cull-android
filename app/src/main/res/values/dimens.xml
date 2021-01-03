@@ -85,5 +85,16 @@
     <dimen name="menu_item_padding">8dp</dimen>
 
 
+    <!-- AUTH -->
+    <dimen name="auth_title_font">25sp</dimen>
+    <dimen name="auth_subtitle_font">17sp</dimen>
+    <dimen name="auth_screen_margin">24dp</dimen>
+    <dimen name="auth_field_font">17sp</dimen>
+    <dimen name="auth_field_text_font">15sp</dimen>
+    <dimen name="auth_field_spacing">22dp</dimen>
+    <dimen name="auth_text_spacing">9dp</dimen>
+    <dimen name="auth_terms_font">15sp</dimen>
+    <dimen name="auth_terms_padding">10dp</dimen>
+
     <integer name="fragment_animation_duration">200</integer>
 </resources>

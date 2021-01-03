@@ -2,11 +2,12 @@
 <resources>
 
     <style name="ButtonRounded">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/btn_rounded_height</item>
         <item name="android:background">@drawable/btn_rounded</item>
         <item name="android:fontFamily">@font/kievitcomppro_light</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/btn_rounded_font</item>
-        <item name="android:layout_height">@dimen/btn_rounded_height</item>
         <item name="android:letterSpacing">0.05</item>
         <item name="android:gravity">center</item>
     </style>
@@ -82,6 +83,20 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:lines">1</item>
+    </style>
+
+    <style name="AuthInputLayout" parent="SpaceTextInputLayout">
+        <item name="android:layout_marginStart">@dimen/auth_screen_margin</item>
+        <item name="android:layout_marginEnd">@dimen/auth_screen_margin</item>
+        <item name="android:layout_marginBottom">@dimen/auth_field_spacing</item>
+    </style>
+
+    <style name="AuthEditText" parent="SpaceEditText">
+        <item name="android:textSize">@dimen/auth_field_font</item>
+    </style>
+
+    <style name="AuthEditTitle" parent="SpaceEditTitle">
+        <item name="android:textSize">@dimen/auth_field_spacing</item>
     </style>
 
 </resources>

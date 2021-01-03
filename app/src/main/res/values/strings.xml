@@ -52,5 +52,14 @@
     <string name="menu_terms">Termeni si conditii</string>
     <string name="menu_privacy">Politica de confidentialitate</string>
     <string name="menu_logout">Log out</string>
+    
+    <!-- AUTH -->
+    <string name="auth_register_title">Detalii utilizator</string>
+    <string name="auth_register_subtitle">Te rugam sa completezi campurile de mai jos</string>
+    <string name="auth_field_last_name">Nume</string>
+    <string name="auth_field_first_name">Prenume</string>
+    <string name="auth_field_email">Email</string>
+    <string name="auth_field_password">Parola</string>
+    <string name="auth_agree_terms">Sunt de acord cu termenii si conditiile</string>
 
 </resources>
