@@ -38,6 +38,7 @@ class DataRepository(private val appContext: Context) {
                 val results = awaitAll(
                     async { quizRepository.getQuiz(true) },
                     async { textRepository.getText(Text.Key.TERMS, true) },
+                    async { textRepository.getText(Text.Key.PRIVACY, true) },
                 )
                 when {
                     results.all { it is ResultWrapper.Success } -> {

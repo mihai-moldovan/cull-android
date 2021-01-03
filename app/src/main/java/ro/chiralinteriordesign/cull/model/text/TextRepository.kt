@@ -14,14 +14,15 @@ class TextRepository(
 ) {
 
     suspend fun getText(key: Text.Key, forceDownload: Boolean = false): ResultWrapper<Text> {
-        val localData = localRepository[this.javaClass.name] as? Text
+        val localKey = "${this.javaClass.name}/${key.name}"
+        val localData = localRepository[localKey] as? Text
         return if (localData != null && !forceDownload) {
             ResultWrapper.Success(localData, true)
         } else {
             val response = safeApiCall { webservice.getText(key.key) }
             when (response) {
                 is ResultWrapper.Success -> {
-                    localRepository[this.javaClass.name] = response.value
+                    localRepository[localKey] = response.value
                 }
                 else -> Unit
             }

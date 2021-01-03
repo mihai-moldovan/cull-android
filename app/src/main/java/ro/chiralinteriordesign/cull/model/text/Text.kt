@@ -10,6 +10,7 @@ data class Text(
     val value: String,
 ) : Serializable {
     enum class Key(val key: String) {
-        TERMS("terms")
+        TERMS("terms"),
+        PRIVACY("privacy"),
     }
 }

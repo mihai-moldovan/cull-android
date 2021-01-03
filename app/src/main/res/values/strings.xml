@@ -50,7 +50,7 @@
     <string name="menu_account">Contul meu</string>
     <string name="menu_orders">Istoric comenzi</string>
     <string name="menu_terms">Termeni si conditii</string>
-    <string name="menu_policy">Politica de confidentialitate</string>
+    <string name="menu_privacy">Politica de confidentialitate</string>
     <string name="menu_logout">Log out</string>
 
 </resources>

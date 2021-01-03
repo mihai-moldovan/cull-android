@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResultListener
 import ro.chiralinteriordesign.cull.databinding.ProductsListFragmentBinding
-import ro.chiralinteriordesign.cull.model.text.Text
 import ro.chiralinteriordesign.cull.ui.texts.TextsActivity
+import ro.chiralinteriordesign.cull.R
+import ro.chiralinteriordesign.cull.model.text.Text
 
 class ProductsListFragment : Fragment() {
 
@@ -31,15 +33,34 @@ class ProductsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.buttonMenu?.setOnClickListener {
-//            startActivity(
-//                TextsActivity.getIntent(
-//                    requireContext(),
-//                    "TERMENI TEST CONDITII",
-//                    textKey = Text.Key.TERMS,
-//                )
-//            )
             val fr = MenuFragment.newInstance()
             fr.showNow(parentFragmentManager, MenuFragment.TAG)
+            fr.setFragmentResultListener(MenuFragment.TAG) { _, bundle ->
+                (bundle.getSerializable(MenuFragment.MENU_RESULT) as? MenuFragment.MenuItem)?.let { item ->
+                    when (item) {
+                        MenuFragment.MenuItem.ACCOUNT -> {
+                        }
+                        MenuFragment.MenuItem.ORDERS -> {
+                        }
+                        MenuFragment.MenuItem.TERMS -> startActivity(
+                            TextsActivity.getIntent(
+                                requireContext(),
+                                getString(R.string.menu_terms),
+                                textKey = Text.Key.TERMS,
+                            )
+                        )
+                        MenuFragment.MenuItem.PRIVACY -> startActivity(
+                            TextsActivity.getIntent(
+                                requireContext(),
+                                getString(R.string.menu_privacy),
+                                textKey = Text.Key.PRIVACY,
+                            )
+                        )
+                        MenuFragment.MenuItem.LOGOUT -> {
+                        }
+                    }
+                }
+            }
         }
     }
 

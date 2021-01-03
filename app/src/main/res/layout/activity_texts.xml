@@ -61,7 +61,6 @@
         android:layout_marginEnd="@dimen/texts_activity_padding"
         android:layout_marginBottom="@dimen/texts_btn_margin"
         android:background="@android:color/transparent"
-        android:layerType="software"
         app:layout_constraintBottom_toTopOf="@+id/btnOk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

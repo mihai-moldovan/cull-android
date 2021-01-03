@@ -6,6 +6,7 @@
     <dimen name="btn_rounded_height">52dp</dimen>
     <dimen name="btn_rounded_font">18sp</dimen>
     <dimen name="standard_btn_margin">45dp</dimen>
+    <dimen name="button_min_size">50dp</dimen>
 
     <!--    Text-->
     <dimen name="text_font">14sp</dimen>
