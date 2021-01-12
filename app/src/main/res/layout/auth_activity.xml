@@ -4,4 +4,5 @@
     android:id="@+id/childContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/auth_background_full"
     tools:context=".ui.auth.AuthActivity" />

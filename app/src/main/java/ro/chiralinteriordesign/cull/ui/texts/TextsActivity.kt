@@ -8,7 +8,7 @@ import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import ro.chiralinteriordesign.cull.App
-import ro.chiralinteriordesign.cull.databinding.ActivityTextsBinding
+import ro.chiralinteriordesign.cull.databinding.TextsActivityBinding
 import ro.chiralinteriordesign.cull.model.text.Text
 import ro.chiralinteriordesign.cull.services.ResultWrapper
 import ro.chiralinteriordesign.cull.ui.BaseActivity
@@ -64,11 +64,11 @@ class TextsActivity : BaseActivity() {
     }
 
 
-    private lateinit var binding: ActivityTextsBinding
+    private lateinit var binding: TextsActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTextsBinding.inflate(layoutInflater)
+        binding = TextsActivityBinding.inflate(layoutInflater)
         binding.navBar.titleView.text = intent.getStringExtra(ARG_TITLE)
         binding.webview.setBackgroundColor(Color.TRANSPARENT)
 

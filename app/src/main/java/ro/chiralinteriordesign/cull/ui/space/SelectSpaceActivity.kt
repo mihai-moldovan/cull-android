@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.*
 import ro.chiralinteriordesign.cull.R
-import ro.chiralinteriordesign.cull.databinding.ActivitySelectSpaceBinding
+import ro.chiralinteriordesign.cull.databinding.SelectSpaceActivityBinding
 import ro.chiralinteriordesign.cull.model.user.RoomType
 import ro.chiralinteriordesign.cull.ui.BaseActivity
 import ro.chiralinteriordesign.cull.ui.products.ProductsActivity
@@ -19,14 +19,14 @@ import ro.chiralinteriordesign.cull.utils.showKeyboard
 
 class SelectSpaceActivity : BaseActivity() {
 
-    private lateinit var binding: ActivitySelectSpaceBinding
+    private lateinit var binding: SelectSpaceActivityBinding
     private lateinit var roomTypeViews: List<CheckedTextView>
     private lateinit var inputLayouts: List<TextInputLayout>
     private val viewModel: SelectSpaceViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySelectSpaceBinding.inflate(layoutInflater)
+        binding = SelectSpaceActivityBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 

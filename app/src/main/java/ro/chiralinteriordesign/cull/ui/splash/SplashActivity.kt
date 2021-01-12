@@ -3,7 +3,6 @@ package ro.chiralinteriordesign.cull.ui.splash
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
@@ -11,7 +10,7 @@ import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.Constants
 import ro.chiralinteriordesign.cull.Preferences
 import ro.chiralinteriordesign.cull.R
-import ro.chiralinteriordesign.cull.databinding.ActivitySplashBinding
+import ro.chiralinteriordesign.cull.databinding.SplashActivityBinding
 import ro.chiralinteriordesign.cull.ui.BaseActivity
 import ro.chiralinteriordesign.cull.ui.products.ProductsActivity
 import ro.chiralinteriordesign.cull.ui.quiz.QuizActivity
@@ -22,11 +21,11 @@ import ro.chiralinteriordesign.cull.ui.tutorial.TutorialActivity
 class SplashActivity : BaseActivity() {
 
     private val viewModel: SplashViewModel by viewModels()
-    private lateinit var binding: ActivitySplashBinding
+    private lateinit var binding: SplashActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashBinding.inflate(layoutInflater)
+        binding = SplashActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 

@@ -85,18 +85,36 @@
         <item name="android:lines">1</item>
     </style>
 
-    <style name="AuthInputLayout" parent="SpaceTextInputLayout">
+    <style name="AuthInputLayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="colorAccent">@color/gold</item>
+        <item name="suffixTextColor">@color/white_gold_selected</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/gold</item>
+        <item name="colorControlHighlight">@color/gold</item>
         <item name="android:layout_marginStart">@dimen/auth_screen_margin</item>
         <item name="android:layout_marginEnd">@dimen/auth_screen_margin</item>
-        <item name="android:layout_marginBottom">@dimen/auth_field_spacing</item>
+        <item name="android:layout_marginTop">@dimen/auth_field_spacing</item>
+    </style>
+
+    <style name="AuthInputLayout.Password">
+        <item name="endIconMode">password_toggle</item>
     </style>
 
     <style name="AuthEditText" parent="SpaceEditText">
         <item name="android:textSize">@dimen/auth_field_font</item>
+        <item name="android:background">@drawable/space_edit_background</item>
+        <item name="android:layout_height">@dimen/auth_field_height</item>
+    </style>
+
+    <style name="AuthEditText.Password">
+        <item name="android:inputType">textPassword</item>
     </style>
 
     <style name="AuthEditTitle" parent="SpaceEditTitle">
         <item name="android:textSize">@dimen/auth_field_spacing</item>
+        <item name="android:layout_marginTop">0dp</item>
     </style>
 
 </resources>

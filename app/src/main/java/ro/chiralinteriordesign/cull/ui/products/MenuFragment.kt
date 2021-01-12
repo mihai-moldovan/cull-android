@@ -9,6 +9,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.RecyclerView
+import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.databinding.MenuFragmentBinding
 
@@ -21,6 +22,20 @@ class MenuFragment : DialogFragment() {
         const val MENU_RESULT = "menu_result"
         const val TAG = "Menu"
         fun newInstance(): MenuFragment = MenuFragment()
+
+        val loggedInMenu = listOf(
+            MenuItem.ACCOUNT,
+            MenuItem.ORDERS,
+            MenuItem.TERMS,
+            MenuItem.PRIVACY,
+            MenuItem.LOGOUT,
+        )
+
+        val notLoggedInMenu = listOf(
+            MenuItem.LOGIN,
+            MenuItem.TERMS,
+            MenuItem.PRIVACY,
+        )
     }
 
     enum class MenuItem(@StringRes val textRes: Int) {
@@ -29,6 +44,7 @@ class MenuFragment : DialogFragment() {
         TERMS(R.string.menu_terms),
         PRIVACY(R.string.menu_privacy),
         LOGOUT(R.string.menu_logout),
+        LOGIN(R.string.menu_login),
     }
 
     private var binding: MenuFragmentBinding? = null
@@ -45,7 +61,7 @@ class MenuFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = MenuFragmentBinding.inflate(inflater, container, false)
-        return binding!!.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +70,11 @@ class MenuFragment : DialogFragment() {
         binding.btnClose.setOnClickListener {
             this.dismiss()
         }
-        binding.recyclerView.adapter = Adapter()
+        if (App.instance.dataRepository.userRepository.isLoggedIn) {
+            binding.recyclerView.adapter = Adapter(loggedInMenu)
+        } else {
+            binding.recyclerView.adapter = Adapter(notLoggedInMenu)
+        }
     }
 
     override fun onDestroyView() {
@@ -72,24 +92,24 @@ class MenuFragment : DialogFragment() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    inner class Adapter : RecyclerView.Adapter<ViewHolder>() {
+    inner class Adapter(private val items: List<MenuItem>) : RecyclerView.Adapter<ViewHolder>() {
         override fun getItemCount(): Int {
-            return MenuItem.values().size
+            return items.size
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             return ViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_menu, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.menu_item, parent, false)
             ).also { vh ->
                 vh.itemView.setOnClickListener {
-                    onMenuItemClicked(MenuItem.values()[vh.adapterPosition])
+                    onMenuItemClicked(items[vh.adapterPosition])
                 }
             }
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             (holder.itemView as? TextView)?.text =
-                requireContext().getString(MenuItem.values()[position].textRes)
+                requireContext().getString(items[position].textRes)
         }
     }
 }

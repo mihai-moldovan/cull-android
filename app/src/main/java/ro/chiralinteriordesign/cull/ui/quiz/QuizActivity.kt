@@ -1,6 +1,5 @@
 package ro.chiralinteriordesign.cull.ui.quiz
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import ro.chiralinteriordesign.cull.R
@@ -12,7 +11,7 @@ class QuizActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_quiz)
+        setContentView(R.layout.quiz_activity)
 
         if (savedInstanceState == null) {
             if (supportFragmentManager.findFragmentById(R.id.childContainer) == null) {

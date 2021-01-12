@@ -2,7 +2,8 @@
     <string name="app_name">CULL</string>
 
     <!--    GENERAL-->
-    <string name="generic_error">Conexiunea la server nu a reusit</string>
+    <string name="generic_error">Serverul nu este momentan disponibil</string>
+    <string name="network_error">Conexiunea la server nu a reusit</string>
     <string name="btn_ok">OK</string>
     <string name="btn_continue">Continua</string>
 
@@ -52,14 +53,36 @@
     <string name="menu_terms">Termeni si conditii</string>
     <string name="menu_privacy">Politica de confidentialitate</string>
     <string name="menu_logout">Log out</string>
-    
+    <string name="menu_login">Log in</string>
+
     <!-- AUTH -->
     <string name="auth_register_title">Detalii utilizator</string>
     <string name="auth_register_subtitle">Te rugam sa completezi campurile de mai jos</string>
+
     <string name="auth_field_last_name">Nume</string>
     <string name="auth_field_first_name">Prenume</string>
     <string name="auth_field_email">Email</string>
     <string name="auth_field_password">Parola</string>
     <string name="auth_agree_terms">Sunt de acord cu termenii si conditiile</string>
+
+    <string name="auth_login_title">Bine ai revenit</string>
+    <string name="auth_login_subtitle">Te rugam sa introduci email si parola</string>
+    <string name="auth_forgot_password">Am uitat parola</string>
+    <string name="auth_register_button">Nu ai un cont ? <font fgcolor="#FFb59a56">Inregistreza-te</font></string>
+    <string name="auth_btn_authenticate">Autentificare</string>
+    <string name="auth_register_screen_title">Inregistgrare cont</string>
+    <string name="auth_login_screen_title">Autentificare</string>
+
+    <string name="auth_activate_open_email">Deschide email</string>
+    <string name="auth_activate_success">Cont creat cu succes!</string>
+    <string name="auth_activate_message">Te rugam verifica casuta de email pentru confirmarea acestuia</string>
+
+    <string name="auth_forgot_pass_title">Ai uitat parola?</string>
+    <string name="auth_forgot_pass_message_email">Te rugam sa introduci email-ul pentru a primi link-ul de resetare</string>
+    <string name="auth_forgot_pass_message_pass">Te rugam sa introduci noua parola</string>
+    <string name="auth_forgot_pass_send_email">Trimite email</string>
+    <string name="auth_forgot_pass_reset_pass">Resetare parola</string>
+    <string name="auth_forgot_pass_in_progress">Parola in proces de resetare</string>
+    <string name="auth_forgot_pass_check_email">Te rugam verifica casuta de email pentru link-ul de resetare</string>
 
 </resources>

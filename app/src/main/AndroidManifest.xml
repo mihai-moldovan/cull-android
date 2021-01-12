@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ro.chiralinteriordesign.cull" >
+    package="ro.chiralinteriordesign.cull">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,20 +12,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CULL"
-        android:usesCleartextTraffic="@bool/allow_clear_text_traffic" >
-        <activity android:name=".ui.auth.AuthActivity" >
-        </activity>
-        <activity android:name=".ui.texts.TextsActivity" />
-        <activity android:name=".ui.products.ProductsActivity" />
-        <activity android:name=".ui.space.SelectSpaceActivity" />
+        android:usesCleartextTraffic="@bool/allow_clear_text_traffic">
+        <activity
+            android:name=".ui.auth.AuthActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.texts.TextsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.products.ProductsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.space.SelectSpaceActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/notification_channel_id" />
 
-        <activity android:name=".ui.quiz.QuizActivity" />
-        <activity android:name=".ui.tutorial.TutorialActivity" />
-        <activity android:name=".ui.splash.SplashActivity" >
+        <activity
+            android:name=".ui.quiz.QuizActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.tutorial.TutorialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +48,7 @@
 
         <service
             android:name=".services.CULLFirebaseMessagingService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

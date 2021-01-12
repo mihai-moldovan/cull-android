@@ -1,15 +1,13 @@
 package ro.chiralinteriordesign.cull.ui.quiz
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
-import ro.chiralinteriordesign.cull.R
-import ro.chiralinteriordesign.cull.databinding.FragmentQuizResultBinding
+import ro.chiralinteriordesign.cull.databinding.QuizResultFragmentBinding
 import ro.chiralinteriordesign.cull.model.quiz.QuizResult
 
 private const val ARG_RESULT = "result"
@@ -17,7 +15,7 @@ private const val ARG_RESULT = "result"
 class QuizResultFragment : Fragment() {
     private lateinit var result: QuizResult
 
-    private var binding: FragmentQuizResultBinding? = null
+    private var binding: QuizResultFragmentBinding? = null
     private val viewModel: QuizViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +29,7 @@ class QuizResultFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentQuizResultBinding.inflate(inflater, container, false)
+        binding = QuizResultFragmentBinding.inflate(inflater, container, false)
         return binding!!.root
     }
 

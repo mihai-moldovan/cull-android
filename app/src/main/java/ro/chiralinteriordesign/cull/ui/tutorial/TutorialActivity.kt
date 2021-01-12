@@ -5,21 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.Preferences
 import ro.chiralinteriordesign.cull.R
-import ro.chiralinteriordesign.cull.databinding.ActivityTutorialBinding
+import ro.chiralinteriordesign.cull.databinding.TutorialActivityBinding
 import ro.chiralinteriordesign.cull.databinding.TutorialItemBinding
 import ro.chiralinteriordesign.cull.ui.BaseActivity
 import ro.chiralinteriordesign.cull.ui.quiz.QuizActivity
 
 class TutorialActivity : BaseActivity() {
 
-    private lateinit var binding: ActivityTutorialBinding
+    private lateinit var binding: TutorialActivityBinding
 
     val images = listOf(
         R.drawable.onboarding_1,
@@ -40,7 +39,7 @@ class TutorialActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTutorialBinding.inflate(layoutInflater)
+        binding = TutorialActivityBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 

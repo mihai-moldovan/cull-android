@@ -11,26 +11,26 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
-import ro.chiralinteriordesign.cull.databinding.AuthLoginFragmentBinding
-import ro.chiralinteriordesign.cull.ui.auth.forgot_password.ForgotPasswordFragment
+import ro.chiralinteriordesign.cull.databinding.AuthRegisterFragmentBinding
 import ro.chiralinteriordesign.cull.utils.SimpleTextWatcher
-import ro.chiralinteriordesign.cull.utils.pushFragment
 import ro.chiralinteriordesign.cull.utils.showKeyboard
 
-class LoginFragment : Fragment() {
-
+/**
+ * Created by Mihai Moldovan on 03/01/2021.
+ */
+class RegisterFragment : Fragment() {
     companion object {
-        fun newInstance() = LoginFragment()
+        fun newInstance() = RegisterFragment()
     }
 
     private val viewModel: AuthViewModel by activityViewModels()
-    private var binding: AuthLoginFragmentBinding? = null
+    private var binding: AuthRegisterFragmentBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = AuthLoginFragmentBinding.inflate(inflater, container, false)
+    ): View {
+        binding = AuthRegisterFragmentBinding.inflate(inflater, container, false)
         return binding!!.root
     }
 
@@ -46,15 +46,28 @@ class LoginFragment : Fragment() {
             requireActivity().finish()
         }
 
+        setupAuthEdit(binding.lastNameInput, binding.lastNameTitle, viewModel.lastName)
+        setupAuthEdit(binding.firstNameInput, binding.firstNameTitle, viewModel.firstName)
         setupAuthEdit(binding.emailInput, binding.emailTitle, viewModel.email)
         setupAuthEdit(binding.passwordInput, binding.passwordTitle, viewModel.password)
+        setupAuthEdit(binding.password2Input, binding.password2Title, viewModel.password2)
 
-        binding.btnRegister.setOnClickListener {
-            parentFragmentManager.pushFragment(RegisterFragment.newInstance())
+        binding.termsCheckbox.setOnClickListener {
+            viewModel.termsAgreed.postValue(!(viewModel.termsAgreed.value ?: false))
+        }
+
+        viewModel.termsAgreed.observe(viewLifecycleOwner) {
+            binding.termsCheckbox.isChecked = it
         }
 
         binding.btnContinue.setOnClickListener {
-            viewModel.login().observe(viewLifecycleOwner) {
+            val firstName = viewModel.firstName.value ?: return@setOnClickListener
+            val lastName = viewModel.lastName.value ?: return@setOnClickListener
+            val email = viewModel.email.value ?: return@setOnClickListener
+            val password = viewModel.password.value ?: return@setOnClickListener
+            val password2 = viewModel.password2.value ?: return@setOnClickListener
+
+            viewModel.register(firstName, lastName, email, password).observe(viewLifecycleOwner) {
                 if (it == null) {
                     requireActivity().finish()
                 } else {
@@ -62,14 +75,11 @@ class LoginFragment : Fragment() {
                 }
             }
         }
-
-        binding.btnForgotPassword.setOnClickListener {
-            parentFragmentManager.pushFragment(ForgotPasswordFragment.newInstance())
-        }
     }
 
     override fun onDestroyView() {
         binding = null
         super.onDestroyView()
     }
+
 }

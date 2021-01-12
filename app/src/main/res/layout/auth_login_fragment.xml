@@ -21,8 +21,8 @@
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/auth_logo_spacing"
         android:src="@drawable/logo_auth"
-        app:layout_constraintBottom_toTopOf="@id/titleView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/navBar" />
@@ -32,77 +32,39 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/auth_screen_margin"
+        android:layout_marginTop="@dimen/auth_logo_spacing"
         android:layout_marginEnd="@dimen/auth_screen_margin"
         android:layout_marginBottom="@dimen/auth_text_spacing"
         android:fontFamily="@font/kievitcomppro"
-        android:text="@string/auth_register_title"
+        android:text="@string/auth_login_title"
         android:textSize="@dimen/auth_title_font"
-        app:layout_constraintBottom_toTopOf="@id/subTitleView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo" />
 
     <TextView
         android:id="@+id/subTitleView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/auth_screen_margin"
+        android:layout_marginTop="@dimen/auth_text_spacing"
         android:layout_marginEnd="@dimen/auth_screen_margin"
-        android:layout_marginBottom="@dimen/auth_field_spacing"
         android:fontFamily="@font/kievitcomppro"
-        android:text="@string/auth_register_subtitle"
+        android:text="@string/auth_login_subtitle"
         android:textSize="@dimen/auth_subtitle_font"
-        app:layout_constraintBottom_toTopOf="@id/lastNameInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleView" />
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lastNameInput"
-        style="@style/AuthInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/firstNameInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText style="@style/AuthEditText" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/lastNameTitle"
-        style="@style/AuthEditTitle"
-        android:text="@string/auth_field_last_name"
-        app:layout_constraintStart_toStartOf="@id/lastNameInput"
-        app:layout_constraintTop_toTopOf="@id/lastNameInput" />
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/firstNameInput"
-        style="@style/AuthInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/emailInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText style="@style/AuthEditText" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/firstNameTitle"
-        style="@style/AuthEditTitle"
-        android:text="@string/auth_field_first_name"
-        app:layout_constraintStart_toStartOf="@id/firstNameInput"
-        app:layout_constraintTop_toTopOf="@id/firstNameInput" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailInput"
         style="@style/AuthInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/passwordInput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subTitleView">
 
         <com.google.android.material.textfield.TextInputEditText style="@style/AuthEditText" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -116,14 +78,14 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordInput"
-        style="@style/AuthInputLayout"
+        style="@style/AuthInputLayout.Password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/password2Input"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailInput">
 
-        <com.google.android.material.textfield.TextInputEditText style="@style/AuthEditText" />
+        <com.google.android.material.textfield.TextInputEditText style="@style/AuthEditText.Password" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -133,38 +95,26 @@
         app:layout_constraintStart_toStartOf="@id/passwordInput"
         app:layout_constraintTop_toTopOf="@id/passwordInput" />
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password2Input"
-        style="@style/AuthInputLayout"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/btnForgotPassword"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/termsCheckbox"
+        android:layout_marginTop="@dimen/auth_field_spacing"
+        android:fontFamily="@font/kievitcomppro"
+        android:text="@string/auth_forgot_password"
+        android:textColor="@color/gold"
+        android:textSize="@dimen/auth_terms_font"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText style="@style/AuthEditText" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
 
     <TextView
-        android:id="@+id/password2Title"
-        style="@style/AuthEditTitle"
-        android:text="@string/auth_field_password"
-        app:layout_constraintStart_toStartOf="@id/password2Input"
-        app:layout_constraintTop_toTopOf="@id/password2Input" />
-
-    <CheckedTextView
-        android:id="@+id/termsCheckbox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/auth_screen_margin"
-        android:layout_marginEnd="@dimen/auth_screen_margin"
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginBottom="@dimen/auth_field_spacing"
-        android:drawableStart="@drawable/checkbox_selector"
-        android:drawablePadding="@dimen/auth_terms_padding"
         android:fontFamily="@font/kievitcomppro"
-        android:gravity="center_vertical|left"
-        android:text="@string/auth_agree_terms"
+        android:text="@string/auth_register_button"
         android:textSize="@dimen/auth_terms_font"
         app:layout_constraintBottom_toTopOf="@id/btnContinue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -174,7 +124,7 @@
         android:id="@+id/btnContinue"
         style="@style/ButtonRounded"
         android:layout_marginBottom="@dimen/auth_screen_margin"
-        android:text="@string/btn_continue"
+        android:text="@string/auth_btn_authenticate"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

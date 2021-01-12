@@ -29,6 +29,15 @@ sealed class ResultWrapper<out T> {
         ResultWrapper<Nothing>()
 
     object NetworkError : ResultWrapper<Nothing>()
+
+    fun errorMessage(context: Context): String? {
+        return when (this) {
+            is Success -> null
+            is NetworkError -> context.getString(R.string.network_error)
+            is GenericError -> this.error?.detail
+                ?: context.getString(R.string.generic_error)
+        }
+    }
 }
 
 suspend fun <T> safeApiCall(
@@ -51,6 +60,7 @@ suspend fun <T> safeApiCall(
         }
     }
 }
+
 
 private fun createGson(): Gson = GsonBuilder()
     .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -98,5 +108,8 @@ interface Webservice {
 
     @GET("text/{key}/")
     suspend fun getText(@Path("key") key: String): Text
+
+    @POST("user/forgot_password")
+    suspend fun forgotPassword(email: String): Boolean
 
 }

@@ -72,4 +72,8 @@ class UserRepository(
         set(newValue) {
             localRepository[this.javaClass.name] = newValue
         }
+
+    fun logout() {
+        localRepository[this.javaClass.name] = User()
+    }
 }

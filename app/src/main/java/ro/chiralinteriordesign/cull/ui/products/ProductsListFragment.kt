@@ -1,5 +1,6 @@
 package ro.chiralinteriordesign.cull.ui.products
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
+import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.databinding.ProductsListFragmentBinding
 import ro.chiralinteriordesign.cull.ui.texts.TextsActivity
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.model.text.Text
+import ro.chiralinteriordesign.cull.ui.auth.AuthActivity
 
 class ProductsListFragment : Fragment() {
 
@@ -57,7 +60,11 @@ class ProductsListFragment : Fragment() {
                             )
                         )
                         MenuFragment.MenuItem.LOGOUT -> {
+                            App.instance.dataRepository.userRepository.logout()
                         }
+                        MenuFragment.MenuItem.LOGIN -> startActivity(
+                            Intent(requireContext(), AuthActivity::class.java)
+                        )
                     }
                 }
             }

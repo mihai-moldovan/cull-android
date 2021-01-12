@@ -24,7 +24,7 @@ class DataRepository(private val appContext: Context) {
     }
 
     private val localRepository: LocalRepository by lazy { LocalRepository(appContext) }
-    private val webservice: Webservice by lazy { createWebservice(appContext) }
+    val webservice: Webservice by lazy { createWebservice(appContext) }
 
     val quizRepository: QuizRepository by lazy { QuizRepository(localRepository, webservice) }
     val userRepository: UserRepository by lazy { UserRepository(localRepository, webservice) }

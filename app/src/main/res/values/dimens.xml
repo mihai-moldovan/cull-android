@@ -95,6 +95,13 @@
     <dimen name="auth_text_spacing">9dp</dimen>
     <dimen name="auth_terms_font">15sp</dimen>
     <dimen name="auth_terms_padding">10dp</dimen>
+    <dimen name="auth_logo_spacing">35dp</dimen>
+    <dimen name="auth_field_height">52dp</dimen>
+
+    <dimen name="auth_activate_title_font">20sp</dimen>
+    <dimen name="auth_activate_message_font">17sp</dimen>
+    <dimen name="auth_activate_field_spacing">30dp</dimen>
+    <dimen name="auth_activate_screen_margin">45dp</dimen>
 
     <integer name="fragment_animation_duration">200</integer>
 </resources>

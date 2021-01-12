@@ -39,6 +39,6 @@
         app:layout_constraintEnd_toStartOf="@id/btnClose"
         app:layout_constraintStart_toEndOf="@+id/btnBack"
         app:layout_constraintTop_toTopOf="@id/btnBack"
-        tools:text="Termeni si conditii" />
+        tools:text="TITLE" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

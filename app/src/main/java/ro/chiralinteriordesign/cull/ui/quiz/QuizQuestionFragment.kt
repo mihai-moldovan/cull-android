@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import ro.chiralinteriordesign.cull.R
-import ro.chiralinteriordesign.cull.databinding.FragmentQuizQuestionBinding
-import ro.chiralinteriordesign.cull.databinding.ItemQuizAnswerBinding
+import ro.chiralinteriordesign.cull.databinding.QuizItemAnswerBinding
+import ro.chiralinteriordesign.cull.databinding.QuizQuestionFragmentBinding
 import ro.chiralinteriordesign.cull.model.quiz.QuizAnswer
 import ro.chiralinteriordesign.cull.model.quiz.QuizQuestion
 
@@ -25,7 +25,7 @@ private const val ARG_QUESTION = "question"
  */
 class QuizQuestionFragment : Fragment() {
     private lateinit var question: QuizQuestion
-    private var binding: FragmentQuizQuestionBinding? = null
+    private var binding: QuizQuestionFragmentBinding? = null
     private val viewModel: QuizViewModel by activityViewModels()
 
 
@@ -40,7 +40,7 @@ class QuizQuestionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentQuizQuestionBinding.inflate(inflater, container, false)
+        binding = QuizQuestionFragmentBinding.inflate(inflater, container, false)
         return binding!!.root
     }
 
@@ -71,7 +71,7 @@ class QuizQuestionFragment : Fragment() {
     }
 }
 
-class QuizAnswerViewHolder(val binding: ItemQuizAnswerBinding) :
+class QuizAnswerViewHolder(val binding: QuizItemAnswerBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     var data: QuizAnswer? = null
@@ -106,7 +106,7 @@ class QuizQuestionAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizAnswerViewHolder {
         val binding =
-            ItemQuizAnswerBinding.inflate(
+            QuizItemAnswerBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

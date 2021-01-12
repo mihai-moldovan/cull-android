@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.auth.LoginFragment">
+
+
+    <include
+        android:id="@+id/navBar"
+        layout="@layout/nav_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/auth_logo_spacing"
+        android:src="@drawable/logo_auth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navBar" />
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/checkmark_icon"
+        app:layout_constraintBottom_toTopOf="@+id/titleView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/auth_activate_screen_margin"
+        android:layout_marginTop="@dimen/auth_activate_field_spacing"
+        android:layout_marginEnd="@dimen/auth_activate_screen_margin"
+        android:fontFamily="@font/kievitcomppro"
+        android:gravity="center"
+        android:text="@string/auth_activate_success"
+        android:textSize="@dimen/auth_activate_title_font"
+        app:layout_constraintBottom_toTopOf="@+id/messageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon" />
+
+    <TextView
+        android:id="@+id/messageView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/auth_activate_screen_margin"
+        android:layout_marginTop="@dimen/auth_activate_field_spacing"
+        android:layout_marginEnd="@dimen/auth_activate_screen_margin"
+        android:fontFamily="@font/kievitcomppro"
+        android:gravity="center"
+        android:text="@string/auth_activate_message"
+        android:textSize="@dimen/auth_activate_message_font"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleView" />
+
+    <TextView
+        android:id="@+id/btnContinue"
+        style="@style/ButtonRounded"
+        android:layout_marginStart="@dimen/auth_activate_screen_margin"
+        android:layout_marginEnd="@dimen/auth_activate_screen_margin"
+        android:layout_marginBottom="@dimen/auth_screen_margin"
+        android:text="@string/auth_activate_open_email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
