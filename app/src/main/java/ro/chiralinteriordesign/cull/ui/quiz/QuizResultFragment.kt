@@ -40,7 +40,7 @@ class QuizResultFragment : Fragment() {
         binding.textView.text = result.text
         Glide
             .with(binding.imageView)
-            .load(result.photo)
+            .load(result.photoAbsoluteURL)
             .into(binding.imageView)
 
         binding.btnRedo.setOnClickListener {

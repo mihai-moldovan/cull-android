@@ -10,7 +10,7 @@ data class User(
     val firstName: String = "",
     val lastName: String = "",
     val email: String = "",
-    val quizResultId: Int = 0,
+    val quizResult: String = "",
     val authToken: String? = null,
     val rooms: List<Room> = listOf(),
 ) : Serializable

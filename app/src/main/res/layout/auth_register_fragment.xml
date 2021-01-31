@@ -79,7 +79,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/subTitleView">
 
-                <com.google.android.material.textfield.TextInputEditText style="@style/AuthEditText" />
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/AuthEditText"
+                    android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -99,7 +101,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/lastNameInput">
 
-                <com.google.android.material.textfield.TextInputEditText style="@style/AuthEditText" />
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/AuthEditText"
+                    android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -157,7 +161,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/passwordInput">
 
-                <com.google.android.material.textfield.TextInputEditText style="@style/AuthEditText.Password" />
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/AuthEditText.Password"
+                    android:imeOptions="actionDone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView

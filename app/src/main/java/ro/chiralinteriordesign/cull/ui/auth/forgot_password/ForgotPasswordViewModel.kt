@@ -1,15 +1,17 @@
 package ro.chiralinteriordesign.cull.ui.auth.forgot_password
 
+import android.app.Application
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.services.ResultWrapper
 import ro.chiralinteriordesign.cull.services.safeApiCall
+import ro.chiralinteriordesign.cull.R
 
 /**
  * Created by Mihai Moldovan on 12/01/2021.
  */
-class ForgotPasswordViewModel : ViewModel() {
+class ForgotPasswordViewModel(val app: Application) : AndroidViewModel(app) {
 
     val email = MutableLiveData("")
 
@@ -21,8 +23,9 @@ class ForgotPasswordViewModel : ViewModel() {
         }.map {
             when (it) {
                 is ResultWrapper.Success -> null
-                is ResultWrapper.NetworkError -> "Network error"
-                is ResultWrapper.GenericError -> it.error?.detail ?: "Generic error"
+                is ResultWrapper.NetworkError -> app.getString(R.string.network_error)
+                is ResultWrapper.GenericError -> it.error?.detail
+                    ?: app.getString(R.string.generic_error)
             }
         }
     }

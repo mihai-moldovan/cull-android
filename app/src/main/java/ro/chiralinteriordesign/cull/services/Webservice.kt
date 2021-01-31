@@ -4,17 +4,19 @@ import android.content.Context
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
+import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.model.quiz.Quiz
 import ro.chiralinteriordesign.cull.model.text.Text
 import ro.chiralinteriordesign.cull.model.user.User
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by Mihai Moldovan on 21/12/2020.
@@ -77,8 +79,24 @@ private fun convertErrorBody(throwable: HttpException): ErrorResponse? {
     }
 }
 
+private fun getOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
+    .connectTimeout(20, TimeUnit.SECONDS)
+    .readTimeout(20, TimeUnit.SECONDS)
+    .addInterceptor { chain ->
+        App.instance.dataRepository.userRepository.currentUser.authToken?.let { token ->
+            chain.proceed(
+                chain.request()
+                    .newBuilder()
+                    .addHeader("Authorization", "Token $token")
+                    .build()
+            )
+        } ?: chain.proceed(chain.request())
+    }
+    .build()
+
 fun createWebservice(appContext: Context): Webservice = Retrofit.Builder()
     .baseUrl(appContext.resources.getString(R.string.api_url) + "/api/v1/")
+    .client(getOkHttpClient())
     .addConverterFactory(
         GsonConverterFactory.create(createGson())
     )
@@ -91,25 +109,39 @@ interface Webservice {
     @GET("quiz/")
     suspend fun getQuiz(): Quiz
 
-    @POST("user/login/")
-    suspend fun login(email: String, password: String): User
+    @FormUrlEncoded
+    @POST("auth/login/")
+    suspend fun login(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): User
 
-    @POST("user/register/")
-    suspend fun register(firstName: String, lastName: String, email: String, password: String): User
+    @FormUrlEncoded
+    @POST("auth/register/")
+    suspend fun register(
+        @Field("first_name") firstName: String,
+        @Field("last_name") lastName: String,
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): User
 
-    @POST("user/save/")
+    @FormUrlEncoded
+    @POST("auth/save/")
     suspend fun save(
-        firstName: String?,
-        lastName: String?,
-        email: String?,
-        password: String?,
-        quizResultId: Int?
+        @Field("first_name") firstName: String?,
+        @Field("last_name") lastName: String?,
+        @Field("email") email: String?,
+        @Field("password") password: String?,
+        @Field("quiz") iquizResultId: Int?
     ): User
 
     @GET("text/{key}/")
     suspend fun getText(@Path("key") key: String): Text
 
-    @POST("user/forgot_password")
-    suspend fun forgotPassword(email: String): Boolean
+    @FormUrlEncoded
+    @POST("auth/forgot_password")
+    suspend fun forgotPassword(
+        @Field("email") email: String
+    ): Boolean
 
 }

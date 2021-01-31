@@ -106,6 +106,7 @@
         <item name="android:textSize">@dimen/auth_field_font</item>
         <item name="android:background">@drawable/space_edit_background</item>
         <item name="android:layout_height">@dimen/auth_field_height</item>
+        <item name="android:inputType">text</item>
     </style>
 
     <style name="AuthEditText.Password">

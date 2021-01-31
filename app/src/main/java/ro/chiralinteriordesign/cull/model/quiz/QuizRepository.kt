@@ -37,13 +37,21 @@ class QuizRepository(
                                 async {
                                     Glide
                                         .with(App.instance)
-                                        .load(a.photo)
-                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                        .submit(dm.widthPixels, dm.heightPixels)
-                                        .get(10, TimeUnit.SECONDS)
+                                        .load(a.photoAbsoluteURL)
+                                        .preload(dm.widthPixels, dm.heightPixels)
                                 }
                             })
                         }
+                    }
+                    for (r in response.value.results) {
+                        jobs.add(withContext(Dispatchers.IO) {
+                            async {
+                                Glide
+                                    .with(App.instance)
+                                    .load(r.photoAbsoluteURL)
+                                    .preload(dm.widthPixels, dm.heightPixels)
+                            }
+                        })
                     }
                     jobs.joinAll()
                 }

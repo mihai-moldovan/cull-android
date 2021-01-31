@@ -19,7 +19,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     fun login(email: String, password: String): LiveData<String?> {
         return liveData(Dispatchers.IO) {
-            emit(safeApiCall { userRepo.login(email, password) })
+            emit(userRepo.login(email, password))
         }.map { it.errorMessage(getApplication()) }
     }
 
@@ -30,7 +30,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         password: String
     ): LiveData<String?> {
         return liveData(Dispatchers.IO) {
-            emit(safeApiCall { userRepo.register(firstName, lastName, email, password) })
+            emit(userRepo.register(firstName, lastName, email, password) )
         }.map { it.errorMessage(getApplication()) }
     }
 

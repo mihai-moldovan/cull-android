@@ -79,7 +79,7 @@ class QuizAnswerViewHolder(val binding: QuizItemAnswerBinding) :
             field = newValue
             field?.let {
                 Glide.with(binding.imageView)
-                    .load(it.photo)
+                    .load(it.photoAbsoluteURL)
                     .apply(
                         RequestOptions.bitmapTransform(
                             RoundedCorners(

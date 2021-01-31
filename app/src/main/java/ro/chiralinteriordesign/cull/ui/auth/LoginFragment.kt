@@ -54,7 +54,10 @@ class LoginFragment : Fragment() {
         }
 
         binding.btnContinue.setOnClickListener {
-            viewModel.login().observe(viewLifecycleOwner) {
+            val email = viewModel.email.value ?: return@setOnClickListener
+            val password = viewModel.password.value ?: return@setOnClickListener
+
+            viewModel.login(email, password).observe(viewLifecycleOwner) {
                 if (it == null) {
                     requireActivity().finish()
                 } else {
