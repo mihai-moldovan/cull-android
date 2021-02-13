@@ -17,6 +17,7 @@ class CULLFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     override fun onNewToken(token: String) {
+        Log.i("Firebase", "token: $token")
         FirebaseMessaging.getInstance().subscribeToTopic(CORE_TOPIC)
     }
 

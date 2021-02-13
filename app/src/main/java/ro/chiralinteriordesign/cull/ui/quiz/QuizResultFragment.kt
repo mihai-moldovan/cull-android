@@ -1,5 +1,6 @@
 package ro.chiralinteriordesign.cull.ui.quiz
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
+import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.databinding.QuizResultFragmentBinding
 import ro.chiralinteriordesign.cull.model.quiz.QuizResult
+import ro.chiralinteriordesign.cull.ui.products.ProductsActivity
+import ro.chiralinteriordesign.cull.ui.space.SelectSpaceActivity
 
 private const val ARG_RESULT = "result"
 
@@ -49,6 +53,22 @@ class QuizResultFragment : Fragment() {
         }
 
         binding.btnContinue.setOnClickListener {
+
+            val user = App.instance.dataRepository.userRepository.currentUser
+            when {
+                user.rooms.isNullOrEmpty() -> {
+                    //has has no space saved
+                    startActivity(Intent(requireActivity(), SelectSpaceActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    })
+                }
+                else -> {
+                    //show products
+                    startActivity(Intent(requireActivity(), ProductsActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    })
+                }
+            }
             requireActivity().finish()
         }
     }

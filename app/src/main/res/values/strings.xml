@@ -45,6 +45,7 @@
 
     <!-- PRODUCTS -->
     <string name="search_hint">Cauta un produs…</string>
+    <string name="generating_moodboard">Generare moodboard…</string>
 
     <!-- MENU -->
     <string name="menu_title">NAVIGATIE</string>
@@ -54,6 +55,7 @@
     <string name="menu_privacy">Politica de confidentialitate</string>
     <string name="menu_logout">Log out</string>
     <string name="menu_login">Log in</string>
+    <string name="menu_redo_test">Reluare test stil</string>
 
     <!-- AUTH -->
     <string name="auth_register_title">Detalii utilizator</string>

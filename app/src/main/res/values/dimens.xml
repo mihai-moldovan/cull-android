@@ -65,7 +65,7 @@
 
 
     <!-- PRODUCTS -->
-    <dimen name="products_screen_spacing">15dp</dimen>
+    <dimen name="products_screen_spacing">8dp</dimen>
     <dimen name="products_search_font">15sp</dimen>
     <dimen name="products_list_font">15sp</dimen>
     <dimen name="products_list_inset">42dp</dimen>
@@ -75,6 +75,10 @@
     <dimen name="products_stroke">1dp</dimen>
     <dimen name="products_card_corner">4dp</dimen>
     <dimen name="products_add_padding">6.5dp</dimen>
+    <dimen name="products_progress_font">23sp</dimen>
+    <dimen name="products_progress_text_margin">26dp</dimen>
+    <dimen name="products_card_spacing">8dp</dimen>
+    <dimen name="products_card_image_padding">10dp</dimen>
 
 
     <!-- MENU -->

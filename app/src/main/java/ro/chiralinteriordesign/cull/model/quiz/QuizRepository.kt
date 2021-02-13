@@ -8,6 +8,8 @@ import ro.chiralinteriordesign.cull.services.LocalRepository
 import ro.chiralinteriordesign.cull.services.ResultWrapper
 import ro.chiralinteriordesign.cull.services.Webservice
 import ro.chiralinteriordesign.cull.services.safeApiCall
+import java.io.IOException
+import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 
@@ -35,10 +37,16 @@ class QuizRepository(
                         for (a in q.answers) {
                             jobs.add(withContext(Dispatchers.IO) {
                                 async {
-                                    Glide
-                                        .with(App.instance)
-                                        .load(a.photoAbsoluteURL)
-                                        .preload(dm.widthPixels, dm.heightPixels)
+                                    try {
+                                        Glide
+                                            .with(App.instance)
+                                            .load(a.photoAbsoluteURL)
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .submit(dm.widthPixels, dm.heightPixels)
+                                            .get()
+                                    } catch (e: Exception) {
+                                        e.printStackTrace()
+                                    }
                                 }
                             })
                         }
@@ -46,10 +54,16 @@ class QuizRepository(
                     for (r in response.value.results) {
                         jobs.add(withContext(Dispatchers.IO) {
                             async {
-                                Glide
-                                    .with(App.instance)
-                                    .load(r.photoAbsoluteURL)
-                                    .preload(dm.widthPixels, dm.heightPixels)
+                                try {
+                                    Glide
+                                        .with(App.instance)
+                                        .load(r.photoAbsoluteURL)
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .submit(dm.widthPixels, dm.heightPixels)
+                                        .get()
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                }
                             }
                         })
                     }
@@ -60,6 +74,8 @@ class QuizRepository(
             response
         }
     }
+
+    val localQuiz get() = localRepository[this.javaClass.name] as? Quiz
 
     val hasLocalQuiz: Boolean = localRepository[this.javaClass.name] is Quiz
 

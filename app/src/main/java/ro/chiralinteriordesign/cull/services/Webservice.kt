@@ -1,6 +1,7 @@
 package ro.chiralinteriordesign.cull.services
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -13,6 +14,7 @@ import retrofit2.http.*
 import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.model.quiz.Quiz
+import ro.chiralinteriordesign.cull.model.shop.Product
 import ro.chiralinteriordesign.cull.model.text.Text
 import ro.chiralinteriordesign.cull.model.user.User
 import java.io.IOException
@@ -53,6 +55,7 @@ suspend fun <T> safeApiCall(
             is IOException -> ResultWrapper.NetworkError
             is HttpException -> {
                 val code = throwable.code()
+                Log.w("WEBSERVICE", throwable.response().toString())
                 val errorResponse = convertErrorBody(throwable)
                 ResultWrapper.GenericError(code, errorResponse)
             }
@@ -104,6 +107,13 @@ fun createWebservice(appContext: Context): Webservice = Retrofit.Builder()
     .create(Webservice::class.java)
 
 
+data class PaginatedResponse<T>(
+    val count: Int,
+    val next: String,
+    val previouse: String,
+    val results: List<T>,
+)
+
 interface Webservice {
 
     @GET("quiz/")
@@ -143,5 +153,18 @@ interface Webservice {
     suspend fun forgotPassword(
         @Field("email") email: String
     ): Boolean
+
+    @GET("shop/products/")
+    suspend fun getProducts(
+        @Query("page") page: Int,
+        @Query("query") query: String?,
+        @Query("product_type") productType: String?,
+        @Query("min_price") minPrice: Float?,
+        @Query("max_price") maxPrice: Float?,
+        @Query("color") color: String?,
+        @Query("material") material: String?,
+        @Query("room_type") roomType: String?,
+        @Query("style_result") styleResult: String?,
+    ): PaginatedResponse<Product>
 
 }

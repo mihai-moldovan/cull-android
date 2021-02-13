@@ -3,8 +3,8 @@
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/products_card_corner" />
-            <solid android:color="#80FFFFFF" />
-            <stroke android:width="@dimen/products_stroke" android:color="#979797" />
+            <solid android:color="@color/white" />
+            <stroke android:width="@dimen/btn_rounded_stroke" android:color="@color/gold" />
         </shape>
     </item>
     <item>

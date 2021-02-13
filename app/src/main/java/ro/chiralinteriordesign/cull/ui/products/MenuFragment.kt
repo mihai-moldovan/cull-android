@@ -25,6 +25,7 @@ class MenuFragment : DialogFragment() {
 
         val loggedInMenu = listOf(
             MenuItem.ACCOUNT,
+            MenuItem.REDO_TEST,
             MenuItem.ORDERS,
             MenuItem.TERMS,
             MenuItem.PRIVACY,
@@ -35,6 +36,7 @@ class MenuFragment : DialogFragment() {
             MenuItem.LOGIN,
             MenuItem.TERMS,
             MenuItem.PRIVACY,
+            MenuItem.REDO_TEST,
         )
     }
 
@@ -45,6 +47,7 @@ class MenuFragment : DialogFragment() {
         PRIVACY(R.string.menu_privacy),
         LOGOUT(R.string.menu_logout),
         LOGIN(R.string.menu_login),
+        REDO_TEST(R.string.menu_redo_test),
     }
 
     private var binding: MenuFragmentBinding? = null
