@@ -149,7 +149,7 @@ interface Webservice {
     suspend fun getText(@Path("key") key: String): Text
 
     @FormUrlEncoded
-    @POST("auth/forgot_password")
+    @POST("password_reset/")
     suspend fun forgotPassword(
         @Field("email") email: String
     ): Boolean

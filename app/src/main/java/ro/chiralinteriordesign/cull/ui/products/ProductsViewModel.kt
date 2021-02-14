@@ -30,6 +30,9 @@ class ProductsViewModel(app: Application) : AndroidViewModel(app) {
             resetProducts()
         }
 
+    init {
+        loadRoomAndStyle()
+    }
 
     private fun resetProducts() {
         currentJob?.cancel()

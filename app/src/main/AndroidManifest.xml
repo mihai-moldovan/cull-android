@@ -37,6 +37,9 @@
             android:name=".ui.tutorial.TutorialActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.auth.reset_password.ResetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -44,6 +47,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="links.cullapp.ro"
+                    android:scheme="https" />
+            </intent-filter>
+
         </activity>
 
         <service

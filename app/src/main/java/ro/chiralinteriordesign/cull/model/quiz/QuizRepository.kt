@@ -32,42 +32,44 @@ class QuizRepository(
                 is ResultWrapper.Success -> {
                     localRepository[this.javaClass.name] = response.value
                     val dm = App.instance.resources.displayMetrics
-                    val jobs = mutableListOf<Job>()
+//                    val jobs = mutableListOf<Job>()
                     for (q in response.value.questions) {
                         for (a in q.answers) {
-                            jobs.add(withContext(Dispatchers.IO) {
-                                async {
+//                            jobs.add(withContext(Dispatchers.IO) {
+//                                async {
                                     try {
                                         Glide
                                             .with(App.instance)
                                             .load(a.photoAbsoluteURL)
                                             .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                            .submit(dm.widthPixels, dm.heightPixels)
-                                            .get()
+                                            .preload()
+//                                            .submit(dm.widthPixels, dm.heightPixels)
+//                                            .get()
                                     } catch (e: Exception) {
                                         e.printStackTrace()
                                     }
-                                }
-                            })
+//                                }
+//                            })
                         }
                     }
                     for (r in response.value.results) {
-                        jobs.add(withContext(Dispatchers.IO) {
-                            async {
+//                        jobs.add(withContext(Dispatchers.IO) {
+//                            async {
                                 try {
                                     Glide
                                         .with(App.instance)
                                         .load(r.photoAbsoluteURL)
                                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                        .submit(dm.widthPixels, dm.heightPixels)
-                                        .get()
+//                                        .submit(dm.widthPixels, dm.heightPixels)
+//                                        .get()
+                                        .preload()
                                 } catch (e: Exception) {
                                     e.printStackTrace()
                                 }
-                            }
-                        })
+//                            }
+//                        })
                     }
-                    jobs.joinAll()
+//                    jobs.joinAll()
                 }
                 else -> Unit
             }

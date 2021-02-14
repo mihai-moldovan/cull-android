@@ -21,7 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:overScrollMode="ifContentScrolls"
-        app:layout_constraintBottom_toTopOf="@+id/btnContinue"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/navBar">
@@ -190,21 +190,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/password2Input" />
 
+            <TextView
+                android:id="@+id/btnContinue"
+                style="@style/ButtonRounded"
+                android:layout_marginTop="@dimen/auth_field_spacing"
+                android:layout_marginBottom="@dimen/auth_screen_margin"
+                android:text="@string/btn_continue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/termsCheckbox"
+                app:layout_constraintWidth_percent="0.75" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-
-    <TextView
-        android:id="@+id/btnContinue"
-        style="@style/ButtonRounded"
-        android:layout_marginBottom="@dimen/auth_screen_margin"
-        android:text="@string/btn_continue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.75" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

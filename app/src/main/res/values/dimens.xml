@@ -80,6 +80,14 @@
     <dimen name="products_card_spacing">8dp</dimen>
     <dimen name="products_card_image_padding">10dp</dimen>
 
+    <!-- PRODUCT DETAILS -->
+    <dimen name="product_details_bottom_corners">35dp</dimen>
+    <dimen name="product_details_bottom_padding">20dp</dimen>
+    <dimen name="product_details_title_font">15sp</dimen>
+    <dimen name="product_details_price_font">16sp</dimen>
+    <dimen name="product_details_description_font">12sp</dimen>
+    <dimen name="product_details_bottom_spacing">10dp</dimen>
+    <dimen name="product_details_top_spacing">20dp</dimen>
 
     <!-- MENU -->
     <dimen name="menu_padding_v">40dp</dimen>

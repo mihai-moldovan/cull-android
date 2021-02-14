@@ -24,12 +24,13 @@ import ro.chiralinteriordesign.cull.ui.auth.AuthActivity
 import ro.chiralinteriordesign.cull.ui.quiz.QuizActivity
 import ro.chiralinteriordesign.cull.ui.texts.TextsActivity
 import ro.chiralinteriordesign.cull.utils.hideKeyboard
+import ro.chiralinteriordesign.cull.utils.pushFragment
 
 class ProductsListFragment : Fragment() {
 
     private var binding: ProductsListFragmentBinding? = null
     val adapter = ProductsAdapter({
-
+        parentFragmentManager.pushFragment(ProductDetailsFragment.newInstance(it))
     },
         {
             viewModel.loadNextPage()
@@ -124,7 +125,6 @@ class ProductsListFragment : Fragment() {
         viewModel.roomStyle.observe(viewLifecycleOwner) {
             binding.roomTypeLabel.text = it
         }
-        viewModel.loadRoomAndStyle()
     }
 
     override fun onResume() {
@@ -135,8 +135,8 @@ class ProductsListFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         binding = null
+        super.onDestroyView()
     }
 
 }
