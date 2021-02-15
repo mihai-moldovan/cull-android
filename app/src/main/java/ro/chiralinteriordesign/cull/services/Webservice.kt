@@ -5,7 +5,7 @@ import android.util.Log
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import okhttp3.Interceptor
+import com.google.gson.JsonObject
 import okhttp3.OkHttpClient
 import retrofit2.HttpException
 import retrofit2.Retrofit
@@ -29,7 +29,11 @@ data class ErrorResponse(val detail: String?)
 
 sealed class ResultWrapper<out T> {
     data class Success<out T>(val value: T, val fromCache: Boolean) : ResultWrapper<T>()
-    data class GenericError(val code: Int? = null, val error: ErrorResponse? = null) :
+    data class GenericError(
+        val code: Int? = null,
+        val error: ErrorResponse? = null,
+        val json: JsonObject? = null
+    ) :
         ResultWrapper<Nothing>()
 
     object NetworkError : ResultWrapper<Nothing>()
@@ -56,8 +60,15 @@ suspend fun <T> safeApiCall(
             is HttpException -> {
                 val code = throwable.code()
                 Log.w("WEBSERVICE", throwable.response().toString())
-                val errorResponse = convertErrorBody(throwable)
-                ResultWrapper.GenericError(code, errorResponse)
+                val body = throwable.response()?.errorBody()?.string()
+                Log.w("WEBSERVICE", "Body: $body")
+                val errorResponse = convertErrorBody(body)
+                val json = try {
+                    createGson().fromJson(body ?: "", JsonObject::class.java)
+                } catch (e: java.lang.Exception) {
+                    null
+                }
+                ResultWrapper.GenericError(code, errorResponse, json)
             }
             else -> {
                 ResultWrapper.GenericError(null, null)
@@ -72,9 +83,9 @@ private fun createGson(): Gson = GsonBuilder()
     .setDateFormat("")
     .create()
 
-private fun convertErrorBody(throwable: HttpException): ErrorResponse? {
+private fun convertErrorBody(jsonBody: String?): ErrorResponse? {
     return try {
-        throwable.response()?.errorBody()?.string()?.let {
+        jsonBody?.let {
             createGson().fromJson(it, ErrorResponse::class.java)
         }
     } catch (exception: Exception) {
@@ -167,4 +178,11 @@ interface Webservice {
         @Query("style_result") styleResult: String?,
     ): PaginatedResponse<Product>
 
+
+    @FormUrlEncoded
+    @POST("password_reset/confirm/")
+    suspend fun resetPassword(
+        @Field("password") password: String,
+        @Field("token") token: String,
+    ): Gson
 }

@@ -89,6 +89,8 @@
     <string name="auth_forgot_pass_reset_pass">Resetare parola</string>
     <string name="auth_forgot_pass_in_progress">Parola in proces de resetare</string>
     <string name="auth_forgot_pass_check_email">Te rugam verifica casuta de email pentru link-ul de resetare</string>
+    <string name="auth_reset_pass_missing_fields">Completeaza ambele campuri</string>
+    <string name="auth_reset_pass_no_match">Introdu aceeasi parola de doua ori</string>
 
 
 
