@@ -98,6 +98,7 @@ class ProductsViewModel(app: Application) : AndroidViewModel(app) {
         currentFilters = (currentFilters ?: ProductFilters()).copy(
             query = null,
             roomType = roomType,
+            roomArea = room?.area,
             quizResult = quizResult?.key
         )
         val name = "${roomType?.stringName(getApplication()) ?: ""} ${quizResult?.title ?: ""}"

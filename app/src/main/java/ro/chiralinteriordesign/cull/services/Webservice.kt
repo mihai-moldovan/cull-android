@@ -177,6 +177,7 @@ interface Webservice {
         @Query("color") color: String?,
         @Query("material") material: String?,
         @Query("room_type") roomType: String?,
+        @Query("room_area") roomArea: Int?,
         @Query("style_result") styleResult: String?,
     ): PaginatedResponse<Product>
 

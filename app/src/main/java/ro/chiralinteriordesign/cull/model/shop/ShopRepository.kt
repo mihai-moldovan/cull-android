@@ -37,6 +37,7 @@ class ShopRepository(
                 filters?.color,
                 filters?.material,
                 filters?.roomType?.name,
+                filters?.roomArea,
                 filters?.quizResult,
             )
 

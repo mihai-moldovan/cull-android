@@ -13,5 +13,6 @@ data class ProductFilters(
     val color: String? = null,
     val material: String? = null,
     val roomType: RoomType? = null,
+    val roomArea: Int? = null,
     val quizResult: String? = null,
 )
