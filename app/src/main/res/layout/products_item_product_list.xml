@@ -4,19 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/products_card_spacing">
+    android:padding="@dimen/products_card_spacing"
+    tools:layout_height="300dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/product_card_background">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:padding="@dimen/products_card_image_padding"
             android:scaleType="centerInside"
+            app:layout_constraintBottom_toTopOf="@id/titleLabel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,9 +32,9 @@
             android:gravity="center_horizontal"
             android:textColor="@color/black"
             android:textSize="@dimen/products_list_font"
+            app:layout_constraintBottom_toTopOf="@id/priceLabel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView"
             tools:text="Scaun Fausto" />
 
         <TextView
@@ -43,9 +45,9 @@
             android:gravity="center_horizontal"
             android:textColor="@color/black"
             android:textSize="@dimen/products_list_font"
+            app:layout_constraintBottom_toTopOf="@id/buttonAdd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleLabel"
             tools:text="450 RON" />
 
         <ImageButton
@@ -54,8 +56,9 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:src="@drawable/btn_add"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/priceLabel" />
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

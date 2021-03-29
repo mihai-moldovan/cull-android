@@ -4,7 +4,7 @@
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/products_card_corner" />
             <solid android:color="@color/white" />
-            <stroke android:width="@dimen/btn_rounded_stroke" android:color="@color/gold" />
+            <stroke android:width="@dimen/products_stroke_selected" android:color="@color/gold" />
         </shape>
     </item>
     <item>

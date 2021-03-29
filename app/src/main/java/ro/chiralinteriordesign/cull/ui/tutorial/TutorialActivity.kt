@@ -15,6 +15,7 @@ import ro.chiralinteriordesign.cull.databinding.TutorialActivityBinding
 import ro.chiralinteriordesign.cull.databinding.TutorialItemBinding
 import ro.chiralinteriordesign.cull.ui.BaseActivity
 import ro.chiralinteriordesign.cull.ui.quiz.QuizActivity
+import ro.chiralinteriordesign.cull.ui.splash.SplashActivity
 
 class TutorialActivity : BaseActivity() {
 
@@ -72,12 +73,14 @@ class TutorialActivity : BaseActivity() {
             private fun updateTexts() {
                 binding.titleView.setText(titles[currentPos])
                 binding.textView.setText(texts[currentPos])
+                binding.btnSkip.setText(
+                    if (currentPos == titles.size - 1) R.string.btn_start else R.string.btn_skip
+                )
             }
         })
 
         binding.btnSkip.setOnClickListener {
-            startActivity(Intent(this, QuizActivity::class.java))
-            finish()
+            SplashActivity.showInitialActivity(this)
         }
     }
 

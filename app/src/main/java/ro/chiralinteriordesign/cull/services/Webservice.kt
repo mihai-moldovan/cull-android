@@ -13,7 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.R
+import ro.chiralinteriordesign.cull.model.designer.Designer
 import ro.chiralinteriordesign.cull.model.quiz.Quiz
+import ro.chiralinteriordesign.cull.model.shop.Cart
 import ro.chiralinteriordesign.cull.model.shop.Product
 import ro.chiralinteriordesign.cull.model.text.Text
 import ro.chiralinteriordesign.cull.model.user.User
@@ -178,6 +180,9 @@ interface Webservice {
         @Query("style_result") styleResult: String?,
     ): PaginatedResponse<Product>
 
+    @GET("shop/carts/")
+    suspend fun getCarts(): List<Cart>
+
 
     @FormUrlEncoded
     @POST("password_reset/confirm/")
@@ -185,4 +190,7 @@ interface Webservice {
         @Field("password") password: String,
         @Field("token") token: String,
     ): Gson
+
+    @GET("designers/")
+    suspend fun getDesigners(): List<Designer>
 }

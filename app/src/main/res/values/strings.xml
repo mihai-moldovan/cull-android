@@ -1,11 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY nbsp "&#160;"> ]>
 <resources>
     <string name="app_name">CULL</string>
 
     <!--    GENERAL-->
     <string name="generic_error">Serverul nu este momentan disponibil</string>
-    <string name="network_error">Conexiunea la server nu a reusit</string>
+    <string name="network_error">Conexiunea la server nu a reușit</string>
     <string name="btn_ok">OK</string>
-    <string name="btn_continue">Continua</string>
+    <string name="btn_continue">Continuă</string>
 
     <!--    TUTORIAL-->
     <string name="tutorial_title_1">Bine ai venit!</string>
@@ -16,11 +17,12 @@
     <string name="tutorial_text_3">Hai să începem!</string>
 
     <string name="btn_skip">Skip</string>
+    <string name="btn_start">Start</string>
 
     <!-- QUIZ -->
-    <string name="btn_discover_your_style">Descopera-ti stilul</string>
+    <string name="btn_discover_your_style">Descoperă-ți stilul</string>
     <string name="quiz_start_title">Care este stilul tău?</string>
-    <string name="quiz_start_text">Alege imaginile preferate si află\ncare este stilul care te definește!</string>
+    <string name="quiz_start_text">Alege imaginile preferate și află\ncare este stilul care te definește!</string>
     <string name="quiz_step_format">Pasul %1$d</string>
 
     <string name="btn_redo_test">Reluare test</string>
@@ -33,65 +35,78 @@
     <string name="space_room_type_lobby">Hol</string>
     <string name="space_room_type_office">Birou</string>
     <string name="space_room_type_bedroom">Dormitor</string>
-    <string name="space_room_type_child_room">Camera copii</string>
-    <string name="space_dimensions_cta">Adauga dimensiunile estimative</string>
-    <string name="space_length">Lungime</string>
-    <string name="space_width">Latime</string>
-    <string name="space_height">Inaltime</string>
-    <string name="space_windows">Ferestre</string>
-    <string name="space_doors">Usi</string>
-    <string name="space_edit_suffix_cm">CM</string>
-    <string name="space_edit_error_not_zero">Valoare incorecta</string>
+    <string name="space_room_type_child_room">Cameră copii</string>
+    <string name="space_area">Suprafață</string>
+    <string name="space_edit_suffix_cm">m&#x00B2;</string>
+    <string name="space_edit_error_not_zero">Valoare incorectă</string>
 
     <!-- PRODUCTS -->
-    <string name="search_hint">Cauta un produs…</string>
+    <string name="search_hint">Caută un produs…</string>
     <string name="generating_moodboard">Generare moodboard…</string>
-    <string name="add_to_cart">Adauga in cos</string>
-    <string name="remove_from_cart">Scoate din cos</string>
+    <string name="add_to_cart">Adaugă în listă</string>
+    <string name="remove_from_cart">Scoate din listă</string>
     <string name="products_details_title">DETALIU PRODUS</string>
 
     <!-- MENU -->
-    <string name="menu_title">NAVIGATIE</string>
     <string name="menu_account">Contul meu</string>
     <string name="menu_orders">Istoric comenzi</string>
-    <string name="menu_terms">Termeni si conditii</string>
-    <string name="menu_privacy">Politica de confidentialitate</string>
+    <string name="menu_terms">Termeni și condiții</string>
+    <string name="menu_privacy">Politica de confidențialitate</string>
     <string name="menu_logout">Log out</string>
     <string name="menu_login">Log in</string>
     <string name="menu_redo_test">Reluare test stil</string>
+    <string name="menu_change_room">Schimbare cameră</string>
+    <string name="menu_contact_designer">Contactează designer</string>
+    <string name="menu_saved_list">Liste salvate</string>
 
     <!-- AUTH -->
     <string name="auth_register_title">Detalii utilizator</string>
-    <string name="auth_register_subtitle">Te rugam sa completezi campurile de mai jos</string>
+    <string name="auth_register_subtitle">Te rugăm să completezi câmpurile de mai jos</string>
 
     <string name="auth_field_last_name">Nume</string>
     <string name="auth_field_first_name">Prenume</string>
     <string name="auth_field_email">Email</string>
     <string name="auth_field_password">Parola</string>
-    <string name="auth_agree_terms">Sunt de acord cu termenii si conditiile</string>
+    <string name="auth_agree_terms">Sunt de acord cu termenii și condițiile</string>
 
     <string name="auth_login_title">Bine ai revenit</string>
-    <string name="auth_login_subtitle">Te rugam sa introduci email si parola</string>
+    <string name="auth_login_subtitle">Te rugăm să introduci email și parola</string>
     <string name="auth_forgot_password">Am uitat parola</string>
-    <string name="auth_register_button">Nu ai un cont ? <font fgcolor="#FFb59a56">Inregistreza-te</font></string>
+    <string name="auth_register_button">Nu ai un cont ? <font fgcolor="#FFb59a56">Înregistreză-te</font></string>
     <string name="auth_btn_authenticate">Autentificare</string>
-    <string name="auth_register_screen_title">Inregistgrare cont</string>
+    <string name="auth_register_screen_title">Înregistrare cont</string>
     <string name="auth_login_screen_title">Autentificare</string>
 
     <string name="auth_activate_open_email">Deschide email</string>
     <string name="auth_activate_success">Cont creat cu succes!</string>
-    <string name="auth_activate_message">Te rugam verifica casuta de email pentru confirmarea acestuia</string>
+    <string name="auth_activate_message">Te rugăm verifică casuța de email pentru confirmarea acestuia.</string>
 
     <string name="auth_forgot_pass_title">Ai uitat parola?</string>
-    <string name="auth_forgot_pass_message_email">Te rugam sa introduci email-ul pentru a primi link-ul de resetare</string>
-    <string name="auth_forgot_pass_message_pass">Te rugam sa introduci noua parola</string>
+    <string name="auth_forgot_pass_message_email">Te rugăm să introduci email-ul pentru a primi link-ul de resetare</string>
+    <string name="auth_forgot_pass_message_pass">Te rugăm sa introduci noua parolă</string>
     <string name="auth_forgot_pass_send_email">Trimite email</string>
-    <string name="auth_forgot_pass_reset_pass">Resetare parola</string>
-    <string name="auth_forgot_pass_in_progress">Parola in proces de resetare</string>
-    <string name="auth_forgot_pass_check_email">Te rugam verifica casuta de email pentru link-ul de resetare</string>
-    <string name="auth_reset_pass_missing_fields">Completeaza ambele campuri</string>
-    <string name="auth_reset_pass_no_match">Introdu aceeasi parola de doua ori</string>
+    <string name="auth_forgot_pass_reset_pass">Resetare parolă</string>
+    <string name="auth_forgot_pass_in_progress">Parola în proces de resetare</string>
+    <string name="auth_forgot_pass_check_email">Te rugăm verifică casuța de email pentru link-ul de resetare</string>
+    <string name="auth_reset_pass_missing_fields">Completează ambele câmpuri</string>
+    <string name="auth_reset_pass_no_match">Introdu aceeași parolă de doua ori</string>
 
+    <!-- CART -->
+    <string name="cart_continue">Cere ofertă</string>
+    <string name="cart_quantity">Cantitate:&nbsp;</string>
+    <plurals name="cart_count_format">
+        <item quantity="one">%1$d produs</item>
+        <item quantity="other">%1$d produse</item>
+    </plurals>
 
+    <!-- ALERTS -->
+    <string name="alert_confirmation_title">Ești sigur?</string>
+    <string name="alert_confirmation_delete_cart">Lista va fi ștearsă definitiv</string>
+    <string name="alert_yes">Da</string>
+    <string name="alert_no">Nu</string>
+
+    <!--    DESIGNERS-->
+    <string name="designers_title">LISTĂ DESIGNERI</string>
+    <string name="designers_cta">Trimite cerere</string>
 
 </resources>

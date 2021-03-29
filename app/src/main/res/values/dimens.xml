@@ -36,13 +36,14 @@
 
     <dimen name="quiz_answer_rounded_corner">10dp</dimen>
     <dimen name="quiz_answer_margin">20dp</dimen>
+    <dimen name="quiz_answer_border">3dp</dimen>
 
     <!-- SELECT SPACE -->
     <dimen name="space_margin">24dp</dimen>
-    <dimen name="space_item_spacing">15dp</dimen>
+    <dimen name="space_item_spacing">40dp</dimen>
     <dimen name="space_title_font">20sp</dimen>
     <dimen name="space_dimensions_font">17sp</dimen>
-    <dimen name="space_edit_spacing">23dp</dimen>
+    <dimen name="space_edit_spacing">40dp</dimen>
     <dimen name="space_edit_padding_h">16dp</dimen>
     <dimen name="space_edit_padding_v">5dp</dimen>
     <dimen name="space_edit_font">17sp</dimen>
@@ -73,12 +74,15 @@
     <dimen name="products_search_padding_h">15dp</dimen>
     <dimen name="products_search_padding_v">15dp</dimen>
     <dimen name="products_stroke">1dp</dimen>
+    <dimen name="products_stroke_selected">3dp</dimen>
     <dimen name="products_card_corner">4dp</dimen>
     <dimen name="products_add_padding">6.5dp</dimen>
     <dimen name="products_progress_font">23sp</dimen>
     <dimen name="products_progress_text_margin">26dp</dimen>
     <dimen name="products_card_spacing">8dp</dimen>
     <dimen name="products_card_image_padding">10dp</dimen>
+    <dimen name="products_list_item_height_1">300dp</dimen>
+    <dimen name="products_list_item_height_2">200dp</dimen>
 
     <!-- PRODUCT DETAILS -->
     <dimen name="product_details_bottom_corners">35dp</dimen>
@@ -90,7 +94,7 @@
     <dimen name="product_details_top_spacing">20dp</dimen>
 
     <!-- MENU -->
-    <dimen name="menu_padding_v">40dp</dimen>
+    <dimen name="menu_padding_v">20dp</dimen>
     <dimen name="menu_padding_h">21dp</dimen>
     <dimen name="menu_title_font">12sp</dimen>
     <dimen name="menu_item_font">20sp</dimen>
@@ -115,5 +119,17 @@
     <dimen name="auth_activate_field_spacing">30dp</dimen>
     <dimen name="auth_activate_screen_margin">45dp</dimen>
 
+    <!-- CART -->
+    <dimen name="cart_padding">25dp</dimen>
+    <dimen name="cart_item_img_size">55dp</dimen>
+    <dimen name="cart_item_title_font">15sp</dimen>
+    <dimen name="cart_item_subtitle_font">12sp</dimen>
+    <dimen name="cart_item_horizontal_spacing">15dp</dimen>
+    <dimen name="cart_item_vertical_spacing">12dp</dimen>
+    <dimen name="cart_item_corner_radius">15dp</dimen>
+    <dimen name="cart_item_cell_spacing">7dp</dimen>
+
+
     <integer name="fragment_animation_duration">200</integer>
+
 </resources>

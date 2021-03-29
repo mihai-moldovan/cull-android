@@ -7,8 +7,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import ro.chiralinteriordesign.cull.App
+import ro.chiralinteriordesign.cull.model.quiz.QuizResult
+import ro.chiralinteriordesign.cull.model.shop.Cart
 import ro.chiralinteriordesign.cull.model.shop.Product
 import ro.chiralinteriordesign.cull.model.shop.ProductFilters
+import ro.chiralinteriordesign.cull.model.user.RoomType
 import ro.chiralinteriordesign.cull.services.ResultWrapper
 
 class ProductsViewModel(app: Application) : AndroidViewModel(app) {
@@ -16,23 +19,27 @@ class ProductsViewModel(app: Application) : AndroidViewModel(app) {
     private val dataRepo = App.instance.dataRepository
     private val userRepo = dataRepo.userRepository
     private val quizRepo = dataRepo.quizRepository
+    private val shopRepo = dataRepo.productRepository
 
     val isLoading = MutableLiveData(false)
     val products = MutableLiveData(mutableListOf<Product>())
     val roomStyle = MutableLiveData("")
 
+    private lateinit var currentCart: Cart
+    val currentCartIndex: Int? get() = shopRepo.getCartIndex(currentCart)
+
+
     private var currentPage = 0
     private var hasReachedEnd = false
     private var currentJob: Job? = null
-    private var currentFilters: ProductFilters? = null
-        set(newValue) {
+    var currentFilters: ProductFilters? = null
+        private set(newValue) {
             field = newValue
             resetProducts()
         }
+    var isSearchScreen = false
+        private set
 
-    init {
-        loadRoomAndStyle()
-    }
 
     private fun resetProducts() {
         currentJob?.cancel()
@@ -70,24 +77,31 @@ class ProductsViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun searchQuery(query: String = "") {
+    fun searchQuery(query: String = "", cartIndex: Int) {
+        isSearchScreen = true
         currentFilters = (currentFilters ?: ProductFilters()).copy(
             query = query,
             roomType = null,
             quizResult = null
         )
         this.roomStyle.postValue(null)
+        currentCart = shopRepo.carts!![cartIndex]
     }
 
     fun loadRoomAndStyle() {
+        isSearchScreen = false
         val user = userRepo.currentUser
+        val room = userRepo.room
         val quizResult = quizRepo.localQuiz?.results?.firstOrNull { it.key == user.quizResult }
-        val roomType = user.rooms.firstOrNull()?.roomType
+        val roomType = room?.roomType
+
         currentFilters = (currentFilters ?: ProductFilters()).copy(
             query = null,
             roomType = roomType,
-            quizResult = user.quizResult
+            quizResult = quizResult?.key
         )
-        this.roomStyle.postValue("${roomType?.stringName(getApplication()) ?: ""} ${quizResult?.title ?: ""}")
+        val name = "${roomType?.stringName(getApplication()) ?: ""} ${quizResult?.title ?: ""}"
+        this.roomStyle.postValue(name)
+        currentCart = shopRepo.getOrAddCart(roomType!!, user.quizResult, name)
     }
 }

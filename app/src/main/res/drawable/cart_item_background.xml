@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/background_dark" />
+    <corners android:radius="@dimen/cart_item_corner_radius" />
+    <padding
+        android:bottom="@dimen/cart_item_vertical_spacing"
+        android:left="@dimen/cart_item_horizontal_spacing"
+        android:right="@dimen/cart_item_horizontal_spacing"
+        android:top="@dimen/cart_item_vertical_spacing" />
+</shape>

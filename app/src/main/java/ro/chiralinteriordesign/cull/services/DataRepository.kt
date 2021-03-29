@@ -2,15 +2,13 @@ package ro.chiralinteriordesign.cull.services
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.work.*
 import kotlinx.coroutines.*
 import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.Constants
 import ro.chiralinteriordesign.cull.Preferences
+import ro.chiralinteriordesign.cull.model.designer.DesignerRepository
 import ro.chiralinteriordesign.cull.model.quiz.QuizRepository
-import ro.chiralinteriordesign.cull.model.shop.ProductRepository
+import ro.chiralinteriordesign.cull.model.shop.ShopRepository
 import ro.chiralinteriordesign.cull.model.text.Text
 import ro.chiralinteriordesign.cull.model.text.TextRepository
 import ro.chiralinteriordesign.cull.model.user.UserRepository
@@ -30,7 +28,8 @@ class DataRepository(private val appContext: Context) {
     val quizRepository: QuizRepository by lazy { QuizRepository(localRepository, webservice) }
     val userRepository: UserRepository by lazy { UserRepository(localRepository, webservice) }
     val textRepository: TextRepository by lazy { TextRepository(localRepository, webservice) }
-    val productRepository: ProductRepository by lazy { ProductRepository(localRepository, webservice)}
+    val productRepository: ShopRepository by lazy { ShopRepository(localRepository, webservice)}
+    val designersRepository: DesignerRepository by lazy { DesignerRepository(localRepository, webservice)}
 
     suspend fun reloadDataIfNeeded(): Boolean {
         val timestamp = App.instance.preferences.getLong(Preferences.Key.CACHE_TIMESTAMP, 0L)

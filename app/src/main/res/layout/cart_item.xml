@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/cart_item_cell_spacing"
+    android:paddingBottom="@dimen/cart_item_cell_spacing">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cart_item_background">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/cart_item_img_size"
+            android:layout_height="@dimen/cart_item_img_size"
+            android:scaleType="centerInside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/logo_auth" />
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/cart_item_horizontal_spacing"
+            android:fontFamily="@font/kievitcomppro"
+            android:textColor="@color/white"
+            android:textSize="@dimen/cart_item_title_font"
+            app:layout_constraintBottom_toTopOf="@id/subtitleView"
+            app:layout_constraintEnd_toStartOf="@id/priceView"
+            app:layout_constraintStart_toEndOf="@id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="CANAPEA NOYER" />
+
+        <TextView
+            android:id="@+id/subtitleView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kievitcomppro"
+            android:textColor="@color/white"
+            android:textSize="@dimen/cart_item_subtitle_font"
+            app:layout_constraintBottom_toTopOf="@id/quantityView"
+            app:layout_constraintEnd_toEndOf="@id/titleView"
+            app:layout_constraintStart_toStartOf="@id/titleView"
+            app:layout_constraintTop_toBottomOf="@id/titleView"
+            tools:text="CANAPEA NOYER" />
+
+        <TextView
+            android:id="@+id/quantityLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kievitcomppro"
+            android:text="@string/cart_quantity"
+            android:textColor="@color/white"
+            android:textSize="@dimen/cart_item_subtitle_font"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/titleView"
+            app:layout_constraintTop_toBottomOf="@id/subtitleView" />
+
+        <TextView
+            android:id="@+id/quantityView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kievitcomppro"
+            android:textColor="@color/white"
+            android:textSize="@dimen/cart_item_subtitle_font"
+            app:layout_constraintBaseline_toBaselineOf="@id/quantityLabel"
+            app:layout_constraintStart_toEndOf="@id/quantityLabel"
+            tools:text="2" />
+
+        <TextView
+            android:id="@+id/priceView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/cart_item_horizontal_spacing"
+            android:fontFamily="@font/kievitcomppro_medi"
+            android:textColor="@color/white"
+            android:textSize="@dimen/cart_item_subtitle_font"
+            app:layout_constraintBottom_toBottomOf="@id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="2500 RON" />
+
+        <ImageView
+            android:id="@+id/buttonDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_cart_delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
+

@@ -1,5 +1,7 @@
 package ro.chiralinteriordesign.cull.ui.splash
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -24,6 +26,34 @@ import ro.chiralinteriordesign.cull.ui.tutorial.TutorialActivity
 
 
 class SplashActivity : BaseActivity() {
+
+    companion object {
+        fun showInitialActivity(context: Context) {
+            val user = App.instance.dataRepository.userRepository.currentUser
+            val room = App.instance.dataRepository.userRepository.room
+            when {
+                context !is TutorialActivity && System.currentTimeMillis() - App.instance.preferences.getLong(
+                    Preferences.Key.TUTORIAL_SEEN, 0
+                ) > Constants.TUTORIAL_INTERVAL -> {
+                    //didn't show tutorial
+                    context.startActivity(Intent(context, TutorialActivity::class.java))
+                }
+                context !is QuizActivity && user.quizResult.isEmpty() -> {
+                    //has no quiz done
+                    context.startActivity(Intent(context, QuizActivity::class.java))
+                }
+                context !is SelectSpaceActivity && room == null -> {
+                    //has has no space saved
+                    context.startActivity(Intent(context, SelectSpaceActivity::class.java))
+                }
+                else -> {
+                    //show products
+                    context.startActivity(Intent(context, ProductsActivity::class.java))
+                }
+            }
+            (context as? Activity)?.finish()
+        }
+    }
 
     private val viewModel: SplashViewModel by viewModels()
     private lateinit var binding: SplashActivityBinding
@@ -69,32 +99,6 @@ class SplashActivity : BaseActivity() {
                 }
             }
         }
-        advance()
-    }
-
-    private fun advance() {
-        val user = App.instance.dataRepository.userRepository.currentUser
-        when {
-            System.currentTimeMillis() - App.instance.preferences.getLong(
-                Preferences.Key.TUTORIAL_SEEN,
-                0
-            ) > Constants.TUTORIAL_INTERVAL -> {
-                //didn't show tutorial
-                startActivity(Intent(this@SplashActivity, TutorialActivity::class.java))
-            }
-            user.quizResult.isEmpty() -> {
-                //has no quiz done
-                startActivity(Intent(this@SplashActivity, QuizActivity::class.java))
-            }
-            user.rooms.isNullOrEmpty() -> {
-                //has has no space saved
-                startActivity(Intent(this@SplashActivity, SelectSpaceActivity::class.java))
-            }
-            else -> {
-                //show products
-                startActivity(Intent(this@SplashActivity, ProductsActivity::class.java))
-            }
-        }
-        finish()
+        showInitialActivity(this)
     }
 }

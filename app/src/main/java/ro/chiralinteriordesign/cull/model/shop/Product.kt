@@ -32,7 +32,8 @@ data class Product(
     val maxPrice: Float,
     val images: List<String>,
     val variants: List<ProductVariant>,
-    val tags: List<String>
+    val tags: List<String>,
+    val category: String
 ) : Serializable {
 
 

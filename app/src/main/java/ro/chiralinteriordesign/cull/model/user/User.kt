@@ -2,6 +2,7 @@ package ro.chiralinteriordesign.cull.model.user
 
 import android.content.Context
 import ro.chiralinteriordesign.cull.R
+import ro.chiralinteriordesign.cull.model.shop.Cart
 import java.io.Serializable
 
 /**
@@ -14,7 +15,6 @@ data class User(
     val email: String = "",
     val quizResult: String = "",
     val authToken: String? = null,
-    val rooms: List<Room> = listOf(),
 ) : Serializable
 
 enum class RoomType {
@@ -36,19 +36,7 @@ enum class RoomType {
 
 data class Room(
     val roomType: RoomType? = null,
-    val length: Int = 0,
-    val width: Int = 0,
-    val height: Int = 0,
-    val windows: Int = 0,
-    val doors: Int = 0,
+    val area: Int = 0,
 ) : Serializable {
-
-
-    val isValid: Boolean = roomType != null &&
-            length > 0 &&
-            width > 0 &&
-            height > 0 &&
-            windows > 0 &&
-            doors > 0
-
+    val isValid: Boolean = roomType != null && area > 0
 }

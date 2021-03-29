@@ -14,6 +14,7 @@ import ro.chiralinteriordesign.cull.databinding.SelectSpaceActivityBinding
 import ro.chiralinteriordesign.cull.model.user.RoomType
 import ro.chiralinteriordesign.cull.ui.BaseActivity
 import ro.chiralinteriordesign.cull.ui.products.ProductsActivity
+import ro.chiralinteriordesign.cull.ui.splash.SplashActivity
 import ro.chiralinteriordesign.cull.utils.SimpleTextWatcher
 import ro.chiralinteriordesign.cull.utils.showKeyboard
 
@@ -41,18 +42,10 @@ class SelectSpaceActivity : BaseActivity() {
         roomTypeViews.forEach { setupCheckBox(it) }
 
         inputLayouts = listOf(
-            binding.lengthInput,
-            binding.widthInput,
-            binding.heightInput,
-            binding.windowsInput,
-            binding.doorsInput,
+            binding.surfaceInput,
         )
 
-        setupEdit(binding.lengthInput, binding.lengthTitle, viewModel.roomLength)
-        setupEdit(binding.widthInput, binding.widthTitle, viewModel.roomWidth)
-        setupEdit(binding.heightInput, binding.heightTitle, viewModel.roomHeight)
-        setupEdit(binding.windowsInput, binding.windowsTitle, viewModel.roomWindows)
-        setupEdit(binding.doorsInput, binding.doorsTitle, viewModel.roomDoors)
+        setupEdit(binding.surfaceInput, binding.surfaceTitle, viewModel.roomArea)
 
         viewModel.roomType.observe(this) { type ->
             roomTypeViews.forEachIndexed { i, v ->
@@ -69,18 +62,9 @@ class SelectSpaceActivity : BaseActivity() {
             inputLayouts.forEach { it.error = null }
             if (viewModel.room.value?.isValid == true) {
                 viewModel.saveRoom()
-                startActivity(Intent(this@SelectSpaceActivity, ProductsActivity::class.java))
-                finish()
+                SplashActivity.showInitialActivity(this)
             } else {
-                if (viewModel.roomLength.value == 0) binding.lengthInput.error =
-                    getString(R.string.space_edit_error_not_zero)
-                if (viewModel.roomWidth.value == 0) binding.widthInput.error =
-                    getString(R.string.space_edit_error_not_zero)
-                if (viewModel.roomHeight.value == 0) binding.heightInput.error =
-                    getString(R.string.space_edit_error_not_zero)
-                if (viewModel.roomWindows.value == 0) binding.windowsInput.error =
-                    getString(R.string.space_edit_error_not_zero)
-                if (viewModel.roomDoors.value == 0) binding.doorsInput.error =
+                if (viewModel.roomArea.value == 0) binding.surfaceInput.error =
                     getString(R.string.space_edit_error_not_zero)
                 if (viewModel.roomType.value == null) {
                     roomTypeViews.forEach {

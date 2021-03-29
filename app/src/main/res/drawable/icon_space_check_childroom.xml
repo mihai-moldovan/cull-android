@@ -3,6 +3,9 @@
     <item android:state_checked="true">
         <bitmap android:src="@drawable/icon_space_childroom" android:tint="@color/gold" />
     </item>
+    <item android:state_pressed="true">
+        <bitmap android:src="@drawable/icon_space_childroom" android:tint="@color/gold" />
+    </item>
     <item>
         <bitmap android:src="@drawable/icon_space_childroom" android:tint="@color/white" />
     </item>

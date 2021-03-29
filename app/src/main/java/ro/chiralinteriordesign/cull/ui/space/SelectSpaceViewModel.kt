@@ -16,20 +16,12 @@ class SelectSpaceViewModel : ViewModel() {
     private val userRepository by lazy { App.instance.dataRepository.userRepository }
 
     val roomType = MutableLiveData<RoomType>()
-    val roomLength = MutableLiveData(0)
-    val roomWidth = MutableLiveData(0)
-    val roomHeight = MutableLiveData(0)
-    val roomWindows = MutableLiveData(0)
-    val roomDoors = MutableLiveData(0)
+    val roomArea = MutableLiveData(0)
 
     val room = MediatorLiveData<Room>().apply {
         value = Room()
         addSource(roomType) { postValue(this.value?.copy(roomType = it)) }
-        addSource(roomLength) { postValue(this.value?.copy(length = it)) }
-        addSource(roomWidth) { postValue(this.value?.copy(width = it)) }
-        addSource(roomHeight) { postValue(this.value?.copy(height = it)) }
-        addSource(roomWindows) { postValue(this.value?.copy(windows = it)) }
-        addSource(roomDoors) { postValue(this.value?.copy(doors = it)) }
+        addSource(roomArea) { postValue(this.value?.copy(area = it)) }
     }
 
     fun saveRoom() {
@@ -37,7 +29,7 @@ class SelectSpaceViewModel : ViewModel() {
         if (!room.isValid) {
             return
         }
-        userRepository.currentUser = userRepository.currentUser.copy(rooms = listOf(room))
+        userRepository.room = room
     }
 
 }

@@ -13,6 +13,7 @@ import ro.chiralinteriordesign.cull.databinding.QuizResultFragmentBinding
 import ro.chiralinteriordesign.cull.model.quiz.QuizResult
 import ro.chiralinteriordesign.cull.ui.products.ProductsActivity
 import ro.chiralinteriordesign.cull.ui.space.SelectSpaceActivity
+import ro.chiralinteriordesign.cull.ui.splash.SplashActivity
 
 private const val ARG_RESULT = "result"
 
@@ -53,23 +54,23 @@ class QuizResultFragment : Fragment() {
         }
 
         binding.btnContinue.setOnClickListener {
-
-            val user = App.instance.dataRepository.userRepository.currentUser
-            when {
-                user.rooms.isNullOrEmpty() -> {
-                    //has has no space saved
-                    startActivity(Intent(requireActivity(), SelectSpaceActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    })
-                }
-                else -> {
-                    //show products
-                    startActivity(Intent(requireActivity(), ProductsActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    })
-                }
-            }
-            requireActivity().finish()
+            SplashActivity.showInitialActivity(requireActivity())
+//            val user = App.instance.dataRepository.userRepository.currentUser
+//            when {
+//                user.rooms.isNullOrEmpty() -> {
+//                    //has has no space saved
+//                    startActivity(Intent(requireActivity(), SelectSpaceActivity::class.java).apply {
+//                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+//                    })
+//                }
+//                else -> {
+//                    //show products
+//                    startActivity(Intent(requireActivity(), ProductsActivity::class.java).apply {
+//                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+//                    })
+//                }
+//            }
+//            requireActivity().finish()
         }
     }
 

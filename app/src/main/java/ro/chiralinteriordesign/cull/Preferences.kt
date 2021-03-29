@@ -15,7 +15,10 @@ class Preferences(app: Application) {
         LAST_VERSION,
     }
 
-    private val mSharedPreferences: SharedPreferences
+    private val mSharedPreferences: SharedPreferences = app.getSharedPreferences(
+        GENERAL_PREFERENCES,
+        Context.MODE_PRIVATE
+    )
 
     @Synchronized
     fun getLong(key: Key, defValue: Long): Long {
@@ -68,10 +71,4 @@ class Preferences(app: Application) {
             get() = App.instance.preferences
     }
 
-    init {
-        mSharedPreferences = app.getSharedPreferences(
-            GENERAL_PREFERENCES,
-            Context.MODE_PRIVATE
-        )
-    }
 }

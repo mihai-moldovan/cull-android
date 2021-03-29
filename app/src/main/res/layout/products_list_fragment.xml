@@ -7,58 +7,6 @@
     tools:context=".ui.products.ProductsListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/loadingView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_dark"
-        android:visibility="gone">
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:scaleType="centerInside"
-            android:src="@drawable/background_pattern"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/progressBackground"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/moodboard_progress_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/progressForeground"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/moodboard_progress_foreground"
-            app:layout_constraintBottom_toBottomOf="@id/progressBackground"
-            app:layout_constraintEnd_toEndOf="@id/progressBackground"
-            app:layout_constraintStart_toStartOf="@id/progressBackground"
-            app:layout_constraintTop_toTopOf="@id/progressBackground" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/products_progress_text_margin"
-            android:fontFamily="@font/kievitcomppro"
-            android:letterSpacing="0.05"
-            android:text="@string/generating_moodboard"
-            android:textColor="@color/white"
-            android:textSize="@dimen/products_progress_font"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/progressBackground" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/productView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -74,6 +22,16 @@
             app:layout_constraintBottom_toBottomOf="@id/searchBar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/searchBar" />
+
+        <include
+            android:id="@+id/navBar"
+            layout="@layout/nav_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
 
 
         <EditText
@@ -145,6 +103,62 @@
             app:spanCount="2"
             tools:itemCount="3"
             tools:listitem="@layout/products_item_product_list" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/loadingView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_dark"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:src="@drawable/background_pattern"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/progressBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/moodboard_progress_background"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/progressForeground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/moodboard_progress_foreground"
+            app:layout_constraintBottom_toBottomOf="@id/progressBackground"
+            app:layout_constraintEnd_toEndOf="@id/progressBackground"
+            app:layout_constraintStart_toStartOf="@id/progressBackground"
+            app:layout_constraintTop_toTopOf="@id/progressBackground" />
+
+        <TextView
+            android:id="@+id/loadingViewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/products_progress_text_margin"
+            android:fontFamily="@font/kievitcomppro"
+            android:letterSpacing="0.05"
+            android:text="@string/generating_moodboard"
+            android:textColor="@color/white"
+            android:textSize="@dimen/products_progress_font"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressBackground" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

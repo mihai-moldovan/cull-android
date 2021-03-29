@@ -1,9 +1,11 @@
 package ro.chiralinteriordesign.cull.model.user
 
+import ro.chiralinteriordesign.cull.model.shop.Cart
 import ro.chiralinteriordesign.cull.services.LocalRepository
 import ro.chiralinteriordesign.cull.services.ResultWrapper
 import ro.chiralinteriordesign.cull.services.Webservice
 import ro.chiralinteriordesign.cull.services.safeApiCall
+import java.io.Serializable
 
 
 /**
@@ -64,16 +66,24 @@ class UserRepository(
 
     var currentUser: User
         get() {
-            if (localRepository[this.javaClass.name] !is User) {
-                localRepository[this.javaClass.name] = User()
+            if (localRepository[User::javaClass.name] !is User) {
+                localRepository[User::javaClass.name] = User()
             }
-            return localRepository[this.javaClass.name] as User
+            return localRepository[User::javaClass.name] as User
         }
         set(newValue) {
-            localRepository[this.javaClass.name] = newValue
+            localRepository[User::javaClass.name] = newValue
+        }
+
+    var room: Room?
+        get() = localRepository[Room::class.java.name] as? Room
+        set(newValue) {
+            localRepository[Room::class.java.name] = newValue
         }
 
     fun logout() {
         localRepository[this.javaClass.name] = User()
+        localRepository[Room::class.java.name] = null
+        localRepository[Cart::class.java.name] = null
     }
 }
