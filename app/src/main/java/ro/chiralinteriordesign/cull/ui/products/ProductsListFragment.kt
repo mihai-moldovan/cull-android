@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -28,12 +27,13 @@ private const val ARG_CART_INDEX = "cart_index"
 class ProductsListFragment : Fragment() {
 
     companion object {
-        fun newInstance(searchTerm: String? = null, cartIndex: Int? = null) = ProductsListFragment().apply {
-            searchTerm?.let {
-                arguments = Bundle().apply {
-                    putString(ARG_SEARCH_TERM, it)
-                    putInt(ARG_CART_INDEX, cartIndex!!)
-                }
+        fun newInstance(
+            searchTerm: String? = null,
+            cartIndex: Int? = null
+        ) = ProductsListFragment().apply {
+            arguments = Bundle().apply {
+                searchTerm?.let { putString(ARG_SEARCH_TERM, it) }
+                cartIndex?.let { putInt(ARG_CART_INDEX, it) }
             }
         }
     }
@@ -53,8 +53,8 @@ class ProductsListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            viewModel.searchQuery(it.getString(ARG_SEARCH_TERM) ?: "", it.getInt(ARG_CART_INDEX, 0))
+        arguments?.getString(ARG_SEARCH_TERM)?.let {
+            viewModel.searchQuery(it, arguments?.getInt(ARG_CART_INDEX, 0) ?: 0)
         } ?: run {
             viewModel.loadRoomAndStyle()
         }
@@ -110,11 +110,17 @@ class ProductsListFragment : Fragment() {
                 binding.progressBackground.clearAnimation()
             }
             adapter.isLoading = isLoading
+            binding.refreshLayout.isRefreshing = isLoading
         })
 
 
         binding.recyclerView.adapter = adapter
         binding.recyclerView.itemAnimator = null
+
+        binding.refreshLayout.setOnRefreshListener {
+            viewModel.loadRoomAndStyle()
+            viewModel.loadNextPage()
+        }
 
         viewModel.products.observe(viewLifecycleOwner) {
             adapter.data = it
@@ -125,7 +131,7 @@ class ProductsListFragment : Fragment() {
                 v.hideKeyboard()
                 val text = v.text.toString()
                 if (text.isNotBlank()) {
-                    val fr = ProductsListFragment.newInstance(text)
+                    val fr = newInstance(text, viewModel.currentCartIndex)
                     parentFragmentManager.pushFragment(fr)
                 }
                 true

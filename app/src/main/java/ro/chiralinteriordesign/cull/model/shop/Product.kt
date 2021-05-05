@@ -38,7 +38,7 @@ data class Product(
 
 
     val priceString: String
-        get() = currencyFormat.format(minPrice + maxPrice / 2)
+        get() = currencyFormat.format((minPrice + maxPrice) / 2)
 
     private lateinit var _thumbnails: List<String>
     val thumbnails: List<String>

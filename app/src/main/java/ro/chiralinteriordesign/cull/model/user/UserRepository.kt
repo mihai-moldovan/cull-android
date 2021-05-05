@@ -21,7 +21,7 @@ class UserRepository(
         val response = safeApiCall { webservice.login(email, password) }
         when (response) {
             is ResultWrapper.Success -> {
-                localRepository[this.javaClass.name] = response.value
+                currentUser = response.value
             }
             else -> Unit
         }
@@ -37,7 +37,7 @@ class UserRepository(
         val response = safeApiCall { webservice.register(firstName, lastName, email, password) }
         when (response) {
             is ResultWrapper.Success -> {
-                localRepository[this.javaClass.name] = response.value
+                currentUser = response.value
             }
             else -> Unit
         }
@@ -47,15 +47,14 @@ class UserRepository(
     suspend fun saveUserData(
         firstName: String? = null,
         lastName: String? = null,
-        email: String? = null,
         password: String? = null,
-        quizResultId: Int? = null
+        quizResult: String? = null
     ): ResultWrapper<User> {
         val response =
-            safeApiCall { webservice.save(firstName, lastName, email, password, quizResultId) }
+            safeApiCall { webservice.saveUser(firstName, lastName, password, quizResult) }
         when (response) {
             is ResultWrapper.Success -> {
-                localRepository[this.javaClass.name] = response.value
+                currentUser = response.value
             }
             else -> Unit
         }
@@ -82,7 +81,7 @@ class UserRepository(
         }
 
     fun logout() {
-        localRepository[this.javaClass.name] = User()
+        currentUser = User()
         localRepository[Room::class.java.name] = null
         localRepository[Cart::class.java.name] = null
     }

@@ -36,10 +36,24 @@
             android:textColor="@color/white"
             android:textSize="@dimen/cart_item_subtitle_font"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/titleView"
+            app:layout_constraintEnd_toStartOf="@id/statusView"
             app:layout_constraintStart_toStartOf="@id/titleView"
             app:layout_constraintTop_toBottomOf="@id/titleView"
             tools:text="CANAPEA NOYER" />
+
+        <TextView
+            android:id="@+id/statusView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kievitcomppro"
+            android:text="@string/offer_sent_short"
+            android:textColor="@color/white"
+            android:textSize="@dimen/cart_item_subtitle_font"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/titleView"
+            app:layout_constraintTop_toBottomOf="@id/titleView"
+            tools:visibility="visible" />
 
 
         <ImageView

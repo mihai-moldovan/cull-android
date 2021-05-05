@@ -1,17 +1,11 @@
 package ro.chiralinteriordesign.cull.model.shop
 
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import kotlinx.coroutines.*
-import ro.chiralinteriordesign.cull.App
-import ro.chiralinteriordesign.cull.model.quiz.Quiz
+import com.google.gson.Gson
+import okhttp3.RequestBody
 import ro.chiralinteriordesign.cull.model.user.RoomType
 import ro.chiralinteriordesign.cull.services.*
-import java.io.IOException
 import java.io.Serializable
-import java.lang.Exception
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 /**
@@ -39,6 +33,7 @@ class ShopRepository(
                 filters?.roomType?.name?.toLowerCase(Locale.US),
                 filters?.roomArea,
                 filters?.quizResult,
+                filters?.lastMoodboardId,
             )
 
         }
@@ -71,6 +66,9 @@ class ShopRepository(
     }
 
     fun addProductInCart(cart: Cart, product: Product) {
+        if (cart.isSent) {
+            return
+        }
         val index = cart.lineItems.indexOfFirst { it.product.id == product.id }
         if (index >= 0) {
             val item = cart.lineItems[index]
@@ -81,11 +79,14 @@ class ShopRepository(
         saveCart(cart)
     }
 
-    fun removeProductFromCart(cart: Cart, product: Product) {
+    fun removeProductFromCart(cart: Cart, product: Product, all: Boolean = false) {
+        if (cart.isSent) {
+            return
+        }
         val index = cart.lineItems.indexOfFirst { it.product.id == product.id }
         if (index >= 0) {
             val item = cart.lineItems[index]
-            if (item.quantity > 1) {
+            if (item.quantity > 1 && !all) {
                 cart.lineItems[index] = item.copy(quantity = item.quantity - 1)
             } else {
                 cart.lineItems.removeAt(index)
@@ -103,12 +104,13 @@ class ShopRepository(
     }
 
     fun getOrAddCart(roomType: RoomType, style: String, name: String): Cart {
-        return carts?.firstOrNull { it.roomType == roomType && it.style == style } ?: Cart(
+        return carts?.firstOrNull { it.roomType == roomType && it.style == style && !it.isSent } ?: Cart(
             0,
             mutableListOf(),
             name,
             roomType,
-            style
+            style,
+            false
         ).also { this.addCart(it) }
     }
 
@@ -120,6 +122,29 @@ class ShopRepository(
             carts
         } else {
             carts?.toMutableList()?.apply { add(cart) } ?: listOf(cart)
+        }
+    }
+
+
+    suspend fun requestCartOffer(cart: Cart): Boolean {
+        val response = safeApiCall {
+            if (cart.id > 0) {
+                webservice.sendExistingCart(cart.id)
+            } else {
+                val body = RequestBody.create(
+                    okhttp3.MediaType.parse("application/json; charset=utf-8"),
+                    Gson().toJson(cart.cartSerialization)
+                )
+                webservice.sendNewCart(body)
+            }
+        }
+        return when (response) {
+            is ResultWrapper.Success -> {
+                cart.isSent = true
+                saveCart(cart)
+                true
+            }
+            else -> false
         }
     }
 }

@@ -17,6 +17,9 @@ class SplashViewModel : ViewModel() {
 
     fun ensureAllLoaded() = liveData(Dispatchers.IO) {
         val result = dataRepo.reloadDataIfNeeded()
+        if (dataRepo.userRepository.isLoggedIn) {
+            dataRepo.loadUserData()
+        }
         emit(result || dataRepo.hasLocalData)
     }
 }

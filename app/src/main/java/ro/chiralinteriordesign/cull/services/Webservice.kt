@@ -7,6 +7,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -149,13 +150,12 @@ interface Webservice {
     ): User
 
     @FormUrlEncoded
-    @POST("auth/save/")
-    suspend fun save(
+    @PUT("my-account/")
+    suspend fun saveUser(
         @Field("first_name") firstName: String?,
         @Field("last_name") lastName: String?,
-        @Field("email") email: String?,
         @Field("password") password: String?,
-        @Field("quiz") iquizResultId: Int?
+        @Field("quiz_result") quizResult: String?
     ): User
 
     @GET("text/{key}/")
@@ -179,6 +179,7 @@ interface Webservice {
         @Query("room_type") roomType: String?,
         @Query("room_area") roomArea: Int?,
         @Query("style_result") styleResult: String?,
+        @Query("last_moodboard_id") moodboardId: Int?,
     ): PaginatedResponse<Product>
 
     @GET("shop/carts/")
@@ -194,4 +195,11 @@ interface Webservice {
 
     @GET("designers/")
     suspend fun getDesigners(): List<Designer>
+
+
+    @POST("shop/carts/send_new_cart/")
+    suspend fun sendNewCart(@Body params: RequestBody)
+
+    @POST("shop/carts/{id}/send_cart/")
+    suspend fun sendExistingCart(@Path("id") id: Int)
 }

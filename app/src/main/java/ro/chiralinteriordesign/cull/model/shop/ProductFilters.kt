@@ -15,4 +15,5 @@ data class ProductFilters(
     val roomType: RoomType? = null,
     val roomArea: Int? = null,
     val quizResult: String? = null,
+    val lastMoodboardId: Int? = null,
 )

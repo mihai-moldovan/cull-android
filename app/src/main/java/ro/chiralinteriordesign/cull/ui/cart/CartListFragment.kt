@@ -78,6 +78,7 @@ class CartListFragment : Fragment() {
                     binding.titleView.text = it.name
                     binding.subtitleView.text =
                         binding.subtitleView.resources.getQuantityString(R.plurals.cart_count_format, it.lineItems.size, it.lineItems.size)
+                    binding.statusView.visibility = if (it.isSent) View.VISIBLE else View.GONE
                 }
             }
     }

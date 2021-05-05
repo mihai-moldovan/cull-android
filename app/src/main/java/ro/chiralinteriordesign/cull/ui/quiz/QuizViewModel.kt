@@ -1,10 +1,8 @@
 package ro.chiralinteriordesign.cull.ui.quiz
 
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.model.quiz.QuizAnswer
 import ro.chiralinteriordesign.cull.model.quiz.QuizQuestion
@@ -73,6 +71,9 @@ class QuizViewModel : ViewModel() {
                 quiz.results.firstOrNull { it.key == resultKey }?.let {
                     result.postValue(it)
                     userRepo.currentUser = userRepo.currentUser.copy(quizResult = it.key)
+                    viewModelScope.launch {
+                        userRepo.saveUserData(quizResult = it.key)
+                    }
                 }
             }
         }

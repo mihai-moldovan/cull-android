@@ -98,15 +98,22 @@
         <item quantity="one">%1$d produs</item>
         <item quantity="other">%1$d produse</item>
     </plurals>
+    <string name="offer_sent">Cererea a fost trimisă cu succes. Vei fi contactat pe email.</string>
+    <string name="offer_failed">Cererea nu a putut fi trimisă. Încearcă mai târziu.</string>
+    <string name="offer_sent_short">Cerere trimisă</string>
+
+    
 
     <!-- ALERTS -->
     <string name="alert_confirmation_title">Ești sigur?</string>
     <string name="alert_confirmation_delete_cart">Lista va fi ștearsă definitiv</string>
     <string name="alert_yes">Da</string>
     <string name="alert_no">Nu</string>
+    <string name="alert_ok">OK</string>
 
     <!--    DESIGNERS-->
     <string name="designers_title">LISTĂ DESIGNERI</string>
     <string name="designers_cta">Trimite cerere</string>
+    
 
 </resources>

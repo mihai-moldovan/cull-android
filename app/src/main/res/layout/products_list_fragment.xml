@@ -89,20 +89,27 @@
             app:layout_constraintTop_toBottomOf="@id/searchBar"
             tools:text="Dormitor Minimalist Cozy" />
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refreshLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/roomTypeLabel"
-            app:spanCount="2"
-            tools:itemCount="3"
-            tools:listitem="@layout/products_item_product_list" />
+            app:layout_constraintTop_toBottomOf="@id/roomTypeLabel">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+
+                app:spanCount="2"
+                tools:itemCount="3"
+                tools:listitem="@layout/products_item_product_list" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -112,7 +119,7 @@
         android:layout_height="match_parent"
         android:background="@color/background_dark"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <ImageView
             android:layout_width="0dp"

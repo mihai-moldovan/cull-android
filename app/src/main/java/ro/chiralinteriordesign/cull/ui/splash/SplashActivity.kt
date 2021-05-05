@@ -38,7 +38,7 @@ class SplashActivity : BaseActivity() {
                     //didn't show tutorial
                     context.startActivity(Intent(context, TutorialActivity::class.java))
                 }
-                context !is QuizActivity && user.quizResult.isEmpty() -> {
+                context !is QuizActivity && user.quizResult.isNullOrBlank() -> {
                     //has no quiz done
                     context.startActivity(Intent(context, QuizActivity::class.java))
                 }

@@ -55,22 +55,6 @@ class QuizResultFragment : Fragment() {
 
         binding.btnContinue.setOnClickListener {
             SplashActivity.showInitialActivity(requireActivity())
-//            val user = App.instance.dataRepository.userRepository.currentUser
-//            when {
-//                user.rooms.isNullOrEmpty() -> {
-//                    //has has no space saved
-//                    startActivity(Intent(requireActivity(), SelectSpaceActivity::class.java).apply {
-//                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-//                    })
-//                }
-//                else -> {
-//                    //show products
-//                    startActivity(Intent(requireActivity(), ProductsActivity::class.java).apply {
-//                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-//                    })
-//                }
-//            }
-//            requireActivity().finish()
         }
     }
 

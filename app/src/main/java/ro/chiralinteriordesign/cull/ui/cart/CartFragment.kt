@@ -1,19 +1,25 @@
 package ro.chiralinteriordesign.cull.ui.cart
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.databinding.CartItemBinding
 import ro.chiralinteriordesign.cull.databinding.FragmentCartBinding
 import ro.chiralinteriordesign.cull.model.shop.Cart
 import ro.chiralinteriordesign.cull.model.shop.CartLineItem
+import ro.chiralinteriordesign.cull.ui.auth.AuthActivity
 import ro.chiralinteriordesign.cull.ui.products.ProductDetailsFragment
 import ro.chiralinteriordesign.cull.utils.pushFragment
 
@@ -33,7 +39,29 @@ class CartFragment : Fragment() {
 
     private val viewModel: CartViewModel by viewModels()
     private var binding: FragmentCartBinding? = null
-    private lateinit var adapter: Adapter
+    private val adapter: Adapter = Adapter(object : AdapterListener {
+        override fun onItemClick(item: CartLineItem, pos: Int) {
+            parentFragmentManager.pushFragment(ProductDetailsFragment.newInstance(item.product, viewModel.cartIndex))
+        }
+
+        override fun onQuantityDecrease(item: CartLineItem, post: Int) {
+            viewModel.removeProduct(item.product, false)
+        }
+
+        override fun onQuantityIncrease(item: CartLineItem, pos: Int) {
+            viewModel.addProduct(item.product)
+        }
+
+        override fun onRemoveItem(item: CartLineItem, pos: Int) {
+            viewModel.removeProduct(item.product, true)
+        }
+    })
+
+    private val requestOfferContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            requestOffer()
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +74,8 @@ class CartFragment : Fragment() {
             parentFragmentManager.popBackStack()
             return
         }
-
-        adapter = Adapter(cart) { lineItem, _ ->
-            parentFragmentManager.pushFragment(ProductDetailsFragment.newInstance(lineItem.product, cartIndex))
-        }
+        viewModel.cartIndex = cartIndex
+        viewModel.cart.value = cart
     }
 
     override fun onCreateView(
@@ -63,7 +89,6 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = binding ?: return
-        binding.navBar.titleView.text = adapter.cart.name
         binding.navBar.btnClose.setOnClickListener {
             requireActivity().onBackPressed()
         }
@@ -73,10 +98,26 @@ class CartFragment : Fragment() {
 
         binding.recyclerView.adapter = adapter
         binding.btnContinue.setOnClickListener {
-            val cart = adapter.cart
+            val cart = viewModel.cart.value ?: return@setOnClickListener
             if (cart.lineItems.isEmpty()) {
                 return@setOnClickListener
             }
+            if (viewModel.isLoggedIn) {
+                requestOffer()
+            } else {
+                requestOfferContent.launch(Intent(requireActivity(), AuthActivity::class.java))
+            }
+        }
+
+        viewModel.cart.observe(viewLifecycleOwner) {
+            adapter.cart = it
+            binding.navBar.titleView.text = it.name
+            if (it.isSent || it.lineItems.isEmpty()) {
+                binding.btnContinue.visibility = View.INVISIBLE
+            } else {
+                binding.btnContinue.visibility = View.VISIBLE
+            }
+            binding.offerSentText.visibility = if (it.isSent) View.VISIBLE else View.GONE
         }
     }
 
@@ -85,8 +126,25 @@ class CartFragment : Fragment() {
         super.onDestroyView()
     }
 
+    private fun requestOffer() {
+        val binding = binding ?: return
+        val cart = viewModel.cart.value ?: return
+        binding.progressBar.visibility = View.VISIBLE
+        binding.btnContinue.visibility = View.INVISIBLE
+        viewModel.requestOffer().observe(viewLifecycleOwner) {
+            binding.progressBar.visibility = View.INVISIBLE
+            if (!it) {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setMessage(R.string.offer_failed)
+                    .setPositiveButton(R.string.alert_ok, null)
+                    .show()
+                binding.btnContinue.visibility = View.VISIBLE
+            }
+        }
+    }
 
-    class LineItemViewHolder(private val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    class LineItemViewHolder(val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         var lineItem: CartLineItem? = null
             set(newValue) {
@@ -98,19 +156,38 @@ class CartFragment : Fragment() {
                         .into(binding.imageView)
                     binding.titleView.text = it.product.title
                     binding.subtitleView.text = it.product.category
-                    binding.priceView.text = it.product.priceString
+                    binding.priceView.text = it.priceString
                     binding.quantityView.text = it.quantity.toString()
                 }
             }
+
+        var archived: Boolean = false
+            set(newValue) {
+                field = newValue
+                val visibility = if (newValue) View.INVISIBLE else View.VISIBLE
+                binding.buttonDecrease.visibility = visibility
+                binding.buttonIncrease.visibility = visibility
+                binding.buttonDelete.visibility = visibility
+            }
     }
 
-    class Adapter(
-        val cart: Cart,
-        private val onItemClickListener: ((item: CartLineItem, pos: Int) -> Unit)
-    ) : RecyclerView.Adapter<LineItemViewHolder>() {
+    interface AdapterListener {
+        fun onItemClick(item: CartLineItem, pos: Int)
+        fun onQuantityIncrease(item: CartLineItem, pos: Int)
+        fun onQuantityDecrease(item: CartLineItem, post: Int)
+        fun onRemoveItem(item: CartLineItem, pos: Int)
+    }
+
+    class Adapter(private val listener: AdapterListener) : RecyclerView.Adapter<LineItemViewHolder>() {
+
+        var cart: Cart? = null
+            set(newValue) {
+                field = newValue
+                notifyDataSetChanged()
+            }
 
         override fun getItemCount(): Int {
-            return cart.lineItems.size
+            return cart?.lineItems?.size ?: 0
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineItemViewHolder {
@@ -118,14 +195,32 @@ class CartFragment : Fragment() {
                 .apply {
                     itemView.setOnClickListener {
                         lineItem?.let { lineItem ->
-                            onItemClickListener(lineItem, adapterPosition)
+                            listener.onItemClick(lineItem, adapterPosition)
+                        }
+                    }
+                    binding.buttonIncrease.setOnClickListener {
+                        lineItem?.let { lineItem ->
+                            listener.onQuantityIncrease(lineItem, adapterPosition)
+                        }
+                    }
+                    binding.buttonDecrease.setOnClickListener {
+                        lineItem?.let { lineItem ->
+                            listener.onQuantityDecrease(lineItem, adapterPosition)
+                        }
+                    }
+                    binding.buttonDelete.setOnClickListener {
+                        lineItem?.let {
+                            listener.onRemoveItem(it, adapterPosition)
                         }
                     }
                 }
         }
 
         override fun onBindViewHolder(holder: LineItemViewHolder, position: Int) {
-            holder.lineItem = cart.lineItems[position]
+            cart?.let {
+                holder.lineItem = it.lineItems[position]
+                holder.archived = it.isSent
+            }
         }
     }
 }

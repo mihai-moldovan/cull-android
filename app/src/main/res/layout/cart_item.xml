@@ -18,6 +18,7 @@
             android:layout_width="@dimen/cart_item_img_size"
             android:layout_height="@dimen/cart_item_img_size"
             android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/logo_auth" />
@@ -51,6 +52,18 @@
             tools:text="CANAPEA NOYER" />
 
         <TextView
+            android:id="@+id/priceView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/cart_item_horizontal_spacing"
+            android:fontFamily="@font/kievitcomppro_medi"
+            android:textColor="@color/white"
+            android:textSize="@dimen/cart_item_subtitle_font"
+            app:layout_constraintBaseline_toBaselineOf="@id/subtitleView"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="2500 RON" />
+
+        <TextView
             android:id="@+id/quantityLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,26 +86,51 @@
             app:layout_constraintStart_toEndOf="@id/quantityLabel"
             tools:text="2" />
 
-        <TextView
-            android:id="@+id/priceView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/cart_item_horizontal_spacing"
-            android:fontFamily="@font/kievitcomppro_medi"
-            android:textColor="@color/white"
-            android:textSize="@dimen/cart_item_subtitle_font"
-            app:layout_constraintBottom_toBottomOf="@id/imageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="2500 RON" />
 
         <ImageView
             android:id="@+id/buttonDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingStart="@dimen/cart_item_quantity_buttons_padding_h"
+            android:paddingTop="@dimen/cart_item_quantity_buttons_padding_v"
+            android:paddingEnd="@dimen/cart_item_quantity_buttons_padding_h"
+            android:paddingBottom="@dimen/cart_item_quantity_buttons_padding_v"
             android:src="@drawable/btn_cart_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+        <TextView
+            android:id="@+id/buttonIncrease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kievitcomppro_bold"
+            android:paddingStart="@dimen/cart_item_quantity_buttons_padding_h"
+            android:paddingTop="@dimen/cart_item_quantity_buttons_padding_v"
+            android:paddingEnd="@dimen/cart_item_quantity_buttons_padding_h"
+            android:paddingBottom="@dimen/cart_item_quantity_buttons_padding_v"
+            android:text="+"
+            android:textColor="@color/white"
+            android:textSize="@dimen/cart_item_quantity_buttons_font"
+            app:layout_constraintBottom_toBottomOf="@id/quantityView"
+            app:layout_constraintEnd_toStartOf="@+id/buttonDecrease"
+            app:layout_constraintTop_toTopOf="@id/quantityView" />
+
+        <TextView
+            android:id="@+id/buttonDecrease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kievitcomppro_bold"
+            android:paddingStart="@dimen/cart_item_quantity_buttons_padding_h"
+            android:paddingTop="@dimen/cart_item_quantity_buttons_padding_v"
+            android:paddingEnd="@dimen/cart_item_quantity_buttons_padding_h"
+            android:paddingBottom="@dimen/cart_item_quantity_buttons_padding_v"
+            android:text="-"
+            android:textColor="@color/white"
+            android:textSize="@dimen/cart_item_quantity_buttons_font"
+            app:layout_constraintBottom_toBottomOf="@id/quantityView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/quantityView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -34,7 +34,7 @@ class ProductDetailsViewModel : ViewModel() {
             shopRepo.addProductInCart(cart, product)
             isAdded.postValue(true)
         } else {
-            shopRepo.removeProductFromCart(cart, product)
+            shopRepo.removeProductFromCart(cart, product, true)
             isAdded.postValue(false)
         }
     }

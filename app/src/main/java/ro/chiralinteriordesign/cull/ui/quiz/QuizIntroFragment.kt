@@ -55,13 +55,13 @@ class QuizIntroFragment : Fragment() {
             iv.visibility = View.VISIBLE
             iv.animate()
                 .alpha(0f)
-                .setDuration(1000)
+                .setDuration(300)
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator?) {
                         iv.visibility = View.GONE
                     }
                 })
-                .setStartDelay(1000)
+                .setStartDelay(700)
         }
     }
 

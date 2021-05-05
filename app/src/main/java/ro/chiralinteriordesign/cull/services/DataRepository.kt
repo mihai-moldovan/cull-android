@@ -28,8 +28,8 @@ class DataRepository(private val appContext: Context) {
     val quizRepository: QuizRepository by lazy { QuizRepository(localRepository, webservice) }
     val userRepository: UserRepository by lazy { UserRepository(localRepository, webservice) }
     val textRepository: TextRepository by lazy { TextRepository(localRepository, webservice) }
-    val productRepository: ShopRepository by lazy { ShopRepository(localRepository, webservice)}
-    val designersRepository: DesignerRepository by lazy { DesignerRepository(localRepository, webservice)}
+    val productRepository: ShopRepository by lazy { ShopRepository(localRepository, webservice) }
+    val designersRepository: DesignerRepository by lazy { DesignerRepository(localRepository, webservice) }
 
     suspend fun reloadDataIfNeeded(): Boolean {
         val timestamp = App.instance.preferences.getLong(Preferences.Key.CACHE_TIMESTAMP, 0L)
@@ -68,4 +68,9 @@ class DataRepository(private val appContext: Context) {
     }
 
     val hasLocalData: Boolean = quizRepository.hasLocalQuiz
+
+    suspend fun loadUserData(): Boolean {
+//        productRepository.loadCarts(true)
+        return true
+    }
 }

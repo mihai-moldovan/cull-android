@@ -18,7 +18,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomPart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/navBar">
@@ -58,6 +58,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/variantsRecyclerView"
                 app:tabBackground="@drawable/product_dot_indicator"
+                android:background="@android:color/transparent"
                 app:tabGravity="center"
                 app:tabIndicatorHeight="0dp"
                 app:tabPaddingEnd="13dp"
@@ -109,22 +110,36 @@
                     android:background="@android:color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    android:scrollbars="none"
                     app:layout_constraintTop_toBottomOf="@id/productPriceView"
                     tools:ignore="WebViewLayout" />
-
-                <Button
-                    android:id="@+id/btnAddToCart"
-                    style="@style/ButtonRounded"
-                    android:layout_width="0dp"
-                    android:layout_marginTop="@dimen/product_details_bottom_spacing"
-                    android:text="@string/add_to_cart"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/productDescriptionView"
-                    app:layout_constraintWidth_percent="0.75" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomPart"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/product_details_bottom_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/btnAddToCart"
+            style="@style/ButtonRounded"
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/product_details_bottom_spacing"
+            android:layout_marginBottom="@dimen/product_details_bottom_spacing"
+            android:text="@string/add_to_cart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.75" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

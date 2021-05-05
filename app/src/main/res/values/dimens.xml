@@ -128,6 +128,13 @@
     <dimen name="cart_item_vertical_spacing">12dp</dimen>
     <dimen name="cart_item_corner_radius">15dp</dimen>
     <dimen name="cart_item_cell_spacing">7dp</dimen>
+    <dimen name="cart_item_quantity_buttons_font">20sp</dimen>
+    <dimen name="cart_item_quantity_buttons_padding_h">10sp</dimen>
+    <dimen name="cart_item_quantity_buttons_padding_v">5sp</dimen>
+    <dimen name="cart_offer_sent_font">17sp</dimen>
+
+    <!-- FILTERS-->
+    <dimen name="filters_section_title_font"></dimen>
 
 
     <integer name="fragment_animation_duration">200</integer>

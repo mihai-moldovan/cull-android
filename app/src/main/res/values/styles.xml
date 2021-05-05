@@ -69,6 +69,7 @@
         <item name="android:layout_marginTop">@dimen/space_edit_title_margin_v</item>
         <item name="android:layout_marginStart">@dimen/space_edit_title_margin</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/space_edit_font</item>
     </style>
 
     <style name="SpaceRoomTypeView">
@@ -114,8 +115,7 @@
     </style>
 
     <style name="AuthEditTitle" parent="SpaceEditTitle">
-        <item name="android:textSize">@dimen/auth_field_spacing</item>
-        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:textSize">@dimen/auth_field_text_font</item>
     </style>
 
 </resources>

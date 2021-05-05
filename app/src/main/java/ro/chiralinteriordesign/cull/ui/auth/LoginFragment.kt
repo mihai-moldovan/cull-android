@@ -1,5 +1,6 @@
 package ro.chiralinteriordesign.cull.ui.auth
 
+import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
@@ -59,6 +60,7 @@ class LoginFragment : Fragment() {
 
             viewModel.login(email, password).observe(viewLifecycleOwner) {
                 if (it == null) {
+                    requireActivity().setResult(Activity.RESULT_OK)
                     requireActivity().finish()
                 } else {
                     Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
