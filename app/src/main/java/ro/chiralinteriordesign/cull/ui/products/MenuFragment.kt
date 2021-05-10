@@ -21,6 +21,7 @@ import ro.chiralinteriordesign.cull.ui.cart.CartActivity
 import ro.chiralinteriordesign.cull.ui.designers.DesignersActivity
 import ro.chiralinteriordesign.cull.ui.quiz.QuizActivity
 import ro.chiralinteriordesign.cull.ui.space.SelectSpaceActivity
+import ro.chiralinteriordesign.cull.ui.splash.SplashActivity
 import ro.chiralinteriordesign.cull.ui.texts.TextsActivity
 
 /**
@@ -145,6 +146,8 @@ class MenuFragment : DialogFragment() {
                 )
                 MenuItem.LOGOUT -> {
                     App.instance.dataRepository.userRepository.logout()
+                    startActivity(Intent(requireContext(), SplashActivity::class.java))
+                    requireActivity().finish()
                 }
                 MenuItem.LOGIN -> startActivity(
                     Intent(requireContext(), AuthActivity::class.java)

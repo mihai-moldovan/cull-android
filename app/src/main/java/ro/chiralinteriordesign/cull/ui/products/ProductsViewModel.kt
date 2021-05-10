@@ -8,9 +8,7 @@ import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.model.quiz.QuizResult
-import ro.chiralinteriordesign.cull.model.shop.Cart
-import ro.chiralinteriordesign.cull.model.shop.Product
-import ro.chiralinteriordesign.cull.model.shop.ProductFilters
+import ro.chiralinteriordesign.cull.model.shop.*
 import ro.chiralinteriordesign.cull.model.user.RoomType
 import ro.chiralinteriordesign.cull.services.ResultWrapper
 
@@ -24,6 +22,7 @@ class ProductsViewModel(app: Application) : AndroidViewModel(app) {
     val isLoading = MutableLiveData(false)
     val products = MutableLiveData(mutableListOf<Product>())
     val roomStyle = MutableLiveData("")
+    val query = MutableLiveData("")
 
     private lateinit var currentCart: Cart
     val currentCartIndex: Int? get() = shopRepo.getCartIndex(currentCart)
@@ -32,14 +31,12 @@ class ProductsViewModel(app: Application) : AndroidViewModel(app) {
     private var currentPage = 0
     private var hasReachedEnd = false
     private var currentJob: Job? = null
-    var currentFilters: ProductFilters? = null
-        private set(newValue) {
-            field = newValue
-            resetProducts()
-        }
+
+    private var currentFilters: ProductFilters? = null
+    private var moodboardFilters: MoodBoardFilters? = null
+
     var isSearchScreen = false
         private set
-
 
     private fun resetProducts() {
         currentJob?.cancel()
@@ -57,16 +54,30 @@ class ProductsViewModel(app: Application) : AndroidViewModel(app) {
                     return@launch
                 }
                 isLoading.postValue(true)
-                currentPage += 1
-                when (val result =
-                    dataRepo.productRepository.loadProducts(currentPage, currentFilters)) {
-                    is ResultWrapper.Success -> {
-                        val pList = products.value ?: mutableListOf()
-                        pList.addAll(result.value.results)
-                        products.postValue(pList)
+
+                val moodboardFilters = moodboardFilters
+                if (moodboardFilters != null) {
+                    when (val result = shopRepo.getMoodboard(moodboardFilters)) {
+                        is ResultWrapper.Success -> {
+                            currentFilters = ProductFilters(moodboardId = result.value.id)
+                            this@ProductsViewModel.moodboardFilters = null
+                        }
+                        else -> hasReachedEnd = true
                     }
-                    else -> {
-                        hasReachedEnd = true
+                }
+
+                if (!hasReachedEnd) {
+                    currentPage += 1
+                    when (val result =
+                        shopRepo.loadProducts(currentPage, currentFilters)) {
+                        is ResultWrapper.Success -> {
+                            val pList = products.value ?: mutableListOf()
+                            pList.addAll(result.value)
+                            products.postValue(pList)
+                        }
+                        else -> {
+                            hasReachedEnd = true
+                        }
                     }
                 }
                 isLoading.postValue(false)
@@ -79,12 +90,11 @@ class ProductsViewModel(app: Application) : AndroidViewModel(app) {
 
     fun searchQuery(query: String = "", cartIndex: Int) {
         isSearchScreen = true
-        currentFilters = (currentFilters ?: ProductFilters()).copy(
-            query = query,
-            roomType = null,
-            quizResult = null
-        )
+        currentFilters = ProductFilters(query = query)
+        moodboardFilters = null
+        resetProducts()
         this.roomStyle.postValue(null)
+        this.query.postValue(query)
         currentCart = shopRepo.carts!![cartIndex]
     }
 
@@ -92,17 +102,21 @@ class ProductsViewModel(app: Application) : AndroidViewModel(app) {
         isSearchScreen = false
         val user = userRepo.currentUser
         val room = userRepo.room
-        val quizResult = quizRepo.localQuiz?.results?.firstOrNull { it.key == user.quizResult }
-        val roomType = room?.roomType
+        val quizResult = quizRepo.localQuiz?.results?.firstOrNull { it.key == user.quizResult } ?: return
+        val roomType = room?.roomType ?: return
 
-        currentFilters = (currentFilters ?: ProductFilters()).copy(
-            query = null,
+        moodboardFilters = MoodBoardFilters(
             roomType = roomType,
-            roomArea = room?.area,
-            quizResult = quizResult?.key
+            roomArea = room.area,
+            quizResult = quizResult.key,
+            lastMoodboardId = currentFilters?.moodboardId
         )
-        val name = "${roomType?.stringName(getApplication()) ?: ""} ${quizResult?.title ?: ""}"
+        currentFilters = null
+        resetProducts()
+
+        val name = "${roomType.stringName(getApplication()) ?: ""} ${quizResult.title ?: ""}"
         this.roomStyle.postValue(name)
-        currentCart = shopRepo.getOrAddCart(roomType!!, user.quizResult, name)
+        this.query.postValue(null)
+        currentCart = shopRepo.getOrAddCart(roomType, user.quizResult, name)
     }
 }

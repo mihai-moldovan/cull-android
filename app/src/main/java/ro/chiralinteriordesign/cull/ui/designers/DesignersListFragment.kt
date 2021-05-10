@@ -1,5 +1,6 @@
 package ro.chiralinteriordesign.cull.ui.designers
 
+import android.app.ProgressDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.databinding.DesignersListFragmentBinding
 import ro.chiralinteriordesign.cull.databinding.DesignersListItemBinding
@@ -46,11 +48,22 @@ class DesignersListFragment : Fragment() {
         }
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
-
+            if (it) {
+                binding.progressBar.visibility = View.VISIBLE
+                binding.btnContinue.visibility = View.INVISIBLE
+            } else {
+                binding.progressBar.visibility = View.INVISIBLE
+                binding.btnContinue.visibility = View.VISIBLE
+            }
         }
 
         binding.btnContinue.setOnClickListener {
-
+            viewModel.contactDesigners(adapter.selection.toList()).observe(viewLifecycleOwner) {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setMessage(if (it) R.string.offer_failed else R.string.offer_sent)
+                    .setPositiveButton(R.string.alert_ok, null)
+                    .show()
+            }
         }
 
         binding.navBar.btnBack.setOnClickListener {
@@ -94,7 +107,7 @@ class DesignersListFragment : Fragment() {
             }
     }
 
-    class Adapter() : RecyclerView.Adapter<DesignerViewHolder>() {
+    class Adapter : RecyclerView.Adapter<DesignerViewHolder>() {
 
         var data: List<Designer>? = null
             set(newValue) {
@@ -102,7 +115,7 @@ class DesignersListFragment : Fragment() {
                 notifyDataSetChanged()
             }
 
-        val selection = HashSet<Int>()
+        val selection = HashSet<Long>()
 
         override fun getItemCount(): Int {
             return data?.size ?: 0

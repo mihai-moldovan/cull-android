@@ -84,7 +84,9 @@ class ProductsListFragment : Fragment() {
             requireActivity().onBackPressed()
         }
 
-        binding.navBar.titleView.text = viewModel.currentFilters?.query
+        viewModel.query.observe(viewLifecycleOwner) {
+            binding.navBar.titleView.text = it
+        }
 
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             val binding = this.binding ?: return@Observer

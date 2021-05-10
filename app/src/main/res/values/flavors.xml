@@ -2,8 +2,7 @@
 <resources>
     <bool name="is_production">false</bool>
     <bool name="allow_clear_text_traffic">true</bool>
-    <string name="api_url">http://192.168.2.1</string>
-<!--    <string name="api_url">http://192.168.0.184</string>-->
+    <string name="api_url">http://192.168.0.184</string>
 
     <string name="notification_channel_id">CORE</string>
 </resources>

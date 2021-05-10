@@ -71,8 +71,10 @@ class QuizViewModel : ViewModel() {
                 quiz.results.firstOrNull { it.key == resultKey }?.let {
                     result.postValue(it)
                     userRepo.currentUser = userRepo.currentUser.copy(quizResult = it.key)
-                    viewModelScope.launch {
-                        userRepo.saveUserData(quizResult = it.key)
+                    if (userRepo.isLoggedIn) {
+                        viewModelScope.launch {
+                            userRepo.saveUserData(quizResult = it.key)
+                        }
                     }
                 }
             }

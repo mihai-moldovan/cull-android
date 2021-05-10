@@ -71,3 +71,13 @@ data class ProductVariant(
 
         }
 }
+
+data class ProductFilters(
+    val query: String? = null,
+    val productType: String? = null,
+    val minPrice: Float? = null,
+    val maxPrice: Float? = null,
+    val color: String? = null,
+    val material: String? = null,
+    val moodboardId: Int? = null,
+)

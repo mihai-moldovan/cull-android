@@ -1,16 +1,9 @@
 package ro.chiralinteriordesign.cull.model.designer
 
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.gson.Gson
 import kotlinx.coroutines.*
-import ro.chiralinteriordesign.cull.App
-import ro.chiralinteriordesign.cull.services.LocalRepository
-import ro.chiralinteriordesign.cull.services.ResultWrapper
-import ro.chiralinteriordesign.cull.services.Webservice
-import ro.chiralinteriordesign.cull.services.safeApiCall
-import java.io.IOException
-import java.lang.Exception
-import java.util.concurrent.TimeUnit
+import okhttp3.RequestBody
+import ro.chiralinteriordesign.cull.services.*
 
 
 /**
@@ -24,5 +17,21 @@ class DesignerRepository(
 
     suspend fun getDesigners(): ResultWrapper<List<Designer>> {
         return safeApiCall { webservice.getDesigners() }
+    }
+
+    suspend fun contactDesigners(model: ContactDesigners): Boolean {
+        val response = safeApiCall {
+            val body = RequestBody.create(
+                okhttp3.MediaType.parse("application/json; charset=utf-8"),
+                createGson().toJson(model)
+            )
+            webservice.contactDesigners(body)
+        }
+        return when (response) {
+            is ResultWrapper.Success -> {
+                true
+            }
+            else -> false
+        }
     }
 }

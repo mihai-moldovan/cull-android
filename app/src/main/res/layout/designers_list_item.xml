@@ -55,8 +55,8 @@
             android:id="@+id/checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:button="@drawable/designer_checkbox"
-            android:enabled="false"
+            android:background="@drawable/designer_checkbox"
+            android:button="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -41,18 +41,16 @@
             app:layout_constraintTop_toBottomOf="@id/titleView"
             tools:text="CANAPEA NOYER" />
 
-        <TextView
+        <ImageView
             android:id="@+id/statusView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/kievitcomppro"
-            android:text="@string/offer_sent_short"
-            android:textColor="@color/white"
-            android:textSize="@dimen/cart_item_subtitle_font"
+            android:src="@drawable/icon_paper_plane"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/titleView"
             app:layout_constraintTop_toBottomOf="@id/titleView"
+            app:tint="@color/white"
             tools:visibility="visible" />
 
 

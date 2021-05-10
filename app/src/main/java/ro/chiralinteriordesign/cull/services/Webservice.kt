@@ -17,6 +17,8 @@ import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.model.designer.Designer
 import ro.chiralinteriordesign.cull.model.quiz.Quiz
 import ro.chiralinteriordesign.cull.model.shop.Cart
+import ro.chiralinteriordesign.cull.model.shop.MoodBoardFilters
+import ro.chiralinteriordesign.cull.model.shop.Moodboard
 import ro.chiralinteriordesign.cull.model.shop.Product
 import ro.chiralinteriordesign.cull.model.text.Text
 import ro.chiralinteriordesign.cull.model.user.User
@@ -81,7 +83,7 @@ suspend fun <T> safeApiCall(
 }
 
 
-private fun createGson(): Gson = GsonBuilder()
+fun createGson(): Gson = GsonBuilder()
     .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
     .setDateFormat("")
     .create()
@@ -124,7 +126,7 @@ fun createWebservice(appContext: Context): Webservice = Retrofit.Builder()
 data class PaginatedResponse<T>(
     val count: Int,
     val next: String,
-    val previouse: String,
+    val previous: String,
     val results: List<T>,
 )
 
@@ -176,11 +178,17 @@ interface Webservice {
         @Query("max_price") maxPrice: Float?,
         @Query("color") color: String?,
         @Query("material") material: String?,
-        @Query("room_type") roomType: String?,
-        @Query("room_area") roomArea: Int?,
-        @Query("style_result") styleResult: String?,
-        @Query("last_moodboard_id") moodboardId: Int?,
+        @Query("moodboard") moodboardId: Int?
     ): PaginatedResponse<Product>
+
+
+    @GET("shop/moodboard/")
+    suspend fun getMoodboard(
+        @Query("room_type") roomType: String,
+        @Query("style_result") styleResult: String,
+        @Query("room_area") roomArea: Int?,
+        @Query("last_moodboard_id") moodboardId: Int?
+    ): Moodboard
 
     @GET("shop/carts/")
     suspend fun getCarts(): List<Cart>
@@ -196,6 +204,8 @@ interface Webservice {
     @GET("designers/")
     suspend fun getDesigners(): List<Designer>
 
+    @POST("designers/contact/")
+    suspend fun contactDesigners(@Body params: RequestBody)
 
     @POST("shop/carts/send_new_cart/")
     suspend fun sendNewCart(@Body params: RequestBody)

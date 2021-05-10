@@ -20,7 +20,7 @@ class ShopRepository(
     suspend fun loadProducts(
         page: Int = 1,
         filters: ProductFilters? = null,
-    ): ResultWrapper<PaginatedResponse<Product>> {
+    ): ResultWrapper<List<Product>> {
         return safeApiCall {
             webservice.getProducts(
                 page,
@@ -30,12 +30,21 @@ class ShopRepository(
                 filters?.maxPrice,
                 filters?.color,
                 filters?.material,
-                filters?.roomType?.name?.toLowerCase(Locale.US),
-                filters?.roomArea,
-                filters?.quizResult,
-                filters?.lastMoodboardId,
-            )
+                filters?.moodboardId,
+            ).results
+        }
+    }
 
+    suspend fun getMoodboard(
+        filters: MoodBoardFilters
+    ): ResultWrapper<Moodboard> {
+        return safeApiCall {
+            webservice.getMoodboard(
+                filters.roomType.name.toLowerCase(Locale.US),
+                filters.quizResult,
+                filters.roomArea,
+                filters.lastMoodboardId
+            )
         }
     }
 
