@@ -51,12 +51,15 @@
             tools:text="CANAPEA NOYER" />
 
 
-        <CheckBox
+        <CheckedTextView
             android:id="@+id/checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/designer_checkbox"
             android:button="@null"
+            android:enabled="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

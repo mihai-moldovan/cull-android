@@ -114,6 +114,17 @@
     <!--    DESIGNERS-->
     <string name="designers_title">LISTĂ DESIGNERI</string>
     <string name="designers_cta">Trimite cerere</string>
-    
+    <string name="designers_too_many">Puteți contacta maximum %1$d designeri.</string>
+
+
+    <!-- FILTERS  -->
+    <string name="filters_title">FILTRE</string>
+    <string name="filter_categories">Categorii</string>
+    <string name="filter_colors">Culori</string>
+    <string name="filter_materials">Material</string>
+    <string name="filter_price">Gama de prețuri</string>
+    <string name="filter_btn_apply">Aplică</string>
+    <string name="filter_price_range_format">%1$d RON - %2$d RON</string>
+
 
 </resources>

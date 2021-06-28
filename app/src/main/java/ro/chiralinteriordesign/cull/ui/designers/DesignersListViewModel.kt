@@ -50,4 +50,7 @@ class DesignersListViewModel : ViewModel() {
             isLoading.postValue(false)
         }
     }
+
+    val isLoggedIn: Boolean
+        get() = userRepo.isLoggedIn
 }

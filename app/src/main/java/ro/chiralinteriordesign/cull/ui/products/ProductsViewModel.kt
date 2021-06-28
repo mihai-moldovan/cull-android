@@ -2,6 +2,7 @@ package ro.chiralinteriordesign.cull.ui.products
 
 import android.app.Application
 import androidx.lifecycle.*
+import androidx.work.ListenableWorker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
@@ -32,7 +33,8 @@ class ProductsViewModel(app: Application) : AndroidViewModel(app) {
     private var hasReachedEnd = false
     private var currentJob: Job? = null
 
-    private var currentFilters: ProductFilters? = null
+    var currentFilters: ProductFilters? = null
+        private set
     private var moodboardFilters: MoodBoardFilters? = null
 
     var isSearchScreen = false
@@ -88,13 +90,13 @@ class ProductsViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun searchQuery(query: String = "", cartIndex: Int) {
+    fun searchQuery(filters: ProductFilters, cartIndex: Int) {
         isSearchScreen = true
-        currentFilters = ProductFilters(query = query)
+        currentFilters = filters
         moodboardFilters = null
         resetProducts()
         this.roomStyle.postValue(null)
-        this.query.postValue(query)
+        this.query.postValue(filters.query)
         currentCart = shopRepo.carts!![cartIndex]
     }
 

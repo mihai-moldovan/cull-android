@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <size
+                android:width="@dimen/filters_price_seekbar_thumb_size1"
+                android:height="@dimen/filters_price_seekbar_thumb_size1" />
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+    <item android:gravity="center">
+        <shape android:shape="oval">
+            <size
+                android:width="@dimen/filters_price_seekbar_thumb_size2"
+                android:height="@dimen/filters_price_seekbar_thumb_size2" />
+            <solid android:color="@color/gold" />
+        </shape>
+    </item>
+</layer-list>

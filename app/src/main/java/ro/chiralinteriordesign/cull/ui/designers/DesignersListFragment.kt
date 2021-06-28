@@ -1,12 +1,15 @@
 package ro.chiralinteriordesign.cull.ui.designers
 
+import android.app.Activity
 import android.app.ProgressDialog
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,6 +18,7 @@ import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.databinding.DesignersListFragmentBinding
 import ro.chiralinteriordesign.cull.databinding.DesignersListItemBinding
 import ro.chiralinteriordesign.cull.model.designer.Designer
+import ro.chiralinteriordesign.cull.ui.auth.AuthActivity
 
 class DesignersListFragment : Fragment() {
 
@@ -25,6 +29,12 @@ class DesignersListFragment : Fragment() {
     private val viewModel: DesignersListViewModel by viewModels()
     private var binding: DesignersListFragmentBinding? = null
     private val adapter = Adapter()
+
+    private val contactDesignerContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            contactDesigners()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,11 +68,10 @@ class DesignersListFragment : Fragment() {
         }
 
         binding.btnContinue.setOnClickListener {
-            viewModel.contactDesigners(adapter.selection.toList()).observe(viewLifecycleOwner) {
-                MaterialAlertDialogBuilder(requireContext())
-                    .setMessage(if (it) R.string.offer_failed else R.string.offer_sent)
-                    .setPositiveButton(R.string.alert_ok, null)
-                    .show()
+            if (viewModel.isLoggedIn) {
+                contactDesigners()
+            } else {
+                contactDesignerContent.launch(Intent(requireActivity(), AuthActivity::class.java))
             }
         }
 
@@ -76,6 +85,25 @@ class DesignersListFragment : Fragment() {
 
         binding.navBar.titleView.setText(R.string.designers_title)
 
+    }
+
+    private fun contactDesigners() {
+        val selectionList = adapter.selection.toList()
+        val maxDesigners = 1
+        if (selectionList.size > maxDesigners) {
+            MaterialAlertDialogBuilder(requireContext())
+                .setMessage(resources.getString(R.string.designers_too_many, maxDesigners))
+                .setPositiveButton(R.string.alert_ok, null)
+                .show()
+            return
+        }
+
+        viewModel.contactDesigners(adapter.selection.toList()).observe(viewLifecycleOwner) {
+            MaterialAlertDialogBuilder(requireContext())
+                .setMessage(if (!it) R.string.offer_failed else R.string.offer_sent)
+                .setPositiveButton(R.string.alert_ok, null)
+                .show()
+        }
     }
 
     override fun onResume() {

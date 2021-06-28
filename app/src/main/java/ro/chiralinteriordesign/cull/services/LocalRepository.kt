@@ -31,7 +31,7 @@ class LocalRepository(val appContext: Context) {
     }
 
     fun intentAction(key: String): String {
-        return LocalRepository::javaClass.name + "/" + key
+        return LocalRepository::class.java.name + "/" + key
     }
 
 

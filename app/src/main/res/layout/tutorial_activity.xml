@@ -64,12 +64,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:tabBackground="@drawable/dot_indicator"
+        android:background="@null"
         app:tabGravity="center"
         app:tabIndicatorHeight="0dp"
         app:tabPaddingEnd="13dp"
         app:tabPaddingStart="13dp" />
 
-    <Button
+    <TextView
         android:id="@+id/btnSkip"
         style="@style/ButtonRounded"
         android:layout_width="0dp"

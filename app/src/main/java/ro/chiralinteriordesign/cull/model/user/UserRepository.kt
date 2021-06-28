@@ -65,13 +65,13 @@ class UserRepository(
 
     var currentUser: User
         get() {
-            if (localRepository[User::javaClass.name] !is User) {
-                localRepository[User::javaClass.name] = User()
+            if (localRepository[User::class.java.name] !is User) {
+                localRepository[User::class.java.name] = User()
             }
-            return localRepository[User::javaClass.name] as User
+            return localRepository[User::class.java.name] as User
         }
         set(newValue) {
-            localRepository[User::javaClass.name] = newValue
+            localRepository[User::class.java.name] = newValue
         }
 
     var room: Room?

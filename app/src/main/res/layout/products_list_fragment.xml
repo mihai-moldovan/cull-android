@@ -12,67 +12,108 @@
         android:layout_height="match_parent"
         android:padding="@dimen/products_screen_spacing">
 
-        <ImageButton
-            android:id="@+id/buttonMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:minHeight="@dimen/button_min_size"
-            android:src="@drawable/btn_hamburger_selector"
-            app:layout_constraintBottom_toBottomOf="@id/searchBar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/searchBar" />
 
-        <include
-            android:id="@+id/navBar"
-            layout="@layout/nav_bar"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/searchNavBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@color/background_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="gone" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="@dimen/btn_size"
+                android:layout_height="@dimen/btn_size"
+                android:scaleType="center"
+                android:src="@drawable/btn_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/buttonFilters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/products_screen_spacing"
+                android:background="@null"
+                android:minHeight="@dimen/button_min_size"
+                android:src="@drawable/btn_filter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <EditText
-            android:id="@+id/searchBar"
+            <TextView
+                android:id="@+id/titleView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="middle"
+                android:fontFamily="@font/kievitcomppro"
+                android:gravity="center"
+                android:letterSpacing="0.07"
+                android:maxLines="2"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/texts_title_font"
+                app:layout_constraintBottom_toBottomOf="@id/btnBack"
+                app:layout_constraintEnd_toStartOf="@id/buttonFilters"
+                app:layout_constraintStart_toEndOf="@+id/btnBack"
+                app:layout_constraintTop_toTopOf="@id/btnBack"
+                tools:text="TITLE" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/normalNavBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/products_screen_spacing"
-            android:layout_marginEnd="@dimen/products_screen_spacing"
-            android:background="@drawable/search_bar_bacgkround"
-            android:drawableEnd="@drawable/icon_search"
-            android:fontFamily="@font/kievitcomppro"
-            android:hint="@string/search_hint"
-            android:imeOptions="actionSearch"
-            android:inputType="textFilter"
-            android:textSize="@dimen/products_list_font"
-            app:layout_constraintEnd_toStartOf="@+id/buttonFilters"
-            app:layout_constraintStart_toEndOf="@+id/buttonMenu"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/buttonFilters"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/products_screen_spacing"
-            android:background="@null"
-            android:minHeight="@dimen/button_min_size"
-            android:src="@drawable/btn_filter"
-            app:layout_constraintBottom_toBottomOf="@id/searchBar"
-            app:layout_constraintEnd_toStartOf="@+id/buttonCart"
-            app:layout_constraintTop_toTopOf="@id/searchBar" />
-
-        <ImageButton
-            android:id="@+id/buttonCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:minHeight="@dimen/button_min_size"
-            android:src="@drawable/btn_cart"
-            app:layout_constraintBottom_toBottomOf="@id/searchBar"
+            android:background="@color/background_dark"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/searchBar" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/buttonMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:minHeight="@dimen/button_min_size"
+                android:src="@drawable/btn_hamburger_selector"
+                app:layout_constraintBottom_toBottomOf="@id/searchBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/searchBar" />
+
+
+            <EditText
+                android:id="@+id/searchBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/products_screen_spacing"
+                android:layout_marginEnd="@dimen/products_screen_spacing"
+                android:background="@drawable/search_bar_bacgkround"
+                android:drawableEnd="@drawable/icon_search"
+                android:fontFamily="@font/kievitcomppro"
+                android:hint="@string/search_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="textFilter"
+                android:textSize="@dimen/products_list_font"
+                app:layout_constraintEnd_toStartOf="@+id/buttonCart"
+                app:layout_constraintStart_toEndOf="@+id/buttonMenu"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/buttonCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:minHeight="@dimen/button_min_size"
+                android:src="@drawable/btn_cart"
+                app:layout_constraintBottom_toBottomOf="@id/searchBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/searchBar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/roomTypeLabel"
@@ -86,7 +127,7 @@
             android:textSize="@dimen/products_list_font"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/searchBar"
+            app:layout_constraintTop_toBottomOf="@id/normalNavBar"
             tools:text="Dormitor Minimalist Cozy" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +19,7 @@ import ro.chiralinteriordesign.cull.databinding.ProductsItemLoadingBinding
 import ro.chiralinteriordesign.cull.databinding.ProductsItemProductListBinding
 import ro.chiralinteriordesign.cull.databinding.ProductsListFragmentBinding
 import ro.chiralinteriordesign.cull.model.shop.Product
+import ro.chiralinteriordesign.cull.model.shop.ProductFilters
 import ro.chiralinteriordesign.cull.ui.cart.CartFragment
 import ro.chiralinteriordesign.cull.utils.hideKeyboard
 import ro.chiralinteriordesign.cull.utils.pushFragment
@@ -54,9 +57,18 @@ class ProductsListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.getString(ARG_SEARCH_TERM)?.let {
-            viewModel.searchQuery(it, arguments?.getInt(ARG_CART_INDEX, 0) ?: 0)
+            viewModel.searchQuery(
+                ProductFilters(query = it),
+                arguments?.getInt(ARG_CART_INDEX, 0) ?: 0
+            )
         } ?: run {
             viewModel.loadRoomAndStyle()
+        }
+
+        setFragmentResultListener(ProductsFiltersFragment.REQUEST_KEY) { key, bundle ->
+            (bundle.getSerializable(ProductsFiltersFragment.ARG_FILTERS) as? ProductFilters)?.let {
+                viewModel.searchQuery(it, viewModel.currentCartIndex ?: 0)
+            }
         }
     }
 
@@ -76,16 +88,16 @@ class ProductsListFragment : Fragment() {
             fr.showNow(parentFragmentManager, MenuFragment.TAG)
         }
 
-        binding.navBar.btnBack.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
-
-        binding.navBar.btnClose.setOnClickListener {
+        binding.btnBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
 
         viewModel.query.observe(viewLifecycleOwner) {
-            binding.navBar.titleView.text = it
+            binding.titleView.text = it
+        }
+
+        binding.buttonFilters.setOnClickListener {
+            parentFragmentManager.pushFragment(ProductsFiltersFragment.newInstance(viewModel.currentFilters))
         }
 
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
@@ -153,15 +165,18 @@ class ProductsListFragment : Fragment() {
             }
         }
 
-        binding.searchBar.visibility =
-            if (viewModel.isSearchScreen) View.INVISIBLE else View.VISIBLE
-        binding.buttonMenu.visibility = binding.searchBar.visibility
-        binding.navBar.navBarContainer.visibility =
-            if (binding.searchBar.visibility == View.VISIBLE) View.INVISIBLE else View.VISIBLE
-        binding.buttonFilters.visibility = binding.searchBar.visibility
-        binding.buttonCart.visibility = binding.searchBar.visibility
-        binding.roomTypeLabel.visibility = binding.searchBar.visibility
-        binding.loadingViewText.visibility = binding.searchBar.visibility
+
+        if (viewModel.isSearchScreen) {
+            binding.normalNavBar.visibility = View.INVISIBLE
+            binding.searchNavBar.visibility = View.VISIBLE
+            binding.roomTypeLabel.visibility = View.GONE
+            binding.loadingViewText.visibility = View.GONE
+        } else {
+            binding.normalNavBar.visibility = View.VISIBLE
+            binding.searchNavBar.visibility = View.INVISIBLE
+            binding.roomTypeLabel.visibility = View.VISIBLE
+            binding.loadingViewText.visibility = View.VISIBLE
+        }
     }
 
     override fun onResume() {

@@ -16,10 +16,7 @@ import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.model.designer.Designer
 import ro.chiralinteriordesign.cull.model.quiz.Quiz
-import ro.chiralinteriordesign.cull.model.shop.Cart
-import ro.chiralinteriordesign.cull.model.shop.MoodBoardFilters
-import ro.chiralinteriordesign.cull.model.shop.Moodboard
-import ro.chiralinteriordesign.cull.model.shop.Product
+import ro.chiralinteriordesign.cull.model.shop.*
 import ro.chiralinteriordesign.cull.model.text.Text
 import ro.chiralinteriordesign.cull.model.user.User
 import java.io.IOException
@@ -174,8 +171,8 @@ interface Webservice {
         @Query("page") page: Int,
         @Query("query") query: String?,
         @Query("product_type") productType: String?,
-        @Query("min_price") minPrice: Float?,
-        @Query("max_price") maxPrice: Float?,
+        @Query("min_price") minPrice: Int?,
+        @Query("max_price") maxPrice: Int?,
         @Query("color") color: String?,
         @Query("material") material: String?,
         @Query("moodboard") moodboardId: Int?
@@ -212,4 +209,7 @@ interface Webservice {
 
     @POST("shop/carts/{id}/send_cart/")
     suspend fun sendExistingCart(@Path("id") id: Int)
+
+    @GET("shop/filters/")
+    suspend fun getFilters(): FiltersData
 }

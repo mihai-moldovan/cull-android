@@ -2,10 +2,12 @@ package ro.chiralinteriordesign.cull.model.shop
 
 import com.google.gson.Gson
 import okhttp3.RequestBody
+import ro.chiralinteriordesign.cull.model.quiz.Quiz
 import ro.chiralinteriordesign.cull.model.user.RoomType
 import ro.chiralinteriordesign.cull.services.*
 import java.io.Serializable
 import java.util.*
+import java.util.logging.Filter
 
 
 /**
@@ -154,6 +156,22 @@ class ShopRepository(
                 true
             }
             else -> false
+        }
+    }
+
+    suspend fun getFilters(): ResultWrapper<FiltersData> {
+        val localData = localRepository[FiltersData::class.java.name] as? FiltersData
+        return if (localData != null) {
+            ResultWrapper.Success(localData, true)
+        } else {
+            val response = safeApiCall { webservice.getFilters() }
+            when (response) {
+                is ResultWrapper.Success -> {
+                    localRepository[FiltersData::class.java.name] = response.value
+                }
+                else -> Unit
+            }
+            response
         }
     }
 }

@@ -1,9 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.products.ProductsFiltersFragment">
 
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="@dimen/btn_size"
+        android:layout_height="@dimen/btn_size"
+        android:scaleType="center"
+        android:src="@drawable/btn_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/btnApply"
+        android:layout_width="@dimen/btn_size"
+        android:layout_height="@dimen/btn_size"
+        android:fontFamily="@font/kievitcomppro"
+        android:gravity="center"
+        android:text="@string/filter_btn_apply"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/texts_title_font"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="middle"
+        android:fontFamily="@font/kievitcomppro"
+        android:gravity="center"
+        android:letterSpacing="0.07"
+        android:maxLines="2"
+        android:text="@string/filters_title"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/texts_title_font"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintEnd_toStartOf="@id/btnApply"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        app:layout_constraintTop_toTopOf="@id/btnBack" />
+
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/filters_lateral_padding"
+            android:paddingEnd="@dimen/filters_lateral_padding"
+            android:paddingBottom="@dimen/filters_section_spacing">
+
+            <TextView
+                android:id="@+id/categoriesTitleView"
+                style="@style/FiltersSectionTitle"
+                android:layout_marginTop="@dimen/filters_section_spacing"
+                android:text="@string/filter_categories"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categoriesRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/filters_item_vertical_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/categoriesTitleView"
+                tools:itemCount="5"
+                tools:listitem="@layout/products_filters_item_text" />
+
+            <TextView
+                android:id="@+id/pricesTitleView"
+                style="@style/FiltersSectionTitle"
+                android:layout_marginTop="@dimen/filters_section_spacing"
+                android:text="@string/filter_price"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/categoriesRecyclerView" />
+
+            <TextView
+                android:id="@+id/pricesSelectionView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/filters_item_spacing"
+                android:fontFamily="@font/kievitcomppro"
+                android:gravity="start"
+                android:textColor="@color/white"
+                android:textSize="@dimen/filters_item_font"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pricesTitleView"
+                tools:text="@string/filter_materials" />
+
+            <com.innovattic.rangeseekbar.RangeSeekBar
+                android:id="@+id/priceSeekBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pricesSelectionView"
+                app:rsb_maxThumbDrawable="@drawable/filters_price_thumb"
+                app:rsb_minThumbDrawable="@drawable/filters_price_thumb"
+                app:rsb_trackColor="@color/white"
+                app:rsb_trackRoundedCaps="true"
+                app:rsb_trackSelectedColor="@color/gold"
+                app:rsb_trackSelectedRoundedCaps="true"
+                app:rsb_trackSelectedThickness="@dimen/filters_price_seekbar_thickness"
+                app:rsb_trackThickness="@dimen/filters_price_seekbar_thickness" />
+
+            <TextView
+                android:id="@+id/colorsTitleView"
+                style="@style/FiltersSectionTitle"
+                android:layout_marginTop="@dimen/filters_section_spacing"
+                android:text="@string/filter_colors"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/priceSeekBar" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/colorsRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/filters_item_vertical_padding"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/colorsTitleView"
+                tools:itemCount="5"
+                tools:listitem="@layout/products_filters_item_color" />
+
+            <TextView
+                android:id="@+id/colorsSelectionTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/kievitcomppro"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/filters_item_font"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/colorsRecyclerView"
+                tools:text="@string/filter_materials" />
+
+
+            <TextView
+                android:id="@+id/materialTitleView"
+                style="@style/FiltersSectionTitle"
+                android:layout_marginTop="@dimen/filters_section_spacing"
+                android:text="@string/filter_materials"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/colorsSelectionTextView" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/materialRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/filters_item_vertical_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/materialTitleView"
+                tools:itemCount="5"
+                tools:listitem="@layout/products_filters_item_text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
