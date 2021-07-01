@@ -6,14 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".ui.texts.TextsActivity">
 
-    <include
-        android:id="@+id/navBar"
-        layout="@layout/nav_bar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="@dimen/btn_size"
+        android:layout_height="@dimen/btn_size"
+        android:scaleType="center"
+        android:src="@drawable/btn_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageButton
+        android:id="@+id/buttonCart"
+        android:layout_width="@dimen/btn_size"
+        android:layout_height="@dimen/btn_size"
+        android:background="@null"
+        android:minHeight="@dimen/button_min_size"
+        android:src="@drawable/btn_cart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="middle"
+        android:fontFamily="@font/kievitcomppro"
+        android:gravity="center"
+        android:letterSpacing="0.07"
+        android:maxLines="2"
+        android:text="@string/products_details_title"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/texts_title_font"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"
+        app:layout_constraintEnd_toStartOf="@+id/buttonCart"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        app:layout_constraintTop_toTopOf="@id/btnBack" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -21,7 +51,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomPart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/navBar">
+        app:layout_constraintTop_toBottomOf="@id/btnBack">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -54,11 +84,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/product_details_top_spacing"
+                android:background="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/variantsRecyclerView"
                 app:tabBackground="@drawable/product_dot_indicator"
-                android:background="@android:color/transparent"
                 app:tabGravity="center"
                 app:tabIndicatorHeight="0dp"
                 app:tabPaddingEnd="13dp"
@@ -108,9 +138,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/product_details_bottom_spacing"
                     android:background="@android:color/transparent"
+                    android:scrollbars="none"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:scrollbars="none"
                     app:layout_constraintTop_toBottomOf="@id/productPriceView"
                     tools:ignore="WebViewLayout" />
 

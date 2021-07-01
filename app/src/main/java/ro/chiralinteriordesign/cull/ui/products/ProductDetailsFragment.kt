@@ -20,6 +20,8 @@ import ro.chiralinteriordesign.cull.databinding.ProductDetailsFragmentBinding
 import ro.chiralinteriordesign.cull.databinding.ProductDetailsPhotoItemBinding
 import ro.chiralinteriordesign.cull.model.shop.Cart
 import ro.chiralinteriordesign.cull.model.shop.Product
+import ro.chiralinteriordesign.cull.ui.cart.CartFragment
+import ro.chiralinteriordesign.cull.utils.pushFragment
 
 /**
  * Created by Mihai Moldovan on 14/02/2021.
@@ -96,7 +98,6 @@ class ProductDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = binding ?: return
-        binding.navBar.titleView.setText(R.string.products_details_title)
         binding.productDescriptionView.setBackgroundColor(Color.TRANSPARENT)
         binding.productDescriptionView.settings.javaScriptEnabled = true
         binding.productDescriptionView.webViewClient = object : WebViewClient() {
@@ -127,12 +128,14 @@ class ProductDetailsFragment : Fragment() {
             binding.btnAddToCart.setText(if (isAdded) R.string.remove_from_cart else R.string.add_to_cart)
         }
 
-        binding.navBar.btnBack.setOnClickListener {
+        binding.btnBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
 
-        binding.navBar.btnClose.setOnClickListener {
-            requireActivity().onBackPressed()
+        binding.buttonCart.setOnClickListener {
+            viewModel.currentCartIndex?.let {
+                parentFragmentManager.pushFragment(CartFragment.newInstance(it))
+            }
         }
         binding.photosRecyclerView.adapter = adapter
         TabLayoutMediator(binding.dotsIndicator, binding.photosRecyclerView) { _, _ -> }.attach()

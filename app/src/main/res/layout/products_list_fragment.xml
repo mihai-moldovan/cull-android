@@ -130,6 +130,21 @@
             app:layout_constraintTop_toBottomOf="@id/normalNavBar"
             tools:text="Dormitor Minimalist Cozy" />
 
+        <TextView
+            android:id="@+id/emptyView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kievitcomppro"
+            android:gravity="center_horizontal"
+            android:paddingTop="@dimen/products_screen_spacing"
+            android:paddingBottom="@dimen/products_screen_spacing"
+            android:textColor="@color/white"
+            android:textSize="@dimen/products_list_font"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/roomTypeLabel"
+            tools:text="Dormitor Minimalist Cozy" />
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/refreshLayout"
             android:layout_width="0dp"

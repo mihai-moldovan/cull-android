@@ -31,6 +31,8 @@
             android:fontFamily="@font/kievitcomppro"
             android:gravity="center_horizontal"
             android:textColor="@color/black"
+            android:paddingStart="@dimen/products_card_image_padding"
+            android:paddingEnd="@dimen/products_card_image_padding"
             android:textSize="@dimen/products_list_font"
             app:layout_constraintBottom_toTopOf="@id/priceLabel"
             app:layout_constraintEnd_toEndOf="parent"

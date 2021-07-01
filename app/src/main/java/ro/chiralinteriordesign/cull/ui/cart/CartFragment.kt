@@ -3,12 +3,11 @@ package ro.chiralinteriordesign.cull.ui.cart
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -16,6 +15,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import ro.chiralinteriordesign.cull.App
 import ro.chiralinteriordesign.cull.R
 import ro.chiralinteriordesign.cull.databinding.CartItemBinding
+import ro.chiralinteriordesign.cull.databinding.CartItemTotalBinding
 import ro.chiralinteriordesign.cull.databinding.FragmentCartBinding
 import ro.chiralinteriordesign.cull.model.shop.Cart
 import ro.chiralinteriordesign.cull.model.shop.CartLineItem
@@ -143,6 +143,13 @@ class CartFragment : Fragment() {
         }
     }
 
+    class TotalItemViewHolder(val binding: CartItemTotalBinding) : RecyclerView.ViewHolder(binding.root) {
+        var priceValue: String? = null
+            set(newValue) {
+                field = newValue
+                binding.priceView.text = newValue
+            }
+    }
 
     class LineItemViewHolder(val binding: CartItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -178,7 +185,11 @@ class CartFragment : Fragment() {
         fun onRemoveItem(item: CartLineItem, pos: Int)
     }
 
-    class Adapter(private val listener: AdapterListener) : RecyclerView.Adapter<LineItemViewHolder>() {
+    class Adapter(private val listener: AdapterListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        companion object {
+            const val VIEW_PRODUCT = 0
+            const val VIEW_TOTAL = 1
+        }
 
         var cart: Cart? = null
             set(newValue) {
@@ -187,39 +198,51 @@ class CartFragment : Fragment() {
             }
 
         override fun getItemCount(): Int {
-            return cart?.lineItems?.size ?: 0
+            val size = cart?.lineItems?.size ?: 0
+            return if (size > 0) size + 1 else 0
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LineItemViewHolder {
-            return LineItemViewHolder(CartItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-                .apply {
-                    itemView.setOnClickListener {
-                        lineItem?.let { lineItem ->
-                            listener.onItemClick(lineItem, adapterPosition)
+        override fun getItemViewType(position: Int): Int = if (position < cart?.lineItems?.size ?: 0) VIEW_PRODUCT else VIEW_TOTAL
+
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            return when (viewType) {
+                VIEW_PRODUCT -> LineItemViewHolder(CartItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+                    .apply {
+                        itemView.setOnClickListener {
+                            lineItem?.let { lineItem ->
+                                listener.onItemClick(lineItem, adapterPosition)
+                            }
+                        }
+                        binding.buttonIncrease.setOnClickListener {
+                            lineItem?.let { lineItem ->
+                                listener.onQuantityIncrease(lineItem, adapterPosition)
+                            }
+                        }
+                        binding.buttonDecrease.setOnClickListener {
+                            lineItem?.let { lineItem ->
+                                listener.onQuantityDecrease(lineItem, adapterPosition)
+                            }
+                        }
+                        binding.buttonDelete.setOnClickListener {
+                            lineItem?.let {
+                                listener.onRemoveItem(it, adapterPosition)
+                            }
                         }
                     }
-                    binding.buttonIncrease.setOnClickListener {
-                        lineItem?.let { lineItem ->
-                            listener.onQuantityIncrease(lineItem, adapterPosition)
-                        }
-                    }
-                    binding.buttonDecrease.setOnClickListener {
-                        lineItem?.let { lineItem ->
-                            listener.onQuantityDecrease(lineItem, adapterPosition)
-                        }
-                    }
-                    binding.buttonDelete.setOnClickListener {
-                        lineItem?.let {
-                            listener.onRemoveItem(it, adapterPosition)
-                        }
-                    }
+                VIEW_TOTAL -> TotalItemViewHolder(CartItemTotalBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+                else -> throw NotImplementedError("not implemented")
+            }
+
+        }
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            when (holder) {
+                is LineItemViewHolder -> cart?.let {
+                    holder.lineItem = it.lineItems[position]
+                    holder.archived = it.isSent
                 }
-        }
-
-        override fun onBindViewHolder(holder: LineItemViewHolder, position: Int) {
-            cart?.let {
-                holder.lineItem = it.lineItems[position]
-                holder.archived = it.isSent
+                is TotalItemViewHolder -> holder.priceValue = cart?.totalString
             }
         }
     }

@@ -20,6 +20,7 @@
         android:id="@+id/btnApply"
         android:layout_width="@dimen/btn_size"
         android:layout_height="@dimen/btn_size"
+        android:layout_marginEnd="@dimen/products_screen_spacing"
         android:fontFamily="@font/kievitcomppro"
         android:gravity="center"
         android:text="@string/filter_btn_apply"

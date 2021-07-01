@@ -46,6 +46,9 @@
     <string name="add_to_cart">Adaugă în listă</string>
     <string name="remove_from_cart">Scoate din listă</string>
     <string name="products_details_title">DETALIU PRODUS</string>
+    <string name="products_list_empty">Nu am găsit niciun produs pentru "%1$s"</string>
+    <string name="products_list_empty_filtered">Nu am găsit niciun produs pentru filtrele aplicate. Încercați modificarea filtrelor.</string>
+    <string name="total">Total</string>
 
     <!-- MENU -->
     <string name="menu_account">Contul meu</string>

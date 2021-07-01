@@ -138,6 +138,27 @@ class ProductsListFragment : Fragment() {
 
         viewModel.products.observe(viewLifecycleOwner) {
             adapter.data = it
+            if (it.isEmpty()) {
+                if (viewModel.query.value.isNullOrBlank()) {
+                    // moodboard, no filters
+                    binding.emptyView.text = resources.getString(
+                        R.string.products_list_empty,
+                        viewModel.roomStyle.value ?: ""
+                    )
+                } else if (viewModel.isFiltered) {
+                    //query, with filters
+                    binding.emptyView.text = resources.getString(R.string.products_list_empty_filtered)
+                } else {
+                    //query, no filters
+                    binding.emptyView.text = resources.getString(
+                        R.string.products_list_empty,
+                        viewModel.query.value ?: ""
+                    )
+                }
+                binding.emptyView.visibility = View.VISIBLE
+            } else {
+                binding.emptyView.visibility = View.GONE
+            }
         }
 
         binding.searchBar.setOnEditorActionListener { v, actionId, _ ->

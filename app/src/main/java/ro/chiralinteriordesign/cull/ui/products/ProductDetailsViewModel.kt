@@ -15,7 +15,10 @@ class ProductDetailsViewModel : ViewModel() {
     private val dataRepo = App.instance.dataRepository
     private val shopRepo = dataRepo.productRepository
 
-    private var currentCart: Cart? = null
+    var currentCart: Cart? = null
+        private set
+    var currentCartIndex: Int? = null
+        private set
 
     val product = MutableLiveData<Product?>(null)
     val isAdded = MediatorLiveData<Boolean>().apply {
@@ -40,8 +43,10 @@ class ProductDetailsViewModel : ViewModel() {
     }
 
     fun setCartIndex(index: Int?) {
-        currentCart = shopRepo.carts?.let { carts ->
-            carts[index ?: carts.size - 1]
+        shopRepo.carts?.let { carts ->
+            val cartIndex = index ?: carts.size - 1
+            currentCartIndex = cartIndex
+            currentCart = carts[cartIndex]
         }
     }
 }

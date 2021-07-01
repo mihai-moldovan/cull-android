@@ -80,4 +80,14 @@ data class ProductFilters(
     val color: String? = null,
     val material: String? = null,
     val moodboardId: Int? = null,
-) : Serializable
+) : Serializable {
+
+
+    val isFiltered: Boolean
+        get() = productType != null ||
+                minPrice != null ||
+                maxPrice != null ||
+                color != null ||
+                material != null
+
+}

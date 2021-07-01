@@ -121,4 +121,8 @@ class ProductsViewModel(app: Application) : AndroidViewModel(app) {
         this.query.postValue(null)
         currentCart = shopRepo.getOrAddCart(roomType, user.quizResult, name)
     }
+
+    val isFiltered: Boolean
+        get() = currentFilters?.isFiltered ?: false
+
 }

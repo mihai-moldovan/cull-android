@@ -78,13 +78,7 @@ class ProductsFiltersFragment : Fragment() {
         binding.categoriesRecyclerView.adapter = categoriesAdapter
         binding.materialRecyclerView.adapter = materialsAdapter
         binding.colorsRecyclerView.adapter = colorsAdapter
-        viewModel.filtersData.observe(viewLifecycleOwner) {
-            categoriesAdapter.data = it?.categories
-            materialsAdapter.data = it?.materials
-            colorsAdapter.data = it?.colors
-            binding.priceSeekBar.max = it?.let { it.maxPrice - it.minPrice + 1 } ?: 1000
-            updatePriceLabels()
-        }
+
         binding.btnBack.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
@@ -123,11 +117,27 @@ class ProductsFiltersFragment : Fragment() {
             categoriesAdapter.selection = it.productType?.split("\\s*,\\s*".toRegex())?.toMutableSet() ?: mutableSetOf()
             materialsAdapter.selection = it.material?.split("\\s*,\\s*".toRegex())?.toMutableSet() ?: mutableSetOf()
             colorsAdapter.selection = it.color?.split("\\s*,\\s*".toRegex())?.toMutableSet() ?: mutableSetOf()
-            val offset = viewModel.filtersData.value?.minPrice ?: 0
-            it.minPrice?.let { binding.priceSeekBar.setMinThumbValue(it + offset) }
-            it.maxPrice?.let { binding.priceSeekBar.setMaxThumbValue(it + offset) }
+            updatePriceSlider()
+            updatePriceLabels()
+            updateColorSelectionLabels()
+        }
+
+        viewModel.filtersData.observe(viewLifecycleOwner) {
+            categoriesAdapter.data = it?.categories
+            materialsAdapter.data = it?.materials
+            colorsAdapter.data = it?.colors
+            binding.priceSeekBar.max = it?.let { it.maxPrice - it.minPrice + 1 } ?: 1000
+            updatePriceSlider()
+            updateColorSelectionLabels()
             updatePriceLabels()
         }
+    }
+
+    private fun updatePriceSlider() {
+        val binding = binding ?: return
+        val offset = viewModel.filtersData.value?.minPrice ?: 0
+        originalFilters.minPrice?.let { binding.priceSeekBar.setMinThumbValue(it + offset) }
+        originalFilters.maxPrice?.let { binding.priceSeekBar.setMaxThumbValue(it + offset) }
     }
 
     private fun updatePriceLabels() {
